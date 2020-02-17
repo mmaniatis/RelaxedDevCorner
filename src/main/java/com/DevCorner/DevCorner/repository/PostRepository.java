@@ -7,6 +7,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface PostRepository extends MongoRepository<Post, String>
 {
-    public Post getMostRecentPost();
-    public List<Post> getPostsFromDate(Date cdDate);
+    public List<Post> findPostsByCategory(String category);
 }
