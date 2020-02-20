@@ -7,6 +7,8 @@ package com.DevCorner.DevCorner.controller;
         import org.springframework.stereotype.Controller;
         import org.springframework.web.bind.annotation.RequestMapping;
         import org.springframework.web.servlet.ModelAndView;
+
+        import java.util.ArrayList;
         import java.util.List;
 
 @Controller
@@ -22,7 +24,7 @@ public class HomeController {
         return mav;
     }
 
-    public List<Post> GetPosts(String Category)
+    public ArrayList<Post> GetPosts(String Category)
     {
         return repository.findPostsByCategory(Category);
     }

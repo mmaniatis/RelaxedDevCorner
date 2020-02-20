@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:layout="http://www.w3.org/1999/xhtml"
       layout:decorate="~{fragments/main_layout}"
-      lang="en" xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" >
 
     <head>
         <title>Relaxed Dev Corner</title>
@@ -13,10 +13,11 @@
                 <h1>Welcome to the relaxedDevCorner</h1>
                 <small>Grab a drink, and let's talk shop.</small>
             </div>
-        </div>
 
-        <tr th:each = "post : ${postList}">
-            <a href=""> <td th:text = "${post.Value.Title}"> Test</td> </a>
-        </tr>
+            <div th:each = "post : ${postList}">
+<!--                <a th:href="@{/ViewPost/{id} {id=${post.id}}"><h1 th:text="${post.title}"></h1></a>-->
+                <a href=""><h1 th:text="${post.title}"></h1></a>
+            </div>
+        </div>
     </body>
 </html>
