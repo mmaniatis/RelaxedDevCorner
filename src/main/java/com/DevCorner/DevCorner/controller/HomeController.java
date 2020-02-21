@@ -5,11 +5,10 @@ package com.DevCorner.DevCorner.controller;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.boot.autoconfigure.SpringBootApplication;
         import org.springframework.stereotype.Controller;
-        import org.springframework.web.bind.annotation.ResponseBody;
-        import org.springframework.web.bind.annotation.RestController;
         import org.springframework.web.bind.annotation.RequestMapping;
+        import org.springframework.web.servlet.ModelAndView;
 
-        import java.util.Date;
+        import java.util.ArrayList;
         import java.util.List;
 
 @Controller
@@ -19,18 +18,14 @@ public class HomeController {
     private PostRepository repository;
 
     @RequestMapping("/")
-    public String index() {
-        List<Post> postList = GetPosts(".NET");
-        return "home/index";
+    public ModelAndView index() {
+        ModelAndView mav = new ModelAndView("home/index")
+                .addObject("postList", GetPosts("Development"));
+        return mav;
     }
 
-    public List<Post> GetPosts(String Category)
+    public ArrayList<Post> GetPosts(String Category)
     {
-        if (repository.findPostsByCategory(".NET").size() == 0)
-        {
-            repository.save(new Post(".NET", "Working in Java after a career of .NET",
-                    "Transition", "Example Body", "Michael J. Maniatis", new Date()));
-        }
-        return repository.findPostsByCategory((".NET"));
+        return repository.findPostsByCategory(Category);
     }
 }
