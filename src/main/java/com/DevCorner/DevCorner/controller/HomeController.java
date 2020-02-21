@@ -20,7 +20,7 @@ public class HomeController {
     @RequestMapping("/")
     public ModelAndView index() {
         ModelAndView mav = new ModelAndView("home/index")
-                .addObject("postList", GetPosts(".NET"));
+                .addObject("postList", GetPosts("Development"));
         return mav;
     }
 
