@@ -15,7 +15,7 @@
             </div>
 
             <div th:each = "post : ${postList}">
-                <a th:href="@{/ViewPost(id=${post.slug})}"><h1 th:text="${post.title}"></h1></a>
+                <a th:href="@{/ViewPost(id=${post.postId})}"><h1 th:text="${post.title}"></h1></a>
 <!--                <a href=""><h1 th:text="${post.title}"></h1></a>-->
             </div>
         </div>

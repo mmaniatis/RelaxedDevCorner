@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Date;
+
 @Controller
 @SpringBootApplication
 public class ViewPostController {
@@ -15,9 +17,14 @@ public class ViewPostController {
     private PostRepository repository;
 
     @RequestMapping("/ViewPost")
-    public ModelAndView index(String id){
+    public ModelAndView index(){
         ModelAndView mav = new ModelAndView("ViewPost/index")
-                .addObject("post", repository.findPostById(id));
+                .addObject("post", new Post("1", "TestCategory", "TestTitle", "TestSlug", "Lorem Ipsum. Lorem Ipsum. L" +
+                        "orem Ipsum. Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. " +
+                        "Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. " +
+                        "Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. " +
+                        "Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. Lorem Ipsum. ",
+                        "Mmaniatis", new Date().toString()));
         return mav;
     }
 }

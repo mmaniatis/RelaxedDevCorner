@@ -7,5 +7,5 @@ package com.DevCorner.DevCorner.repository;
 public interface PostRepository extends MongoRepository<Post, String>
 {
     public ArrayList<Post> findPostsByCategory(String category);
-    public Post findPostById(String id);
+    public Post findPostByPostId(String postId);
 }
