@@ -23,4 +23,10 @@ public class HomeController {
     {
         return repository.findPostsByCategory(category);
     }
+    @GetMapping("/GetPosts/")
+    public ArrayList<Post> GetPosts()
+    {
+        return (ArrayList<Post>) repository.findAll();
+    }
+
 }
