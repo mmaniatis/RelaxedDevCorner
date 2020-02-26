@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{fragments/main_layout}"
+      xmlns:th="http://www.thymeleaf.org" >
+
+    <head>
+        <title>Relaxed Dev Corner</title>
+    </head>
+    <body>
+        <div layout:fragment="content" class="container">
+
+            <div class="jumbotron">
+                <h1>Welcome to the relaxedDevCorner</h1>
+                <small>Grab a drink, and let's talk shop.</small>
+            </div>
+
+            <div th:each = "post : ${postList}">
+                <a th:href="@{/ViewPost(id=${post.postId})}"><h1 th:text="${post.title}"></h1></a>
+<!--                <a href=""><h1 th:text="${post.title}"></h1></a>-->
+            </div>
+        </div>
+    </body>
+</html>
