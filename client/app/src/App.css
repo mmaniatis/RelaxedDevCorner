@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+.jumbotron h1 {
+  text-align: center;
+}
+
+#PostContainer {
+    text-align: center;
+}

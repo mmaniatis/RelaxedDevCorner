@@ -4,9 +4,8 @@ package com.DevCorner.DevCorner.repository;
         import com.DevCorner.DevCorner.models.Post;
         import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface PostRepository extends MongoRepository<Post, String>
-{
+public interface PostRepository extends MongoRepository<Post, String> {
     public ArrayList<Post> findPostsByCategory(String category);
-    public Post findPostByPostId(String postId);
 
+    public Post findPostByPostId(String postId);
 }
