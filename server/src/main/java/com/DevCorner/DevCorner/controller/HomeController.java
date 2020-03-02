@@ -26,7 +26,8 @@ public class HomeController {
     @GetMapping("/GetPosts/")
     public ArrayList<Post> GetPosts()
     {
-        return (ArrayList<Post>) repository.findAll();
+        var PostList = repository.findAll();
+        return (ArrayList<Post>) PostList;
     }
 
 }

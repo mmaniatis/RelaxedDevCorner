@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../App.css';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -28,8 +29,8 @@ class PostList extends Component{
             return <div className="Card" id="PostCard" key={post.id}>
                 <button className="PostCardText" id="Button">
                   <h3 className="PostCardText" id="Title">{post.title}</h3>
-                  <p className="PostCardText" id="Author">{post.author}</p>
-                  <p className="PostCardText" id="Date">03/1/2020</p>
+                  <h4 className="PostCardText" id="Author">{post.author}</h4>
+                  <h4 className="PostCardText" id="Date">{post.cdDate}</h4>
                 </button>
               </div>
 

@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import AppNavbar from './AppNavBar';
 import PostList from './PostList';
-import { Link } from 'react-router-dom';
-import { Button, Container } from 'reactstrap';
+import { Container } from 'reactstrap';
 
 class Home extends Component {
   render() {
@@ -12,7 +11,7 @@ class Home extends Component {
         <AppNavbar/>
         <Container fluid>
               <div className="jumbotron">
-                
+
                 <h1>Welcome to the, $TheDevCorner.</h1>
               
               </div>
