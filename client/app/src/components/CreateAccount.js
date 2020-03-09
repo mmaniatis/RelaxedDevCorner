@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import AppNavbar from './AppNavBar';
 import PostList from './PostList';
-import { Container } from 'reactstrap';
+import { Container, ButtonGroup, Button } from 'reactstrap';
 
 class CreateAccount extends Component{
     render(){
@@ -12,11 +12,13 @@ class CreateAccount extends Component{
                 <AppNavbar/>
                 <div class="jumbotron">
                     
-                    <h1>Create an Account</h1>
+                    <ButtonGroup>
+                        <Button color="primary" size="lg">Create an Account</Button>
+                    </ButtonGroup>
                 
                 </div>
 
-                
+
             </Container>
         </div>
         )};
