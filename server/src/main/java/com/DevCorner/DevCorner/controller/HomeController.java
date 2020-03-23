@@ -5,10 +5,11 @@ package com.DevCorner.DevCorner.controller;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.boot.autoconfigure.SpringBootApplication;
         import org.springframework.web.bind.annotation.*;
+        import org.springframework.web.servlet.ModelAndView;
+
         import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/api")
 @SpringBootApplication
 public class HomeController {
     @Autowired
@@ -24,5 +25,11 @@ public class HomeController {
         var PostList = repository.findAll();
         return (ArrayList<Post>) PostList;
     }
-
+    @RequestMapping("/")
+    public ModelAndView index() {
+        var PostList = repository.findAll();
+        ModelAndView mav = new ModelAndView("home/index")
+                .addObject("postList", (ArrayList<Post>) PostList);
+        return mav;
+    }
 }
