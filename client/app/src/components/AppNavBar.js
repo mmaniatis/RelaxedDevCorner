@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, ButtonGroup, Button} from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
 import ReactDOM from 'react-dom';
 export default class AppNavbar extends Component {
   constructor(props) {
@@ -18,6 +18,7 @@ export default class AppNavbar extends Component {
 
   GetSignInButton() {
     const responseGoogle = (response) => {
+      this.isSignedIn = true;
       console.log(response);
     }
 
@@ -30,6 +31,10 @@ export default class AppNavbar extends Component {
         onFailure={responseGoogle}
         cookiePolicy={'single_host_origin'}
         />
+    }
+    else
+    {
+      return <GoogleLogout></GoogleLogout>
     }
   }
 
@@ -48,9 +53,6 @@ export default class AppNavbar extends Component {
           </NavItem>
           <NavItem>
             <NavLink href="https://github.com/mikejohnmaniatis">GitHub</NavLink>
-          </NavItem>
-          <NavItem>
-            {this.GetSignInButton()}
           </NavItem>
         </Nav>
       </Collapse>
