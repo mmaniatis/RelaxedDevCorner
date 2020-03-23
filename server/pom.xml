@@ -16,7 +16,6 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		<azure.version>2.2.0</azure.version>
 	</properties>
 
 	<dependencies>
