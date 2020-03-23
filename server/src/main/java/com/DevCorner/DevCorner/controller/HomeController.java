@@ -8,28 +8,29 @@ package com.DevCorner.DevCorner.controller;
         import org.springframework.web.servlet.ModelAndView;
 
         import java.util.ArrayList;
+        import java.util.List;
 
 @RestController
 @SpringBootApplication
+@RequestMapping("/api")
 public class HomeController {
     @Autowired
     private IPostRepository repository;
+
     @GetMapping("/GetPosts/{category}")
     public ArrayList<Post> GetPosts(@PathVariable String category)
     {
         return repository.findPostsByCategory(category);
     }
-    @GetMapping("/GetPosts/")
+
+    @GetMapping("/GetPosts")
     public ArrayList<Post> GetPosts()
     {
-        var PostList = repository.findAll();
+        List<Post> PostList = repository.findAll();
         return (ArrayList<Post>) PostList;
     }
-    @RequestMapping("/")
-    public ModelAndView index() {
-        var PostList = repository.findAll();
-        ModelAndView mav = new ModelAndView("home/index")
-                .addObject("postList", (ArrayList<Post>) PostList);
-        return mav;
+    @RequestMapping("/api")
+    public String index() {
+        return "Relaxed Dev Corner API.";
     }
 }
