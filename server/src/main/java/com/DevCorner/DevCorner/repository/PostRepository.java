@@ -32,7 +32,9 @@ public class PostRepository implements IPostRepository {
         MongoCollection coll = getDBCollection("Post");
         Gson g = new Gson();
         if (coll != null){
+
             findIterable = coll.find(new Document());
+
             for (Document doc : findIterable){
                 Post p = g.fromJson(g.toJson(doc) , Post.class);
                 result.add(p);
