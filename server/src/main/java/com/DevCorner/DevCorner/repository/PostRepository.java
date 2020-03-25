@@ -1,14 +1,13 @@
 package com.DevCorner.DevCorner.repository;
-
 import com.DevCorner.DevCorner.models.Post;
 import com.google.gson.Gson;
-
 import com.mongodb.client.*;
 import org.bson.Document;
+
 import java.util.ArrayList;
 
 public class PostRepository implements IPostRepository {
-    private MongoCollection getDBCollection(String collection)
+    private MongoCollection<Document> getDBCollection(String collection)
     {
         String password = System.getenv("APPSETTING_MongoDBPassword");
         MongoClient mongoClient = MongoClients.create(
@@ -16,9 +15,11 @@ public class PostRepository implements IPostRepository {
         MongoDatabase database = mongoClient.getDatabase("Primary");
         MongoCollection coll = null;
         if (collection != null){
-            try {
+            try
+            {
                 coll = database.getCollection(collection);
-            } catch (Exception e){
+            } catch (Exception e)
+            {
 
             }
         }
@@ -29,7 +30,7 @@ public class PostRepository implements IPostRepository {
     {
         ArrayList<Post> result = new ArrayList<Post>();
         FindIterable<Document> findIterable;
-        MongoCollection coll = getDBCollection("Post");
+        MongoCollection<Document> coll = getDBCollection("Post");
         Gson g = new Gson();
         if (coll != null){
 
@@ -41,5 +42,11 @@ public class PostRepository implements IPostRepository {
             }
         }
         return result;
+    }
+
+    public void CreatePost(Post post)
+    {
+        MongoCollection<Document> collection = getDBCollection("Post");
+
     }
 }
