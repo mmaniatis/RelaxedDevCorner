@@ -2,34 +2,29 @@ package com.DevCorner.DevCorner.controller;
 
         import com.DevCorner.DevCorner.models.Post;
         import com.DevCorner.DevCorner.repository.IPostRepository;
-        import org.springframework.beans.factory.annotation.Autowired;
+        import com.DevCorner.DevCorner.repository.PostRepository;
         import org.springframework.boot.autoconfigure.SpringBootApplication;
         import org.springframework.web.bind.annotation.*;
-        import org.springframework.web.servlet.ModelAndView;
-
         import java.util.ArrayList;
-        import java.util.List;
 
 @RestController
 @SpringBootApplication
 @RequestMapping("/api")
 public class HomeController {
-    @Autowired
+
     private IPostRepository repository;
 
-    @GetMapping("/GetPosts/{category}")
-    public ArrayList<Post> GetPosts(@PathVariable String category)
+    public HomeController()
     {
-        return repository.findPostsByCategory(category);
+        repository = new PostRepository();
     }
 
     @GetMapping("/GetPosts")
     public ArrayList<Post> GetPosts()
     {
-        List<Post> PostList = repository.findAll();
-        return (ArrayList<Post>) PostList;
+        return repository.GetAllPosts();
     }
-    @RequestMapping("/api")
+    @RequestMapping("/")
     public String index() {
         return "Relaxed Dev Corner API.";
     }
