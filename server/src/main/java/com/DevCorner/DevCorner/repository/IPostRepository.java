@@ -1,10 +1,8 @@
 package com.DevCorner.DevCorner.repository;
 import java.util.ArrayList;
-import java.util.List;
 import com.DevCorner.DevCorner.models.Post;
-import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface IPostRepository extends MongoRepository<Post, String> {
-    public ArrayList<Post> findPostsByCategory(String category);
-    public Post findPostByPostId(String postId);
+public interface IPostRepository {
+    public ArrayList<Post> GetAllPosts();
+    public void CreatePost(Post post);
 }
