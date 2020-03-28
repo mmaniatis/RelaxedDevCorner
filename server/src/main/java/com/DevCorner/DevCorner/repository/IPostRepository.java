@@ -4,4 +4,5 @@ import com.DevCorner.DevCorner.models.Post;
 
 public interface IPostRepository {
     public ArrayList<Post> GetAllPosts();
+    public void CreatePost(Post post);
 }
