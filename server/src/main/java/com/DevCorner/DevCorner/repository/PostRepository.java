@@ -20,7 +20,7 @@ public class PostRepository implements IPostRepository {
                 coll = database.getCollection(collection);
             } catch (Exception e)
             {
-
+                throw e;
             }
         }
         return coll;

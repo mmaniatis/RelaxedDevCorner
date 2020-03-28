@@ -1,10 +1,8 @@
 package com.DevCorner.DevCorner.controller;
 
-        import com.DevCorner.DevCorner.models.Post;
+        import com.DevCorner.DevCorner.models.*;
         import com.DevCorner.DevCorner.repository.IPostRepository;
         import com.DevCorner.DevCorner.repository.PostRepository;
-        import com.nimbusds.oauth2.sdk.http.HTTPResponse;
-        import com.sun.deploy.net.HttpResponse;
         import org.springframework.boot.autoconfigure.SpringBootApplication;
         import org.springframework.web.bind.annotation.*;
         import java.util.ArrayList;
