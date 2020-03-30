@@ -11,9 +11,9 @@ public class PostRepository implements IPostRepository {
     {
         String password = System.getenv("APPSETTING_MongoDBPassword");
         MongoClient mongoClient = MongoClients.create(
-                "mongodb+srv://mmaniatis:" + password + "@blog-d3ual.mongodb.net/blog?retryWrites=true&w=majority");
+                "mongodb+srv://mmaniatis:" + password+ "@blog-d3ual.mongodb.net/blog?retryWrites=true&w=majority");
         MongoDatabase database = mongoClient.getDatabase("Primary");
-        MongoCollection coll = null;
+        MongoCollection<Document> coll = null;
         if (collection != null){
             try
             {
@@ -47,7 +47,12 @@ public class PostRepository implements IPostRepository {
     public void CreatePost(Post post)
     {
         try{
-            Document toInsert = new Document("item", new Gson().toJson(post));
+            Document toInsert = new Document("category", post.category)
+                                    .append("title", post.title)
+                                    .append("slug", post.slug)
+                                    .append("body", post.body)
+                                    .append("author", post.author)
+                                    .append("cdDate", post.cdDate);
             MongoCollection<Document> collection = getDBCollection("Post");
             collection.insertOne(toInsert);
         }

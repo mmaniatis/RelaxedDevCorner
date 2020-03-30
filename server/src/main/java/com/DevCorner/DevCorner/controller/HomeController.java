@@ -24,8 +24,8 @@ public class HomeController {
     {
         return repository.GetAllPosts();
     }
-    @GetMapping("/CreatePost")
-    public boolean CreatePost(Post post)
+    @PostMapping("/CreatePost")
+    public boolean CreatePost(@RequestBody Post post)
     {
         try
         {
@@ -37,6 +37,7 @@ public class HomeController {
             return false;
         }
     }
+
     @RequestMapping("/")
     public String index() {
         return "Relaxed Dev Corner API.";
