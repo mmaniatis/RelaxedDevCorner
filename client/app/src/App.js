@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Home from './components/Home';
+import CreatePost from './components/CreatePost';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import CreateAccount from './components/CreateAccount';
 
 class App extends Component {
   constructor(){
@@ -29,7 +29,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path='/' exact={true} component={Home}/>
-          <Route path='/CreateAccount' exact={true} component={CreateAccount}/>
+          <Route path='/CreatePost' exact={true} component={CreatePost} />
         </Switch>
       </Router>
     )

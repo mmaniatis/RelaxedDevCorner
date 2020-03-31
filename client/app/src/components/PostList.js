@@ -13,7 +13,7 @@ class PostList extends Component{
     componentDidMount() {
         this.setState({isLoading: true});
 
-        fetch('/api/GetPosts/')
+        fetch('/GetPosts')
         .then(response => response.json())
         .then(data => this.setState({posts: data, isLoading: false}));
     }

@@ -16,7 +16,7 @@ class Home extends Component {
               
               </div>
           <div id="PostContainer">
-          <PostList/>
+            <PostList/>
           </div>
         </Container>
       </div>
