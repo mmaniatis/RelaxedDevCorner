@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class CreatePost extends Component 
 {
@@ -30,20 +31,22 @@ export default class CreatePost extends Component
         const body = this.state.Body;
         const author = 'Michael J. Maniatis';
         const cdDate = new Date();
+        var postObject = JSON.stringify({category: category, title: title, slug:slug,
+            body:body, author:author, cdDate:cdDate})
         return fetch('/CreatePost', {
             method: 'POST',
-            body: JSON.stringify([category, title, slug, body, author, cdDate]),
+            body: postObject,
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
             if (response.status >= 200 && response.status < 300)
             {
-                return response;
+                this.window.location("/");
             }
             else
             {
-                alert("Something went seriously wrong!");
+                console.log(response);
             }
         }).catch(err => console.log(err));
         
@@ -57,6 +60,7 @@ export default class CreatePost extends Component
     render(){
         return (
         <div id = "CreatePostForm">
+
             <form onSubmit={this.createPost}>
                 <label>
                     Category: 
