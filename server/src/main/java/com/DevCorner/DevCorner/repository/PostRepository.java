@@ -3,6 +3,7 @@ import com.DevCorner.DevCorner.models.Post;
 import com.google.gson.Gson;
 import com.mongodb.client.*;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 
@@ -11,7 +12,7 @@ public class PostRepository implements IPostRepository {
     {
         String password = System.getenv("APPSETTING_MongoDBPassword");
         MongoClient mongoClient = MongoClients.create(
-                "mongodb+srv://mmaniatis:" + password+ "@blog-d3ual.mongodb.net/blog?retryWrites=true&w=majority");
+                "mongodb+srv://mmaniatis:" + password + "@blog-d3ual.mongodb.net/blog?retryWrites=true&w=majority");
         MongoDatabase database = mongoClient.getDatabase("Primary");
         MongoCollection<Document> coll = null;
         if (collection != null){
@@ -47,7 +48,8 @@ public class PostRepository implements IPostRepository {
     public void CreatePost(Post post)
     {
         try{
-            Document toInsert = new Document("category", post.category)
+            Document toInsert = new Document("id", new ObjectId())
+                                    .append("category", post.category)
                                     .append("title", post.title)
                                     .append("slug", post.slug)
                                     .append("body", post.body)

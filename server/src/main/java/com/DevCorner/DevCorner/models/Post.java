@@ -1,7 +1,10 @@
 package com.DevCorner.DevCorner.models;
 
+import org.bson.types.ObjectId;
+
 public class Post {
 
+    public ObjectId id;
     public String category;
     public String title;
     public String slug;
@@ -11,6 +14,7 @@ public class Post {
 
     public Post(String category, String title, String slug, String body, String author, String cdDate)
     {
+        this.id = new ObjectId();
         this.category = category;
         this.title = title;
         this.slug = slug;
