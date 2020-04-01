@@ -3,6 +3,6 @@ import java.util.ArrayList;
 import com.DevCorner.DevCorner.models.Post;
 
 public interface IPostRepository {
-    public ArrayList<Post> GetAllPosts();
-    public void CreatePost(Post post);
+    ArrayList<Post> GetAllPosts();
+    void CreatePost(Post post);
 }
