@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import AppNavbar from './AppNavBar';
 import { Link } from 'react-router-dom';
 
 export default class CreatePost extends Component 
@@ -59,31 +60,35 @@ export default class CreatePost extends Component
 
     render(){
         return (
-        <div id = "CreatePostForm">
+            <div>
+                <AppNavbar/>
+                <div id = "CreatePostForm">
 
-            <form onSubmit={this.createPost}>
-                <label>
-                    Category: 
-                    <input name = "Category" type="text" value={this.state.Category} onChange={this.handleChange}></input>
-                </label>
-                <br/>
-                <label>
-                    Title: 
-                    <input name = "Title" type="text" value={this.state.Title} onChange={this.handleChange}></input>
-                </label>
-                <br/>
-                <label>
-                    Slug: 
-                    <input name = "Slug" type="text" value={this.state.Slug} onChange={this.handleChange}></input>
-                </label>
-                <br/>
-                <label>
-                    Body: 
-                    <input name = "Body" type="text" value={this.state.Body} onChange={this.handleChange}></input>
-                </label>
-                <input type="submit" value="Submit"></input>
-            </form>
+                <form onSubmit={this.createPost}>
+                    <label>
+                        Category: 
+                        <input name = "Category" type="text" value={this.state.Category} onChange={this.handleChange}></input>
+                    </label>
+                    <br/>
+                    <label>
+                        Title: 
+                        <input name = "Title" type="text" value={this.state.Title} onChange={this.handleChange}></input>
+                    </label>
+                    <br/>
+                    <label>
+                        Slug: 
+                        <input name = "Slug" type="text" value={this.state.Slug} onChange={this.handleChange}></input>
+                    </label>
+                    <br/>
+                    <label>
+                        Body: 
+                        <input name = "Body" type="text" value={this.state.Body} onChange={this.handleChange}></input>
+                    </label>
+                    <input type="submit" value="Submit"></input>
+                </form>
+            </div>
         </div>
+        
         );
     }
 }

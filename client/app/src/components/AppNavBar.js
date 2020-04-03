@@ -49,6 +49,11 @@ export default class AppNavbar extends Component {
       console.log(response);
     }
 
+    const logout = (response) => {
+      this.setState({isSignedIn : false});
+      alert(response);
+    }
+
     if (this.state.isSignedIn === false)
     {
       return <GoogleLogin
@@ -56,12 +61,17 @@ export default class AppNavbar extends Component {
         buttonText="Login"
         onSuccess={Success}
         onFailure={Failure}
+        isSignedIn={true}
         cookiePolicy={'single_host_origin'}
         />
     }
     else
     {
-      return <GoogleLogout></GoogleLogout>
+      return <GoogleLogout
+      clientId="170017586676-2p1e2cpf0jgt8b1946crn20ipduli4g5.apps.googleusercontent.com"
+      buttonText="Logout"
+      onLogoutSuccess={logout}>
+    </GoogleLogout>
     }
   }
 
