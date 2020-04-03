@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, ButtonGroup, Button} from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { GoogleLogin, GoogleLogout, useGoogleLogin } from 'react-google-login';
 import ReactDOM from 'react-dom';
 export default class AppNavbar extends Component {
   constructor(props) {
@@ -17,9 +17,35 @@ export default class AppNavbar extends Component {
   }
 
   GetSignInButton() {
-    const responseGoogle = (response) => {
-      debugger;
+
+    // const { signIn, loaded } = useGoogleLogin({
+    //   onSuccess,
+    //   clientId,
+    //   cookiePolicy,
+    //   loginHint,
+    //   hostedDomain,
+    //   autoLoad,
+    //   isSignedIn,
+    //   fetchBasicProfile,
+    //   redirectUri,
+    //   discoveryDocs,
+    //   onFailure,
+    //   uxMode,
+    //   scope,
+    //   accessType,
+    //   responseType,
+    //   jsSrc,
+    //   onRequest,
+    //   prompt})
+
+    const Success = (response) => {
       this.setState({isSignedIn : true});
+      alert(response.tokenId);
+      console.log(response);
+    }
+
+    const Failure = (response) => {
+      this.setState({isSignedIn : false});
       console.log(response);
     }
 
@@ -28,8 +54,8 @@ export default class AppNavbar extends Component {
       return <GoogleLogin
         clientId="170017586676-2p1e2cpf0jgt8b1946crn20ipduli4g5.apps.googleusercontent.com"
         buttonText="Login"
-        onSuccess={responseGoogle}
-        onFailure={responseGoogle}
+        onSuccess={Success}
+        onFailure={Failure}
         cookiePolicy={'single_host_origin'}
         />
     }
@@ -39,7 +65,8 @@ export default class AppNavbar extends Component {
     }
   }
 
-   
+  
+
 
   render() {
 
