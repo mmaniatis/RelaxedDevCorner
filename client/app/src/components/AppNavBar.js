@@ -18,7 +18,8 @@ export default class AppNavbar extends Component {
 
   GetSignInButton() {
     const responseGoogle = (response) => {
-      this.isSignedIn = true;
+      debugger;
+      this.setState({isSignedIn : true});
       console.log(response);
     }
 
@@ -56,6 +57,9 @@ export default class AppNavbar extends Component {
           </NavItem>
           <NavItem>
             <NavLink href="https://github.com/mikejohnmaniatis">GitHub</NavLink>
+          </NavItem>
+          <NavItem>
+            {this.GetSignInButton()}
           </NavItem>
         </Nav>
       </Collapse>
