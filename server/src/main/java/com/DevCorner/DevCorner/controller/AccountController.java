@@ -4,6 +4,7 @@ import com.DevCorner.DevCorner.models.*;
 import com.DevCorner.DevCorner.repository.IPostRepository;
 import com.DevCorner.DevCorner.repository.PostRepository;
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,15 @@ public class AccountController {
     {
         DecodedJWT jwt = JWT.decode(token);
 
-
+        String issuer = jwt.getIssuer();
+        String email = jwt.getClaim("email").asString();
+        String name = jwt.getClaim("name").asString();
+        String locale = jwt.getClaim("locale").asString();
+        //Boolean isEmailVerified = jwt.getClaim("email_verified")x.asBoolean();
         return "true";
     }
+
+//    private boolean CreateUserIfNotExists(Account account)
+//    {
+//    }
 }
