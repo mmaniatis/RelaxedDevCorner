@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import AppNavbar from './AppNavBar';
-import { Link } from 'react-router-dom';
 
 export default class CreatePost extends Component 
 {

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, ButtonGroup, Button} from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { GoogleLogin, GoogleLogout, useGoogleLogin } from 'react-google-login';
-import ReactDOM from 'react-dom';
+import { GoogleLogin, GoogleLogout } from 'react-google-login';
 export default class AppNavbar extends Component {
   constructor(props) {
     super(props);
@@ -17,31 +16,21 @@ export default class AppNavbar extends Component {
   }
 
   GetSignInButton() {
-
-    // const { signIn, loaded } = useGoogleLogin({
-    //   onSuccess,
-    //   clientId,
-    //   cookiePolicy,
-    //   loginHint,
-    //   hostedDomain,
-    //   autoLoad,
-    //   isSignedIn,
-    //   fetchBasicProfile,
-    //   redirectUri,
-    //   discoveryDocs,
-    //   onFailure,
-    //   uxMode,
-    //   scope,
-    //   accessType,
-    //   responseType,
-    //   jsSrc,
-    //   onRequest,
-    //   prompt})
-
     const Success = (response) => {
-      this.setState({isSignedIn : true});
-      alert(response.tokenId);
-      console.log(response);
+      return fetch('/Account/Authenticate?idTokenString=' + response.tokenId, {
+        method: 'GET',
+        headers: {
+        }
+    }).then(response => {
+        if (response.ok)
+        {
+          this.setState({isSignedIn : true});
+        }
+        else
+        {
+          this.setState({isSignedIn : false});
+        }
+    }).catch(err => console.log(err));
     }
 
     const Failure = (response) => {
@@ -75,7 +64,15 @@ export default class AppNavbar extends Component {
     }
   }
 
-  
+  ShowCreatePost() 
+  {
+    if (this.state.isSignedIn)
+    {
+      return (<NavItem>
+        <NavLink href="/CreatePost">Create Blog Post</NavLink>
+      </NavItem>);
+    }
+  }
 
 
   render() {
@@ -86,9 +83,7 @@ export default class AppNavbar extends Component {
       <NavbarToggler onClick={this.toggle}/>
       <Collapse isOpen={this.state.isOpen} navbar>
         <Nav className="ml-auto" navbar>
-          <NavItem>
-            <NavLink href="/CreatePost">Create Blog Post</NavLink>
-          </NavItem>
+          {this.ShowCreatePost()};
           <NavItem>
             <NavLink href="https://twitter.com/michaelmaniatis">@mikedev</NavLink>
           </NavItem>
