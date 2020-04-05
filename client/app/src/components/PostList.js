@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
 import { Button, ButtonGroup, Container, Table } from 'reactstrap';
-import { Link } from 'react-router-dom';
 
 class PostList extends Component{
     constructor(props){

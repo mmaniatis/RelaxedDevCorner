@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, ButtonGroup, Button} from 'reactstrap';
+import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from 'reactstrap';
 import { Link } from 'react-router-dom';
-import { GoogleLogin, GoogleLogout } from 'react-google-login';
+import { GoogleLogin} from 'react-google-login';
+import Cookies from 'universal-cookie';
 export default class AppNavbar extends Component {
   constructor(props) {
     super(props);
     this.state = {isOpen: false, isSignedIn: false};
     this.toggle = this.toggle.bind(this);
+
   }
 
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen
     });
+  }
+
+  CheckAuthentication()
+  {
+    const cookies = new Cookies();
+    return cookies.get("IsAuthenticated") == "True";
   }
 
   GetSignInButton() {
@@ -24,6 +32,8 @@ export default class AppNavbar extends Component {
     }).then(response => {
         if (response.ok)
         {
+          debugger;
+          // new Cookies().set("IsAuthenticated", "True");
           this.setState({isSignedIn : true});
         }
         else
@@ -35,15 +45,15 @@ export default class AppNavbar extends Component {
 
     const Failure = (response) => {
       this.setState({isSignedIn : false});
-      console.log(response);
+      // console.log(response);
     }
 
     const logout = (response) => {
       this.setState({isSignedIn : false});
-      alert(response);
+    //   alert(response);
     }
 
-    if (this.state.isSignedIn === false)
+    if (!this.CheckAuthentication())
     {
       return <GoogleLogin
         clientId="170017586676-2p1e2cpf0jgt8b1946crn20ipduli4g5.apps.googleusercontent.com"
@@ -54,19 +64,11 @@ export default class AppNavbar extends Component {
         cookiePolicy={'single_host_origin'}
         />
     }
-    else
-    {
-      return <GoogleLogout
-      clientId="170017586676-2p1e2cpf0jgt8b1946crn20ipduli4g5.apps.googleusercontent.com"
-      buttonText="Logout"
-      onLogoutSuccess={logout}>
-    </GoogleLogout>
-    }
   }
 
-  ShowCreatePost() 
+  ShowCreatePost()
   {
-    if (this.state.isSignedIn)
+    if (this.CheckAuthentication())
     {
       return (<NavItem>
         <NavLink href="/CreatePost">Create Blog Post</NavLink>
