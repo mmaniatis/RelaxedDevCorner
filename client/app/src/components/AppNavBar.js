@@ -23,33 +23,42 @@ export default class AppNavbar extends Component {
     return cookies.get("IsAuthenticated") == "True";
   }
 
+  IsAdmin()
+  {
+    const cookies = new Cookies();
+    return cookies.get("IsAdmin") == "True";
+  }
+
   GetSignInButton() {
     const Success = (response) => {
       return fetch('/Account/Authenticate?idTokenString=' + response.tokenId, {
         method: 'GET',
         headers: {
         }
-    }).then(response => {
-        if (response.ok)
-        {
-          debugger;
-          // new Cookies().set("IsAuthenticated", "True");
-          this.setState({isSignedIn : true});
-        }
-        else
-        {
-          this.setState({isSignedIn : false});
-        }
+    }).then(response => response.json())
+        .then((responseJSON) => {
+          if(responseJSON != null)
+          {
+            if (responseJSON.email != null)
+            {
+              new Cookies().set("IsAuthenticated", "True");
+              if (responseJSON.isAdmin)
+              {
+                new Cookies().set("IsAdmin", "True");
+              }
+            }
+          }
+          window.location.reload(true);
     }).catch(err => console.log(err));
     }
 
     const Failure = (response) => {
-      this.setState({isSignedIn : false});
+      new Cookies().set("IsAuthenticated", "False");
       // console.log(response);
     }
 
     const logout = (response) => {
-      this.setState({isSignedIn : false});
+      new Cookies().set("IsAuthenticated", "False");
     //   alert(response);
     }
 
@@ -68,11 +77,11 @@ export default class AppNavbar extends Component {
 
   ShowCreatePost()
   {
-    if (this.CheckAuthentication())
+    if (this.CheckAuthentication() && this.IsAdmin())
     {
-      return (<NavItem>
+      return (
         <NavLink href="/CreatePost">Create Blog Post</NavLink>
-      </NavItem>);
+      )
     }
   }
 
@@ -85,7 +94,9 @@ export default class AppNavbar extends Component {
       <NavbarToggler onClick={this.toggle}/>
       <Collapse isOpen={this.state.isOpen} navbar>
         <Nav className="ml-auto" navbar>
-          {this.ShowCreatePost()};
+          <NavItem>
+          {this.ShowCreatePost()}
+          </NavItem>
           <NavItem>
             <NavLink href="https://twitter.com/michaelmaniatis">@mikedev</NavLink>
           </NavItem>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { Button, ButtonGroup, Container, Table } from 'reactstrap';
+import { Container } from 'reactstrap';
 
 class PostList extends Component{
     constructor(props){
