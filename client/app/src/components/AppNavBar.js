@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 export default class AppNavbar extends Component {
   constructor(props) {
     super(props);
-    this.state = {isOpen: false, isSignedIn: false};
+    this.state = {isOpen: false};
     this.toggle = this.toggle.bind(this);
 
   }
@@ -69,7 +69,6 @@ export default class AppNavbar extends Component {
         buttonText="Login"
         onSuccess={Success}
         onFailure={Failure}
-        isSignedIn={true}
         cookiePolicy={'single_host_origin'}
         />
     }
