@@ -10,12 +10,18 @@ import java.util.ArrayList;
 
 
 public class PostRepository implements IPostRepository {
-    private MongoCollection<Document> getDBCollection(String collection)
+    private MongoDatabase database;
+    public PostRepository()
     {
         String password = System.getenv("APPSETTING_MongoDBPassword");
         MongoClient mongoClient = MongoClients.create(
                 "mongodb+srv://mmaniatis:" + password + "@blog-d3ual.mongodb.net/blog?retryWrites=true&w=majority");
         MongoDatabase database = mongoClient.getDatabase("Primary");
+        this.database = database;
+    }
+    private MongoCollection<Document> getDBCollection(String collection)
+    {
+
         MongoCollection<Document> coll = null;
         if (collection != null){
             try
@@ -26,7 +32,6 @@ public class PostRepository implements IPostRepository {
                 throw e;
             }
         }
-        mongoClient.close();
         return coll;
     }
 
