@@ -10,11 +10,9 @@ class Home extends Component {
       <div>
         <AppNavbar/>
         <Container fluid>
-              <div className="jumbotron">
-
-                <h1>Welcome to the, $TheDevCorner.</h1>
-              
-              </div>
+          <div className="jumbotron">
+            <h1>Welcome to the, $TheDevCorner.</h1>
+          </div>
           <div id="PostContainer">
             <PostList/>
           </div>

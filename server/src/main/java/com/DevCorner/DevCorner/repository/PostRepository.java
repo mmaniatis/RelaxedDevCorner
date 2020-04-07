@@ -5,7 +5,9 @@ import com.mongodb.client.*;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 
+
 import java.util.ArrayList;
+
 
 public class PostRepository implements IPostRepository {
     private MongoCollection<Document> getDBCollection(String collection)
@@ -29,7 +31,7 @@ public class PostRepository implements IPostRepository {
 
     public ArrayList<Post> GetAllPosts()
     {
-        ArrayList<Post> result = new ArrayList<Post>();
+        ArrayList<Post> result = new ArrayList<>();
         FindIterable<Document> findIterable;
         MongoCollection<Document> coll = getDBCollection("Post");
         Gson g = new Gson();
