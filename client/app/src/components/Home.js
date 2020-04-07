@@ -13,7 +13,7 @@ class Home extends Component {
           <div className="jumbotron">
             <h1>Welcome to the, $TheDevCorner.</h1>
           </div>
-          <div id="PostContainer">
+          <div className="PostContainer">
             <PostList/>
           </div>
         </Container>

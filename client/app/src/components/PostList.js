@@ -17,6 +17,9 @@ class PostList extends Component{
         .then(data => this.setState({posts: data, isLoading: false}));
     }
 
+    //Open particular post..
+    //..
+
     render() {
         const {posts, isLoading} = this.state;
     
@@ -25,13 +28,10 @@ class PostList extends Component{
         }
     
         const GetPostList = posts.map(post => {
-            return <div className="Card" id="PostCard" key={post.id}>
-                <button className="PostCardText" id="Button">
-                  <h3 className="PostCardText" id="Title">{post.title}</h3>
-                  <h4 className="PostCardText" id="Author">{post.author}</h4>
-                  <h4 className="PostCardText" id="Date">{post.cdDate}</h4>
-                </button>
-              </div>
+            return <button className="Card"  key={post.id}>
+                    <h3 className="PostCardText" id="Title">{post.title}</h3>
+                    <span className="PostCardText" id="Author">Written by: {post.author}</span>
+                  </button>
 
           });
         return (

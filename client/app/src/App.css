@@ -41,6 +41,41 @@
   text-align: center;
 }
 
-#PostContainer {
-    text-align: center;
+#MainNavBar 
+{
+  position:fixed;
+  width:100%;
+  z-index:1000000;
+}
+
+.PostContainer {
+  align-items:center;
+  text-align:center;
+  margin:auto;
+}
+
+.Card
+{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  margin-bottom: 10px;
+  width:60%;
+  height:150px;
+  /* margin-left:25%; */
+  background-color:white;
+  border:0px;
+  position:relative;
+}
+
+.Card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  color:#d3d3d3d3;
+}
+
+#Author {
+  font-style:italic;
+  font-size:1rem;
+  bottom:0;
+  left:0;
+  position: absolute;
+  display:block;
 }
