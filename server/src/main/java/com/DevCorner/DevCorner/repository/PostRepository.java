@@ -26,6 +26,7 @@ public class PostRepository implements IPostRepository {
                 throw e;
             }
         }
+        mongoClient.close();
         return coll;
     }
 

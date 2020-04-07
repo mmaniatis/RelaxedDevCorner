@@ -34,6 +34,7 @@ public class AccountRepository implements IAccountRepository {
                 throw e;
             }
         }
+        mongoClient.close();
         return coll;
     }
     public String CreateAccountIfNotExists(Account account) throws Exception {
