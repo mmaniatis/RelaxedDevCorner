@@ -37,6 +37,11 @@ public class HomeController {
             return false;
         }
     }
+    @GetMapping("/GetPost")
+    public Post GetPost(@RequestParam("category") String category, @RequestParam("slug")  String slug)
+    {
+        return repository.GetPost(category, slug);
+    }
 
     @RequestMapping("/")
     public String index() {
