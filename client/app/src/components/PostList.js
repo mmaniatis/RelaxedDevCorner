@@ -26,7 +26,7 @@ class PostList extends Component{
         const GetPostList = posts.map(post => {
           var keyHash = post.title + post.author + post.cdDate;
           return <> 
-                  <a href="/ViewPost/Category/Test/Mike">
+                  <a href= {"/ViewPost/" + post.category + "/" + post.slug + "/"}>
                   <Button className="Card" key={keyHash}>
                     <h3 className="PostCardText" id="Title">{post.title}</h3>
                     <span className="PostCardText" id="Author">Written by: {post.author}</span>

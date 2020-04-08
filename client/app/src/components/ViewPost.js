@@ -1,54 +1,59 @@
 import React, { Component } from 'react';
 import '../App.css';
 import AppNavbar from './AppNavBar';
-// import { Container, Button} from 'reactstrap';
+import { Container} from 'reactstrap';
 
 export default class ViewPost extends Component {
 
     constructor(props){
         super(props);
-        this.state = {title: 'Test', author: 'Test'}
+        this.state = {post: []}
         
     }
-
-    postData(url = '/api/GetPosts', data = {}) {
-        const response = await fetch(url, {
-          method: 'GET',
-          mode: 'cors', 
-          cache: 'no-cache', 
-          credentials: 'same-origin', 
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          redirect: 'follow', 
-          referrerPolicy: 'no-referrer', 
-          body: JSON.stringify(data) 
-        });
-        return response.json();
-      }
-
     componentDidMount()
     {
         if (this.props.match.params){
-            const title = this.props.match.params.title;
-            const author = this.props.match.params.author;
+            const slug = this.props.match.params.slug;
             const category = this.props.match.params.category;
-            this.setState({title, author})
-            
-            
+            fetch('/GetPost?category=' + category + '&slug=' +slug, {
+                method: 'GET',
+                mode: 'cors', 
+                cache: 'no-cache', 
+                // credentials: 'same-origin', 
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                redirect: 'follow', 
+                referrerPolicy: 'no-referrer'
+               
+              }).then(response => response.json())
+              .then(data =>  this.setState({post: data}));
+                
         }
+
     }
 
     render(){
-        const {title, author} = this.state;
-        return (<> 
+        const {post} = this.state;
+        return (<div> 
                 <AppNavbar/>
+                <Container fluid>
+                    <div className="jumbotron">
+                        <h1>{post.title}</h1>
+                    </div>  
+                    <div className ="Post">
 
-                <h1>{title}</h1>
-                    
+                        <div className="PostBody">
+                            <h3>{post.body}</h3>
+                        </div>
+                        
+                        <div className ="PostFooter">
+                            <p>Written by: {post.author}</p>
+                        </div>
+                    </div>
+                </Container>
 
-            <p>Written by: {author}</p>
-        </>
+                </div>
         );
     }
 }

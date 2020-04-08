@@ -22,7 +22,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path='/' exact={true} component={Home}/>
-          <Route path='/ViewPost/:category/:title/:author' exact={true} component={ViewPost}/>
+          <Route path='/ViewPost/:category/:slug' exact={true} component={ViewPost}/>
           {this.returnAdminRoutes()}
         </Switch>
       </Router>
