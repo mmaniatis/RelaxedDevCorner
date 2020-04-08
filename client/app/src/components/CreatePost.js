@@ -61,30 +61,34 @@ export default class CreatePost extends Component
         return (
             <div>
                 <AppNavbar/>
-                <div id = "CreatePostForm">
-
-                <form onSubmit={this.createPost}>
-                    <label>
-                        Category: 
-                        <input name = "Category" type="text" value={this.state.Category} onChange={this.handleChange}></input>
-                    </label>
-                    <br/>
-                    <label>
-                        Title: 
-                        <input name = "Title" type="text" value={this.state.Title} onChange={this.handleChange}></input>
-                    </label>
-                    <br/>
-                    <label>
-                        Slug: 
-                        <input name = "Slug" type="text" value={this.state.Slug} onChange={this.handleChange}></input>
-                    </label>
-                    <br/>
-                    <label>
-                        Body: 
-                        <input name = "Body" type="text" value={this.state.Body} onChange={this.handleChange}></input>
-                    </label>
-                    <input type="submit" value="Submit"></input>
-                </form>
+                <div className="jumbotron">
+                <h1>Thanks for contributing!</h1>
+                </div>
+                    <div id = "CreatePostForm">
+                    
+                    <form onSubmit={this.createPost}>
+                        <label>
+                            Category: 
+                            <input name = "Category" type="text" value={this.state.Category} onChange={this.handleChange}></input>
+                        </label>
+                        <br/>
+                        <label>
+                            Title: 
+                            <input name = "Title" type="text" value={this.state.Title} onChange={this.handleChange}></input>
+                        </label>
+                        <br/>
+                        <label>
+                            Slug: 
+                            <input name = "Slug" type="text" value={this.state.Slug} onChange={this.handleChange}></input>
+                        </label>
+                        <br/>
+                        <label>
+                            Body: 
+                            <input name = "Body" type="text" value={this.state.Body} onChange={this.handleChange}></input>
+                        </label>
+                        <input type="submit" value="Submit"></input>
+                    </form>
+                    
             </div>
         </div>
         
