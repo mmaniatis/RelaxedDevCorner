@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Home from './components/Home';
+import ViewPost from './components/ViewPost';
 import CreatePost from './components/CreatePost';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Cookies from 'universal-cookie';
@@ -21,6 +22,7 @@ class App extends Component {
       <Router>
         <Switch>
           <Route path='/' exact={true} component={Home}/>
+          <Route path='/ViewPost/:category/:title/:author' exact={true} component={ViewPost}/>
           {this.returnAdminRoutes()}
         </Switch>
       </Router>
