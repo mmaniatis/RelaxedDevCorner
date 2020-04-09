@@ -18,7 +18,7 @@ public class AccountRepository implements IAccountRepository {
     private MongoDatabase database;
     public AccountRepository()
     {
-        this.database = new ApplicationProperties().getDataBase("Accounts");
+        this.database = new ApplicationProperties().getDataBase("Primary");
     }
 
     private MongoCollection<Document> getDBCollection(String collection)

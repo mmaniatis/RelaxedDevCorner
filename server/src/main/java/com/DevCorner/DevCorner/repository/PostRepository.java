@@ -19,13 +19,11 @@ public class PostRepository implements IPostRepository {
     private MongoDatabase database;
     public PostRepository()
     {
-        this.database = new ApplicationProperties().getDataBase("Post");
+        this.database = new ApplicationProperties().getDataBase("Primary");
     }
 
     private MongoCollection<Document> getDBCollection(String collection)
     {
-        ApplicationProperties properties = new ApplicationProperties();
-        String password = properties.getProperty("app.MongoPassword");
         MongoCollection<Document> coll = null;
         if (collection != null){
             try

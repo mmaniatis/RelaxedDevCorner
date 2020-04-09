@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import Home from './components/Home';
 import ViewPost from './components/ViewPost';
 import CreatePost from './components/CreatePost';

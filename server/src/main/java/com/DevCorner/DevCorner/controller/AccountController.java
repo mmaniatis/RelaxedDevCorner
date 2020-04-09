@@ -1,5 +1,6 @@
 package com.DevCorner.DevCorner.controller;
 
+import com.DevCorner.DevCorner.ApplicationProperties;
 import com.DevCorner.DevCorner.models.Account;
 import com.DevCorner.DevCorner.repository.AccountRepository;
 import com.DevCorner.DevCorner.repository.IAccountRepository;
@@ -28,8 +29,6 @@ public class AccountController {
     {
         accountRepository = new AccountRepository();
     }
-    @Value("${app.prodGoogleClientId}")
-    private String prodGoogleClientId;
 
     @GetMapping("/Authenticate")
     public String Authenticate(String idTokenString) throws Exception
@@ -37,7 +36,7 @@ public class AccountController {
         HttpTransport transport = new NetHttpTransport();
         JacksonFactory jsonFactory = new JacksonFactory();
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-                .setAudience(Collections.singletonList(prodGoogleClientId))
+                .setAudience(Collections.singletonList(new ApplicationProperties().getProperty("app.prodGoogleClientId")))
                 .build();
         try {
             GoogleIdToken idToken = verifier.verify(idTokenString);

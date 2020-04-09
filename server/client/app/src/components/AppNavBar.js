@@ -65,12 +65,13 @@ export default class AppNavbar extends Component {
     if (!this.CheckAuthentication())
     {
       return <GoogleLogin
-        clientId="170017586676-2p1e2cpf0jgt8b1946crn20ipduli4g5.apps.googleusercontent.com"
+        clientId= process.env.REACT_APP_Prd_GoogleClientId
         buttonText="Login"
         onSuccess={Success}
         onFailure={Failure}
         cookiePolicy={'single_host_origin'}
         />
+
     }
   }
 
