@@ -2,7 +2,10 @@
   text-align: center;
 }
 
-
+.container {
+  display: flex;
+  justify-content: center;
+}
 
 .App-logo {
   height: 40vmin;
@@ -135,19 +138,18 @@
 
 
 .CreatePostForm {
-  display:flex;
-  justify-content: center;
+  display:inline-block;
 }
 
 .CreateFormLabel {
   display:flex;
-  justify-self: center;
+  justify-self: left;
 }
 
 .CreateFormInput {
   display:flex;
   justify-self: center;
-
+  width:400px;
 }
 
 #CreateFormBody {

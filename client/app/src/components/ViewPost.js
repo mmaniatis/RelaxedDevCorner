@@ -15,9 +15,8 @@ export default class ViewPost extends Component {
         if (this.props.match.params){
             const slug = this.props.match.params.slug;
             const category = this.props.match.params.category;
-            fetch('/GetPost?category=' + category + '&slug=' +slug, {
+            fetch(process.env.REACT_APP_API_URL+ '/GetPost?category=' + category + '&slug=' +slug, {
                 method: 'GET',
-                mode: 'cors', 
                 cache: 'no-cache', 
                 // credentials: 'same-origin', 
                 headers: {

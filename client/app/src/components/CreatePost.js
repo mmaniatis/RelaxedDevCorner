@@ -33,17 +33,16 @@ export default class CreatePost extends Component
         const cdDate =  new Date().toDateString();
         var postObject = JSON.stringify({category: category, title: title, slug:slug,
             body:body, author:author, cdDate:cdDate})
-        fetch("https://prd-app-relaxeddevcorner.azurewebsites.net/api/CreatePost", {
-            method: 'POST',
+        fetch(process.env.REACT_APP_API_URL + "CreatePost", {
+            method: 'post',
             body: postObject,
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Request-Headers': '*'
             },
             
         }).then(response => response)
-        .then(data => data)
-        .catch(err => console.log(err));
+        .then(data => window.location.reload(true))
+        .catch(err => alert(err));
         
     }
 
@@ -59,37 +58,39 @@ export default class CreatePost extends Component
                 <div className="jumbotron">
                 <h1>Thanks for contributing!</h1>
                 </div>
+                <div className="container">
                     <div className = "CreatePostForm">
-                    
-                    <form onSubmit={this.createPost}>
-                        <label class="CreateFormLabel">
+
+                        <label className="CreateFormLabel">
                             Category: 
                         </label>
                         <input className ="CreateFormInput"name = "Category" type="text" value={this.state.Category} onChange={this.handleChange}></input>
                         <br/>
-                        <label class="CreateFormLabel">
+                        <label className="CreateFormLabel">
                             Title: 
                         </label>
 
                         <input className ="CreateFormInput" name = "Title" type="text" value={this.state.Title} onChange={this.handleChange}></input>
 
                         <br/>
-                        <label class="CreateFormLabel">
+                        <label className="CreateFormLabel">
                             Slug: 
                         </label>
 
                         <input className ="CreateFormInput" name = "Slug" type="text" value={this.state.Slug} onChange={this.handleChange}></input>
                         <br/>
-                        <label class="CreateFormLabel">
+                        <label className="CreateFormLabel">
                             Body: 
                         </label>
 
                         <textarea className ="CreateFormInput" id="CreateFormBody"
                         name = "Body" type="textarea" value={this.state.Body} onChange={this.handleChange}></textarea>
                         
-                        <input className ="CreateFormInput" type="submit" value="Submit"></input>
-                    </form>
+                        <button onClick={this.createPost}>
+                            Submit
+                        </button>
                     
+                </div>
             </div>
         </div>
         

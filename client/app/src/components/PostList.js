@@ -19,16 +19,20 @@ class PostList extends Component{
 
     receivedData()
     {
-      fetch('/GetPosts')
+      fetch(process.env.REACT_APP_API_URL + 'GetPosts', {
+        method: 'get',
+        headers: {
+        },
+      })
       .then(response => response.json())
       .then(data => {
             console.log(data.length);
             const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
-            const postData = slice.map(post => 
-            <> 
+            const postData = slice.map((post,index) => 
             
+            <div key={index}>
               <a href= {"/ViewPost/" + post.category + "/" + post.slug + "/"}>
-              <Button className="Card" key={post.title + post.author + post.cdDate*Math.random}>
+              <Button className="Card" >
                 <div> 
                   <h3 className="PostCardText" id="Title">{post.title}</h3>
                 </div>
@@ -38,7 +42,9 @@ class PostList extends Component{
               </Button>
               </a>
               <br />
-            </>)
+            </div>
+
+            )
 
             this.setState({
                 pageCount: Math.ceil(data.length / this.state.perPage),
@@ -94,6 +100,7 @@ class PostList extends Component{
                           containerClassName={"pagination"}
                           subContainerClassName={"pages pagination"}
                           activeClassName={"active"}
+                          
                       />
               </div>
             </Container>          
