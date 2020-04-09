@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../App.css';
+import './css/App.css';
 import { Container, Button} from 'reactstrap';
 import ReactPaginate from 'react-paginate';
 
@@ -30,17 +30,19 @@ class PostList extends Component{
             const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
             const postData = slice.map((post,index) => 
             
-            <div key={index}>
-              <a href= {"/ViewPost/" + post.category + "/" + post.slug + "/"}>
-              <Button className="Card" >
-                <div> 
+            <div key={index} className ="container">
+              <a className="PostCard" href= {"/ViewPost/" + post.category + "/" + post.slug + "/"}>
+              {/* <Button  > */}
+                <div className="PostCenter"> 
                   <h3 className="PostCardText" id="Title">{post.title}</h3>
-                </div>
-                
-                <span className="CardFooter">Written by: {post.author} | {post.cdDate} </span>
+                  <span className="CardFooter">Written by: {post.author} | {post.cdDate} </span>
 
-              </Button>
+                </div>
+
+
+              {/* </Button> */}
               </a>
+
               <br />
             </div>
 

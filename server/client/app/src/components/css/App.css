@@ -8,7 +8,7 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 40min;
   pointer-events: none;
 }
 
@@ -60,29 +60,40 @@
   
 }
 
-.Card
+.PostCard
 {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   margin-bottom: 10px;
   width:30%;
   height:150px;
-  /* background-color:white; */
+  background-color:#969696d3;
   border:0px;
-  justify-content: center;
+  justify-self: center;
   display: flex;
+  color:white;
+  align-items:center;
+  padding:4px;
+  border-radius:4px;
 }
 
-.Card:hover {
+
+.PostCard:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  color:#d3d3d3d3;
+  color: white;
+  text-decoration: none;
 }
+.PostCardText{
+  display:flex;
+  justify-self: center;
 
+}
 .CardFooter {
   font-style:italic;
   font-size:.5rem;
-  float:left;
+  /* margin-top:1000; */
+  position: inherit;
+/* bottom: ; */
   
-  display: flex;
 }
 
 .pagination {

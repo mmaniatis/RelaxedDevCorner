@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import '../App.css';
+import './css/App.css';
+
 import AppNavbar from './AppNavBar';
 import PostList from './PostList';
 import { Container} from 'reactstrap';
