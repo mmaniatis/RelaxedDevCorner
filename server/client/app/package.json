@@ -21,8 +21,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "move-build": "mkdir -p ../main/resources/static && mv build/* ../main/resources/static/",
+    "clean-old-build": "rm -rf ../main/resources/static/* ",
+    "clean-new-build": "rm -rf build",
+    "postbuild": "npm run clean-old-build && npm run move-build && npm run clean-new-build"
+
   },
   "proxy": "https://prd-app-relaxeddevcorner.azurewebsites.net/api/",
   "eslintConfig": {
