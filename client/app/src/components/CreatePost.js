@@ -30,7 +30,7 @@ export default class CreatePost extends Component
         const slug = this.state.Slug;
         const body = this.state.Body;
         const author = 'Michael J. Maniatis';
-        const cdDate =  new Date().toDateString();
+        const cdDate =  new Date();
         var postObject = JSON.stringify({category: category, title: title, slug:slug,
             body:body, author:author, cdDate:cdDate})
         fetch(process.env.REACT_APP_API_URL + "CreatePost", {
