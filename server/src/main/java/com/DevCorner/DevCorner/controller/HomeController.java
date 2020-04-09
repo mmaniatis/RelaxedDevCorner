@@ -25,6 +25,7 @@ public class HomeController {
         return repository.GetAllPosts();
     }
     @PostMapping("/CreatePost")
+    @CrossOrigin(origins = "http://localhost:3000")
     public boolean CreatePost(@RequestBody Post post)
     {
         try
@@ -38,6 +39,7 @@ public class HomeController {
         }
     }
     @GetMapping("/GetPost")
+
     public Post GetPost(@RequestParam("category") String category, @RequestParam("slug")  String slug)
     {
         return repository.GetPost(category, slug);

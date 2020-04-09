@@ -30,25 +30,20 @@ export default class CreatePost extends Component
         const slug = this.state.Slug;
         const body = this.state.Body;
         const author = 'Michael J. Maniatis';
-        const cdDate = new Date();
+        const cdDate =  new Date().toDateString();
         var postObject = JSON.stringify({category: category, title: title, slug:slug,
             body:body, author:author, cdDate:cdDate})
-        return fetch('/CreatePost', {
+        fetch("https://prd-app-relaxeddevcorner.azurewebsites.net/api/CreatePost", {
             method: 'POST',
             body: postObject,
             headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then(response => {
-            if (response.status >= 200 && response.status < 300)
-            {
-                this.window.location("/");
-            }
-            else
-            {
-                console.log(response);
-            }
-        }).catch(err => console.log(err));
+                'Content-Type': 'application/json',
+                'Access-Control-Request-Headers': '*'
+            },
+            
+        }).then(response => response)
+        .then(data => data)
+        .catch(err => console.log(err));
         
     }
 
@@ -64,29 +59,35 @@ export default class CreatePost extends Component
                 <div className="jumbotron">
                 <h1>Thanks for contributing!</h1>
                 </div>
-                    <div id = "CreatePostForm">
+                    <div className = "CreatePostForm">
                     
                     <form onSubmit={this.createPost}>
-                        <label>
+                        <label class="CreateFormLabel">
                             Category: 
-                            <input name = "Category" type="text" value={this.state.Category} onChange={this.handleChange}></input>
                         </label>
+                        <input className ="CreateFormInput"name = "Category" type="text" value={this.state.Category} onChange={this.handleChange}></input>
                         <br/>
-                        <label>
+                        <label class="CreateFormLabel">
                             Title: 
-                            <input name = "Title" type="text" value={this.state.Title} onChange={this.handleChange}></input>
                         </label>
+
+                        <input className ="CreateFormInput" name = "Title" type="text" value={this.state.Title} onChange={this.handleChange}></input>
+
                         <br/>
-                        <label>
+                        <label class="CreateFormLabel">
                             Slug: 
-                            <input name = "Slug" type="text" value={this.state.Slug} onChange={this.handleChange}></input>
                         </label>
+
+                        <input className ="CreateFormInput" name = "Slug" type="text" value={this.state.Slug} onChange={this.handleChange}></input>
                         <br/>
-                        <label>
+                        <label class="CreateFormLabel">
                             Body: 
-                            <input name = "Body" type="text" value={this.state.Body} onChange={this.handleChange}></input>
                         </label>
-                        <input type="submit" value="Submit"></input>
+
+                        <textarea className ="CreateFormInput" id="CreateFormBody"
+                        name = "Body" type="textarea" value={this.state.Body} onChange={this.handleChange}></textarea>
+                        
+                        <input className ="CreateFormInput" type="submit" value="Submit"></input>
                     </form>
                     
             </div>

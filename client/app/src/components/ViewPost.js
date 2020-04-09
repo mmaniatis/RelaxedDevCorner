@@ -40,15 +40,12 @@ export default class ViewPost extends Component {
                 <Container fluid>
                     <div className="jumbotron">
                         <h1>{post.title}</h1>
+                        <p>Written by: {post.author}</p>
+               
                     </div>  
-                    <div className ="Post">
-
+                    <div className="article">
                         <div className="PostBody">
-                            <h3>{post.body}</h3>
-                        </div>
-                        
-                        <div className ="PostFooter">
-                            <p>Written by: {post.author}</p>
+                            {post.body}
                         </div>
                     </div>
                 </Container>
