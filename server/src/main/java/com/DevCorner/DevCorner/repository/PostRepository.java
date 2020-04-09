@@ -7,6 +7,7 @@ import org.bson.types.ObjectId;
 
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class PostRepository implements IPostRepository {
@@ -48,6 +49,19 @@ public class PostRepository implements IPostRepository {
             for (Document doc : findIterable){
                 Post p = g.fromJson(g.toJson(doc) , Post.class);
                 result.add(p);
+            }
+        }
+
+        //Not the most efficient sorting algorithm, but it'l do for now.
+        for(int i = 0; i < result.size(); i ++)
+        {
+            for (int j =0; j < result.size() - 1; j ++)
+            {
+                if (result.get(i).cdDate.compareTo(result.get(j + 1).cdDate) <  0) {
+                    Post temp = result.get(i);
+                    result.set(i, result.get(j+ 1));
+                    result.set(j+ 1, temp);
+                }
             }
         }
         return result;
