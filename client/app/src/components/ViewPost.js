@@ -15,9 +15,8 @@ export default class ViewPost extends Component {
         if (this.props.match.params){
             const slug = this.props.match.params.slug;
             const category = this.props.match.params.category;
-            fetch('/GetPost?category=' + category + '&slug=' +slug, {
+            fetch(process.env.REACT_APP_API_URL+ '/GetPost?category=' + category + '&slug=' +slug, {
                 method: 'GET',
-                mode: 'cors', 
                 cache: 'no-cache', 
                 // credentials: 'same-origin', 
                 headers: {
@@ -40,15 +39,12 @@ export default class ViewPost extends Component {
                 <Container fluid>
                     <div className="jumbotron">
                         <h1>{post.title}</h1>
+                        <p>Written by: {post.author}</p>
+               
                     </div>  
-                    <div className ="Post">
-
+                    <div className="article">
                         <div className="PostBody">
-                            <h3>{post.body}</h3>
-                        </div>
-                        
-                        <div className ="PostFooter">
-                            <p>Written by: {post.author}</p>
+                            {post.body}
                         </div>
                     </div>
                 </Container>

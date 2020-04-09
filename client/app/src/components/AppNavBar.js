@@ -31,7 +31,7 @@ export default class AppNavbar extends Component {
 
   GetSignInButton() {
     const Success = (response) => {
-      return fetch('/Account/Authenticate?idTokenString=' + response.tokenId, {
+      return fetch(process.env.REACT_APP_API_URL + 'Account/Authenticate?idTokenString=' + response.tokenId, {
         method: 'GET',
         headers: {
         }

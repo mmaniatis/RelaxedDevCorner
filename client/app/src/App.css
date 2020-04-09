@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+.container {
+  display: flex;
+  justify-content: center;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -52,18 +57,19 @@
   align-items:center;
   text-align:center;
   margin:auto;
+  
 }
 
 .Card
 {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   margin-bottom: 10px;
-  width:60%;
+  width:30%;
   height:150px;
-  /* margin-left:25%; */
   background-color:white;
   border:0px;
-  position:relative;
+  justify-content: center;
+  display: flex;
 }
 
 .Card:hover {
@@ -71,11 +77,82 @@
   color:#d3d3d3d3;
 }
 
-#Author {
+.CardFooter {
   font-style:italic;
-  font-size:1rem;
-  bottom:0;
-  left:0;
-  position: absolute;
-  display:block;
+  font-size:.5rem;
+  float:left;
+  
+  display: flex;
+}
+
+.pagination {
+  /* display: inline !important; */
+  list-style: none;
+  outline: none;
+  justify-content: center;
+  display: flex;
+  
+}
+.pagination > .active > a{
+  background-color: #d3d3d3 ;
+  border-color:  #d3d3d3 ;
+  color: #fff;
+}
+.pagination > li > a{
+  border: 1px solid  #d3d3d3 ;
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+  background-color:  #d3d3d3 ;
+  border-color:  #d3d3d3;
+  outline: none ;
+}
+.pagination > li > a, .pagination > li > span{
+  color:  #d3d3d3
+}
+.pagination > li:first-child > a, .pagination > li:first-child > span, .pagination > li:last-child > a, .pagination > li:last-child > span{
+  border-radius: unset
+}
+.article{
+  display:flex;
+  justify-self: center;
+  justify-content: center;
+}
+
+.PostBody {
+  width:70%;
+  display: flex;
+  justify-self: center;
+  line-height: 3rem;
+  font-size: 2rem;
+}
+
+.PostFooter {
+  font-style:italic;
+  font-size:.7rem;
+  display:flex;
+  justify-self: center;
+}
+
+
+.CreatePostForm {
+  display:inline-block;
+}
+
+.CreateFormLabel {
+  display:flex;
+  justify-self: left;
+}
+
+.CreateFormInput {
+  display:flex;
+  justify-self: center;
+  width:400px;
+}
+
+#CreateFormBody {
+    /* height:1000px; */
+    width:500px;
 }
