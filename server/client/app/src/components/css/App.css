@@ -42,23 +42,35 @@
   }
 }
 
+.HomeContainer {
+  position:absolute;
+  /* align-content: center; */
+  margin:auto;
+  width:100%;
+  height:100%;
+  display:flex;
+  justify-content: center;
+}
 .jumbotron{
   text-align: center;
    /* position: inherit; */
    /* margin-top: 20px;   */
 }
 
-#MainNavBar 
+.NavBar 
 {
   position:fixed;
   width:100%;
-  z-index:1000000;
+  /* z-index:1000000; */
+  display: inline-block;
 }
 
 .PostContainer {
-  align-items:center;
-  text-align:center;
-  margin:auto;
+  /* text-align: center; */
+  display:block;
+  margin-top:7rem;
+  /* width:100%; */
+  /* justify-self: center; */
   
 }
 
@@ -66,29 +78,30 @@
 {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   margin-bottom: 10px;
-  width:30%;
-  height:150px;
+  /* width:30%; */
+  /* height:150px; */
   background-color:#969696d3;
   border:0px;
-  justify-self: center;
-  display: flex;
   color:white;
   align-items:center;
+  text-align: center;
   padding:4px;
   border-radius:4px;
 }
 
+#PostLink {
+  text-decoration: none;
+  color:white;
+
+
+}
 
 .PostCard:hover {
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
   color: white;
   text-decoration: none;
 }
-.PostCardText{
-  display:flex;
-  justify-self: center;
 
-}
 .CardFooter {
   font-style:italic;
   font-size:.5rem;

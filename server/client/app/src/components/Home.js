@@ -7,18 +7,17 @@ import { Container} from 'reactstrap';
 
 class Home extends Component {
   render() {
-    return (<>
-      <div>
-          <div>
+    return (
+      <div className ="HomeContainer">
+          <div className="NavBar">
             <AppNavbar/>
           </div>
-          
-          <div className="jumbotron">
-              <h1>Welcome to the, $TheDevCorner.</h1>
+
+          <div className="PostContainer">
+            <PostList/>
           </div>
-              <PostList/>
         </div>
-      </>
+      
     );
   }
 }

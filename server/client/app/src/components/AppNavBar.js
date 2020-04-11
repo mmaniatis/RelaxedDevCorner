@@ -80,7 +80,7 @@ export default class AppNavbar extends Component {
     else if(this.CheckAuthentication() === true)
     {
       var cookies = new Cookies();
-      return <> <div class="UsernameBox"> <span id="UserNameText">Welcome, <br / > {cookies.get("givenName")}</span></div> </>
+      return <> <div className="UsernameBox"> <span id="UserNameText">Welcome, <br / > {cookies.get("givenName")}</span></div> </>
     }
   }
 
