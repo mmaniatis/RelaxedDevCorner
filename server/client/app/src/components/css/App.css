@@ -44,6 +44,8 @@
 
 .jumbotron{
   text-align: center;
+   /* position: inherit; */
+   /* margin-top: 20px;   */
 }
 
 #MainNavBar 
@@ -162,8 +164,20 @@
   justify-self: center;
   width:400px;
 }
+.UsernameBox {
+  color:white;
+  text-align:center;
+  display:inline-block;
+}
+
+#UserNameText {
+  /* word-wrap: break-word; */
+  font-size:.8 rem;
+}
+
 
 #CreateFormBody {
     /* height:1000px; */
     width:500px;
 }
+

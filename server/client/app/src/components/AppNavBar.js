@@ -8,7 +8,7 @@ export default class AppNavbar extends Component {
     super(props);
     this.state = {isOpen: false};
     this.toggle = this.toggle.bind(this);
-
+    
   }
 
   toggle() {
@@ -47,8 +47,8 @@ export default class AppNavbar extends Component {
               {
                 cookies.set("IsAdmin", "True");
               }
-              responseJSON.givenName ?? cookies.set("givenName", responseJSON.givenName);
-              responseJSON.familyName ?? cookies.set("familyName", responseJSON.familyName);
+              
+              responseJSON.givenName != null ? cookies.set("givenName", responseJSON.givenName) : cookies.set("givenName", "");
 
             }
           }
@@ -73,13 +73,14 @@ export default class AppNavbar extends Component {
         buttonText="Login"
         onSuccess={Success}
         onFailure={Failure}
-        cookiePolicy={'same-site-origin'}
+        cookiePolicy={'single_host_origin'}
         />
 
     }
     else if(this.CheckAuthentication() === true)
     {
-      
+      var cookies = new Cookies();
+      return <> <div class="UsernameBox"> <span id="UserNameText">Welcome, <br / > {cookies.get("givenName")}</span></div> </>
     }
   }
 
