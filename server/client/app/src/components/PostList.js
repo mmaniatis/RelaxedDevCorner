@@ -30,13 +30,9 @@ class PostList extends Component{
             const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
             const postData = slice.map((post,index) => 
             
-            <div key={index} className="PostCard" >
-                <div className="PostCenter"> 
-                  <a id ="PostLink" href= {"/ViewPost/" + post.category + "/" + post.slug + "/"}>
-                      <h3 className="PostCardText" id="Title">{post.title}</h3>
-                      <span className="CardFooter">Written by: {post.author} | {post.cdDate} </span>
-                  </a>
-              </div>
+            <div key={index} className="PostCard" onClick={ () => this.viewPost(post.category, post.slug) }>
+              <h3 className="PostCardText" id="Title">{post.title}</h3>
+              <span className="CardFooter">Written by: {post.author} | {post.cdDate} </span>
               <br />
             </div>
 
@@ -70,6 +66,9 @@ class PostList extends Component{
     }
 
 
+    viewPost = (category, slug) => {
+      window.location.href ="/ViewPost/" + category + "/" + slug + "/";
+    }
 
     //Open particular post..
     render() {
