@@ -8,7 +8,7 @@ export default class AppNavbar extends Component {
     super(props);
     this.state = {isOpen: false};
     this.toggle = this.toggle.bind(this);
-
+    
   }
 
   toggle() {
@@ -39,13 +39,17 @@ export default class AppNavbar extends Component {
         .then((responseJSON) => {
           if(responseJSON != null)
           {
+            var cookies = new Cookies();
             if (responseJSON.email != null)
             {
-              new Cookies().set("IsAuthenticated", "True");
+              cookies.set("IsAuthenticated", "True");
               if (responseJSON.isAdmin)
               {
-                new Cookies().set("IsAdmin", "True");
+                cookies.set("IsAdmin", "True");
               }
+              
+              responseJSON.givenName != null ? cookies.set("givenName", responseJSON.givenName) : cookies.set("givenName", "");
+
             }
           }
           window.location.reload(true);
@@ -65,13 +69,18 @@ export default class AppNavbar extends Component {
     if (!this.CheckAuthentication())
     {
       return <GoogleLogin
-        clientId= process.env.REACT_APP_Prd_GoogleClientId
+        clientId= {process.env.REACT_APP_Prd_GoogleClientId}
         buttonText="Login"
         onSuccess={Success}
         onFailure={Failure}
         cookiePolicy={'single_host_origin'}
         />
 
+    }
+    else if(this.CheckAuthentication() === true)
+    {
+      var cookies = new Cookies();
+      return <> <div className="UsernameBox"> <span id="UserNameText">Welcome, <br / > {cookies.get("givenName")}</span></div> </>
     }
   }
 

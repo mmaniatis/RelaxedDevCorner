@@ -8,15 +8,16 @@ import { Container} from 'reactstrap';
 class Home extends Component {
   render() {
     return (
-      <div>
-        <AppNavbar/>
-        <Container fluid>
-          <div className="jumbotron">
-            <h1>Welcome to the, $TheDevCorner.</h1>
+      <div className ="HomeContainer">
+          <div className="NavBar">
+            <AppNavbar/>
           </div>
+
+          <div className="PostContainer">
             <PostList/>
-        </Container>
-      </div>
+          </div>
+        </div>
+      
     );
   }
 }

@@ -10,7 +10,7 @@ class PostList extends Component{
           posts: [], 
           isLoading:true,
           offset: 0,
-          perPage: 3,
+          perPage: 5,
           currentPage: 0,
           pageCount: null
         }
@@ -30,19 +30,9 @@ class PostList extends Component{
             const slice = data.slice(this.state.offset, this.state.offset + this.state.perPage);
             const postData = slice.map((post,index) => 
             
-            <div key={index} className ="container">
-              <a className="PostCard" href= {"/ViewPost/" + post.category + "/" + post.slug + "/"}>
-              {/* <Button  > */}
-                <div className="PostCenter"> 
-                  <h3 className="PostCardText" id="Title">{post.title}</h3>
-                  <span className="CardFooter">Written by: {post.author} | {post.cdDate} </span>
-
-                </div>
-
-
-              {/* </Button> */}
-              </a>
-
+            <div key={index} className="PostCard" onClick={ () => this.viewPost(post.category, post.slug) }>
+              <h3 className="PostCardText" id="Title">{post.title}</h3>
+              <span className="CardFooter">Written by: {post.author} | {post.cdDate} </span>
               <br />
             </div>
 
@@ -76,6 +66,9 @@ class PostList extends Component{
     }
 
 
+    viewPost = (category, slug) => {
+      window.location.href ="/ViewPost/" + category + "/" + slug + "/";
+    }
 
     //Open particular post..
     render() {
@@ -85,10 +78,7 @@ class PostList extends Component{
           return <p>Loading...</p>;
         }
 
-        return (
-          <div>
-            <Container fluid>
-              <div className="PostContainer">
+        return (<>
                 {this.state.postData}
                     <ReactPaginate
                           previousLabel={"prev"}
@@ -104,9 +94,7 @@ class PostList extends Component{
                           activeClassName={"active"}
                           
                       />
-              </div>
-            </Container>          
-          </div>
+              </>
         );
     }
 }
