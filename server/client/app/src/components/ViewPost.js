@@ -44,7 +44,7 @@ export default class ViewPost extends Component {
                     </div>  
                     <div className="article">
                         <div className="PostBody">
-                            {post.body}
+                            <p>{post.body}</p>
                         </div>
                     </div>
                 </Container>

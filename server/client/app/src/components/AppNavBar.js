@@ -20,13 +20,13 @@ export default class AppNavbar extends Component {
   CheckAuthentication()
   {
     const cookies = new Cookies();
-    return cookies.get("IsAuthenticated") == "True";
+    return cookies.get("IsAuthenticated") === "True";
   }
 
   IsAdmin()
   {
     const cookies = new Cookies();
-    return cookies.get("IsAdmin") == "True";
+    return cookies.get("IsAdmin") === "True";
   }
 
   GetSignInButton() {
@@ -58,12 +58,10 @@ export default class AppNavbar extends Component {
 
     const Failure = (response) => {
       new Cookies().set("IsAuthenticated", "False");
-      // console.log(response);
     }
 
     const logout = (response) => {
       new Cookies().set("IsAuthenticated", "False");
-    //   alert(response);
     }
 
     if (!this.CheckAuthentication())
