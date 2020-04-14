@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Home from './components/Home';
+import AlgorithmPuzzles from './components/AlgorithmPuzzles';
 import ViewPost from './components/ViewPost';
 import CreatePost from './components/CreatePost';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
