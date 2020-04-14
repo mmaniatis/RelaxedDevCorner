@@ -18,6 +18,8 @@
   }
 }
 
+
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -51,18 +53,24 @@
   display:flex;
   justify-content: center;
 }
+
+.ViewPostContainer{
+  display:block;
+}
 .jumbotron{
   text-align: center;
-   /* position: inherit; */
-   /* margin-top: 20px;   */
+   position: inherit;
+   margin-top: 40px;  
+   /* padding-top:5000px; */
+   
 }
 
 .NavBar 
 {
-  position:fixed;
+  position: fixed;
+  top: 0;
   width:100%;
   /* z-index:1000000; */
-  display: inline-block;
 }
 
 .PostContainer {
@@ -201,8 +209,7 @@
 .shareButtons 
 { 
   position:fixed;
-  margin-top: 100px;
-  
+  margin-top: 100px;  
 }
 
 .shareButtons button
@@ -211,3 +218,32 @@
   
 }
 
+
+@media only screen and (max-width: 600px) {
+
+  .jumbotron{
+    text-align: center;
+     position: inherit;
+     margin-top: 40px;  
+     font-size:1rem;
+     
+  }
+  .jumbotron h1 {
+     font-size:2rem;
+     
+  }
+  .PostBody {
+    width:70%;
+    display: flex;
+    justify-self: center;
+    line-height: 1.5rem;
+    font-size: .8rem;
+    word-break: break-word;
+    word-wrap: center;
+  }
+  .shareButtons 
+  { 
+    bottom: 0; 
+  }
+  
+}

@@ -93,7 +93,7 @@ export default class AppNavbar extends Component {
 
 
   render() {
-    return <div class="NavBar"><Navbar color="dark" dark expand="md" id="MainNavBar">
+    return <div className="NavBar"><Navbar color="dark" dark expand="md" id="MainNavBar">
       <NavbarBrand tag={Link} to="/"><img src={logo} alt="Logo" /> CodeCorner</NavbarBrand>
       <NavbarToggler onClick={this.toggle}/>
       <Collapse isOpen={this.state.isOpen} navbar>
@@ -101,9 +101,9 @@ export default class AppNavbar extends Component {
           <NavItem>
           {this.ShowCreatePost()}
           </NavItem>
-          <NavItem>
+          {/* <NavItem>
             <NavLink href="/Algorithms">Algorithms & Puzzles</NavLink>
-          </NavItem>
+          </NavItem> */}
           <NavItem>
             <NavLink href="https://twitter.com/michaelmaniatis">@mikedev</NavLink>
           </NavItem>
