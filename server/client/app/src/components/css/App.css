@@ -198,3 +198,16 @@
     width:500px;
 }
 
+.shareButtons 
+{ 
+  position:fixed;
+  margin-top: 100px;
+  
+}
+
+.shareButtons button
+{ 
+  display:block;
+  
+}
+

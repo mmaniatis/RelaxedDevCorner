@@ -9,9 +9,7 @@ class Home extends Component {
   render() {
     return (
       <div className ="HomeContainer">
-          <div className="NavBar">
-            <AppNavbar/>
-          </div>
+          <AppNavbar/>
 
           <div className="PostContainer">
             <PostList/>
