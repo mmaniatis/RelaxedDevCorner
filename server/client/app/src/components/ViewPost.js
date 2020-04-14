@@ -41,8 +41,10 @@ export default class ViewPost extends Component {
 
     render(){
         const {post} = this.state;
-        return (<div> 
+        return (<div className="ViewPostContainer"> 
+                <div>
                 <AppNavbar/>
+                </div>
                 <div className="shareButtons">
                     <TwitterShareButton
                         url={window.location.href}
@@ -79,17 +81,15 @@ export default class ViewPost extends Component {
                     round />
                     </RedditShareButton>
                 </div>
-                <Container fluid>
-                    <div className="jumbotron">
-                        <h1>{post.title}</h1>
-                        <p>Written by: {post.author}</p>
-                    </div>
-                    <div className="article">
+                <div className="jumbotron">
+                    <h1>{post.title}</h1>
+                    <p>Written by: {post.author}</p>
+                </div>
+                <div className="article">
                         <div className="PostBody">
                             <p>{post.body}</p>
                         </div>
                     </div>
-                </Container>
                 </div>
         );
     }
