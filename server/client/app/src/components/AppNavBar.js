@@ -3,13 +3,12 @@ import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} fr
 import { Link } from 'react-router-dom';
 import { GoogleLogin} from 'react-google-login';
 import Cookies from 'universal-cookie';
-import logo from '../CodeCornerLogo32x32.png';
+import logo from './images/CodeCornerLogo32x32.png';
 export default class AppNavbar extends Component {
   constructor(props) {
     super(props);
     this.state = {isOpen: false};
     this.toggle = this.toggle.bind(this);
-    
   }
 
   toggle() {
@@ -48,7 +47,6 @@ export default class AppNavbar extends Component {
               {
                 cookies.set("IsAdmin", "True");
               }
-              
               responseJSON.givenName != null ? cookies.set("givenName", responseJSON.givenName) : cookies.set("givenName", "");
 
             }
@@ -102,6 +100,9 @@ export default class AppNavbar extends Component {
         <Nav className="ml-auto" navbar>
           <NavItem>
           {this.ShowCreatePost()}
+          </NavItem>
+          <NavItem>
+            <NavLink href="/Algorithms">Algorithms & Puzzles</NavLink>
           </NavItem>
           <NavItem>
             <NavLink href="https://twitter.com/michaelmaniatis">@mikedev</NavLink>
