@@ -2,13 +2,22 @@ import React, { Component } from 'react';
 import './css/App.css';
 import AppNavbar from './AppNavBar';
 import { Container} from 'reactstrap';
+import {
+    EmailShareButton,
+    FacebookShareButton,
+    RedditShareButton,
+    TwitterShareButton,
+    TwitterIcon,
+    FacebookIcon,
+    RedditIcon,
+    EmailIcon
+  } from "react-share";
 
 export default class ViewPost extends Component {
 
     constructor(props){
         super(props);
         this.state = {post: []}
-        
     }
     componentDidMount()
     {
@@ -36,11 +45,46 @@ export default class ViewPost extends Component {
         const {post} = this.state;
         return (<div> 
                 <AppNavbar/>
+                <div className="shareButtons">
+                    <TwitterShareButton
+                        url={window.location.href}
+                        title={"Check out this post on CodeCorner, " +post.title}
+                    >
+                    <TwitterIcon
+                    size={32}
+                    round />
+                    </TwitterShareButton>
+
+                    <FacebookShareButton
+                        url={window.location.href}
+                        title={post.title}
+                    >
+                    <FacebookIcon
+                    size={32}
+                    round />
+                    </FacebookShareButton>
+                    <EmailShareButton
+                        url={window.location.href}
+                        title={post.title}
+                    >
+                    <EmailIcon
+                    size={32}
+                    round />
+                    </EmailShareButton>
+
+                    <RedditShareButton
+                        url={window.location.href}
+                        title={post.title}
+                    >
+                    <RedditIcon
+                    size={32}
+                    round />
+                    </RedditShareButton>
+                </div>
                 <Container fluid>
                     <div className="jumbotron">
                         <h1>{post.title}</h1>
                         <p>Written by: {post.author}</p>
-               
                     </div>  
                     <div className="article">
                         <div className="PostBody">
@@ -48,6 +92,7 @@ export default class ViewPost extends Component {
                         </div>
                     </div>
                 </Container>
+                {/* Sharing to social medias here... */}
 
                 </div>
         );

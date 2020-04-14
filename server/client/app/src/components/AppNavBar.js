@@ -3,6 +3,7 @@ import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} fr
 import { Link } from 'react-router-dom';
 import { GoogleLogin} from 'react-google-login';
 import Cookies from 'universal-cookie';
+import logo from '../CodeCornerLogo32x32.png';
 export default class AppNavbar extends Component {
   constructor(props) {
     super(props);
@@ -94,10 +95,8 @@ export default class AppNavbar extends Component {
 
 
   render() {
-
-
-    return <Navbar color="dark" dark expand="md" id="MainNavBar">
-      <NavbarBrand tag={Link} to="/">Home</NavbarBrand>
+    return <div class="NavBar"><Navbar color="dark" dark expand="md" id="MainNavBar">
+      <NavbarBrand tag={Link} to="/"><img src={logo} alt="Logo" /> CodeCorner</NavbarBrand>
       <NavbarToggler onClick={this.toggle}/>
       <Collapse isOpen={this.state.isOpen} navbar>
         <Nav className="ml-auto" navbar>
@@ -115,6 +114,7 @@ export default class AppNavbar extends Component {
           </NavItem>
         </Nav>
       </Collapse>
-    </Navbar>;
+    </Navbar>
+    </div>
   }
 }
