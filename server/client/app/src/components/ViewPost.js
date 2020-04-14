@@ -33,10 +33,8 @@ export default class ViewPost extends Component {
                 },
                 redirect: 'follow', 
                 referrerPolicy: 'no-referrer'
-               
               }).then(response => response.json())
               .then(data =>  this.setState({post: data}));
-                
         }
 
     }
@@ -85,15 +83,13 @@ export default class ViewPost extends Component {
                     <div className="jumbotron">
                         <h1>{post.title}</h1>
                         <p>Written by: {post.author}</p>
-                    </div>  
+                    </div>
                     <div className="article">
                         <div className="PostBody">
                             <p>{post.body}</p>
                         </div>
                     </div>
                 </Container>
-                {/* Sharing to social medias here... */}
-
                 </div>
         );
     }

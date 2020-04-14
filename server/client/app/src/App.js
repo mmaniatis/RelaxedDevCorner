@@ -22,6 +22,7 @@ class App extends Component {
         <Switch>
           <Route path='/' exact={true} component={Home}/>
           <Route path='/ViewPost/:category/:slug' exact={true} component={ViewPost}/>
+          <Route path='/Algorithms' exact={true} component={AlgorithmPuzzles} />
           {this.returnAdminRoutes()}
         </Switch>
       </Router>
