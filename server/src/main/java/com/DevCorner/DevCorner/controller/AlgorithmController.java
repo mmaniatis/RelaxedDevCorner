@@ -1,6 +1,8 @@
 package com.DevCorner.DevCorner.controller;
 
+import com.DevCorner.DevCorner.models.BinarySearchTree;
 import com.DevCorner.DevCorner.models.TreeNode;
+import org.bson.types.Binary;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class AlgorithmController {
 
     @PostMapping("/MaxDepthBinaryTree")
-    public static int MaxDepthBinaryTree(@RequestBody TreeNode root){
-        int depth = traverse(root, 0);
+    public static int MaxDepthBinaryTree(@RequestBody BinarySearchTree tree){
+        int depth = traverse(tree.root, 0);
         return depth;
     }
 
