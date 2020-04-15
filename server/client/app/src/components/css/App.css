@@ -218,7 +218,17 @@
   
 }
 
+.AlgorithmSectionContainer
+{
+  display: block;
+  width:35%;
+  line-height:2rem;
+}
 
+
+
+
+/* MOBILE CSS */
 @media only screen and (max-width: 600px) {
 
   .jumbotron{
@@ -247,3 +257,4 @@
   }
   
 }
+

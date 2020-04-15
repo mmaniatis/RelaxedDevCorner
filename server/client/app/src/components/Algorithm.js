@@ -1,25 +1,73 @@
 import React, {Component} from 'react'
 import AppNavbar from './AppNavBar'
 
+
 class TreeNode {
     value;
     left;
     right;
 
-    TreeNode(x){
+    constructor(x){
         this.value = x;
+        this.left = null;
+        this.right = null;
     }
 }
+class BinarySearchTree 
+{ 
+    
+    constructor() 
+    { 
+        this.root = null; 
+    } 
+  
+    insert = (data) => 
+    { 
+        var newNode = new TreeNode(data); 
+        if(this.root === null) 
+            this.root = newNode; 
+        else
+            this.insertTreeNode(this.root, newNode); 
+    }
+
+    insertTreeNode(node, newNode) 
+    {  
+        if(newNode.value < node.value) 
+        { 
+            if(node.left === null) 
+                node.left = newNode; 
+            else
+                this.insertTreeNode(node.left, newNode);  
+        } 
+        else
+        { 
+            if(node.right === null) 
+                node.right = newNode; 
+            else
+                this.insertTreeNode(node.right,newNode); 
+        } 
+    }
+    
+    print()
+    { 
+        document.getElementById('outputSection').textContent=JSON.stringify(this);
+
+    }
+
+    reset()
+    {
+        this.root = null;
+        document.getElementById('outputSection').textContent ='';
+    }
+} 
 
 export default class AlgorithmPuzzles extends Component
 {
     constructor(){
         super();
-        this.state = {algorithmName: '', TreeNode: new TreeNode(null)};
+        this.state = {algorithmName: '', BST: new BinarySearchTree};
 
       }
-
-
 
     componentDidMount()
     {
@@ -30,33 +78,17 @@ export default class AlgorithmPuzzles extends Component
         }
     }
 
-    insertTreeNode = (treeNode, val) => 
-    {
-        if (treeNode.value == null)
-        {
-            treeNode.value = new TreeNode(val);
-        }   
-        else if (val < treeNode.value)
-        {
-            this.insertTreeNode(treeNode.left, val);
-        }
-        else if (val >= treeNode.value)
-        {
-            this.insertTreeNode(treeNode.right, val);
-        }
-    };
-
     buildTreeNode = (event) => {
-        // debugger;
         const target = event.target;
         const value = target.value;
-
-        this.insertTreeNode(this.state.TreeNode, value);
-        
-        console.log(this.state.TreeNode);
-        console.log(this.state.TreeNode.left);
-        console.log(this.state.TreeNode.right);
+        this.state.BST.insert(value);
+        document.getElementById('TreeInput').value='';
+        this.state.BST.print();
     };
+
+    resetTree = () => {
+        this.state.BST.reset();
+    }
 
     maxDepthBinaryTree = () => {
         return (<>
@@ -65,13 +97,17 @@ export default class AlgorithmPuzzles extends Component
                         <input 
                         className ="CreateFormInput" 
                         name = "AlgorithmInput" 
-                        type="text" 
+                        type="number" 
                         placeholder="Type in a depth you would like to test:"
+                        id="TreeInput"
                         onChange ={this.buildTreeNode}
                         >
                         </input>
-                        
                     </div>
+
+                    <p id="outputSection">
+                       Tree Output ... 
+                    </p>
                 </div>  
                 </>
         )
@@ -90,6 +126,10 @@ export default class AlgorithmPuzzles extends Component
                 
                 <button >
                     Submit
+                </button>
+
+                <button onClick={this.resetTree}>
+                    Reset
                 </button>
                 </>
     }
