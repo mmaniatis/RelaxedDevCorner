@@ -13,13 +13,28 @@ export default class AlgorithmPuzzles extends Component
     render() {
         return <>
             <AppNavbar/>
-            <Container fluid>
                 <div className="jumbotron">
                     <h1>View & Practice Various Algorithmic Puzzles</h1>
                 </div>
 
-                <a href="/ViewPuzzle/MaxDepthTree"> Max Depth Tree</a>
-            </Container>
+
+
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg">
+
+                                <a href="/ViewPuzzle/MaxDepthTree">
+                                    <button className="btn btn-info btn-block">
+                                        Max Depth Tree
+                                    </button>
+                                </a>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+            
         </>
     }
 }

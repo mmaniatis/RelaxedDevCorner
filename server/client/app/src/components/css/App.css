@@ -1,10 +1,21 @@
-.App {
-  text-align: center;
+a:link {
+  text-decoration: none !important;
 }
 
-.container {
-  display: flex;
-  justify-content: center;
+a:visited {
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: none !important;
+}
+
+a:active {
+  text-decoration: none !important;
+}
+
+.App {
+  text-align: center;
 }
 
 .App-logo {
@@ -17,6 +28,7 @@
     animation: App-logo-spin infinite 20s linear;
   }
 }
+
 
 
 
@@ -70,7 +82,7 @@
   position: fixed;
   top: 0;
   width:100%;
-  /* z-index:1000000; */
+  z-index:1000000;
 }
 
 .PostContainer {
@@ -177,6 +189,7 @@
 
 .CreatePostForm {
   display:inline-block;
+  width:100%;
 }
 
 .CreateFormLabel {
@@ -187,7 +200,7 @@
 .CreateFormInput {
   display:flex;
   justify-self: center;
-  width:400px;
+  width:100%;
 }
 .UsernameBox {
   color:white;
@@ -203,7 +216,7 @@
 
 #CreateFormBody {
     /* height:1000px; */
-    width:500px;
+    width:100%;
 }
 
 .shareButtons 
@@ -218,9 +231,44 @@
   
 }
 
+.AlgorithmSectionContainer
+{
+  /* display: block; */
+  width:50%;
+  line-height:2rem;
+  float:left;
+  word-break:break-word;
+}
 
+.CodeSection{
+  width:50%;
+  float:right;
+}
+
+.UserCode {
+  background-color: #eee;
+  border: 1px solid #999;
+  display: block;
+}
+
+.AlgorithmPageContainer
+{
+  width:100%;
+  height:100%;
+  display: inline-block;
+  margin: 0 auto;
+}
+
+
+
+/* MOBILE CSS */
 @media only screen and (max-width: 600px) {
-
+  html {
+    font-size:70%;
+  }
+  input {
+    width: 50%;
+  }
   .jumbotron{
     text-align: center;
      position: inherit;
@@ -243,7 +291,13 @@
   }
   .shareButtons 
   { 
-    bottom: 0; 
+    margin-top:60%;
+    
+  }
+
+  .CodeSection{
+    font-size: 50%;
   }
   
 }
+
