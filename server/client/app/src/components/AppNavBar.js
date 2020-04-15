@@ -101,9 +101,9 @@ export default class AppNavbar extends Component {
           <NavItem>
           {this.ShowCreatePost()}
           </NavItem>
-          {/* <NavItem>
+          <NavItem>
             <NavLink href="/Algorithms">Algorithms & Puzzles</NavLink>
-          </NavItem> */}
+          </NavItem>
           <NavItem>
             <NavLink href="https://twitter.com/michaelmaniatis">@mikedev</NavLink>
           </NavItem>
