@@ -87,7 +87,7 @@ export default class ViewPost extends Component {
                 </div>
                 <div className="article">
                         <div className="PostBody">
-                            <p>{post.body}</p>
+                            <p id="FormattedText" dangerouslySetInnerHTML={{__html: post.body}}></p>
                         </div>
                     </div>
                 </div>
