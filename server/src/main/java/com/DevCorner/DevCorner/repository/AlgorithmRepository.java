@@ -4,7 +4,10 @@ import com.DevCorner.DevCorner.models.BinarySearchTree;
 import com.DevCorner.DevCorner.models.TreeNode;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class AlgorithmRepository implements IAlgorithmRepository {
 
@@ -13,14 +16,20 @@ public class AlgorithmRepository implements IAlgorithmRepository {
         return depth;
     }
 
-    public ArrayList<Integer> TwoSum(ArrayList<Integer> intArray)
+    public ArrayList<Integer> TwoSum(ArrayList<Integer> intArray, Integer target)
     {
-        ArrayList<Integer> result = new ArrayList<Integer>();
-
+        for (int i = 0; i < intArray.size(); i++)
+        {
+            for (int j = 0; j < intArray.size(); j++)
+            {
+                if (intArray.get(i) + intArray.get(j) == target)
+                {
+                    return new ArrayList<Integer>(Arrays.asList(i, j));
+                }
+            }
+        }
         
-
-
-        return result;
+        return new ArrayList<Integer>();
     }
 
     /* Helper Methods */
