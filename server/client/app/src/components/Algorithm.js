@@ -6,7 +6,7 @@ export default class AlgorithmPuzzles extends Component
 {
     constructor(){
         super();
-        this.state = {algorithmName: '', BST: new BinarySearchTree};
+        this.state = {algorithmName: ''};
 
       }
 

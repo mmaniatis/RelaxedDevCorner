@@ -70,18 +70,18 @@ export default class MaxDepthBinaryTree extends Component
     componentDidMount()
     {
         window.addEventListener('keypress', function (e) {
-            if (e.keyCode === 13 && document.getElementById('TreeInput').value !== '') {
+            if (e.keyCode === 13 && document.getElementById('algoInput').value !== '') {
                 document.getElementById('buildTree').click();
             }
         }, false);
     }
 
     buildTreeNode = (event) => {
-        const value = document.getElementById('TreeInput').value;
+        const value = document.getElementById('algoInput').value;
         if (value !== '')
         {
             this.state.BST.insert(value);
-            document.getElementById('TreeInput').value='';
+            document.getElementById('algoInput').value='';
             this.state.BST.print();
         }
 
@@ -108,63 +108,6 @@ export default class MaxDepthBinaryTree extends Component
         this.state.BST.reset();
     }
 
-    maxDepthBinaryTree = () => {
-        return (<>
-                    <div className="AlgorithmSectionContainer"> 
-                        <div className="inputSection">
-                            <input 
-                            className ="CreateFormInput" 
-                            name = "AlgorithmInput" 
-                            type="number" 
-                            placeholder="Type in a number to insert to tree and press enter or Insert Tree Node:"
-                            id="TreeInput"
-                            // onChange ={this.buildTreeNode}
-                            >
-                            </input>
-                            <button id ="buildTree" onClick={this.buildTreeNode}>
-                            Insert Into Tree
-                            </button>
-                        </div>
-                        
-                        <button onClick={this.getMaxDepth}>
-                            Submit
-                        </button>
-
-                        <button onClick={this.resetTree}>
-                            Reset
-                        </button>
-                        <p id="outputSection">
-                        Tree Output ... 
-                        </p>
-                        
-                    </div>  
-
-
-                    <div className="CodeSection" style={{ whiteSpace: 'pre-wrap' }}>
-                        <code className="UserCode">
-{`
-    public static int MaxDepthBinaryTree (@RequestBody BinarySearchTree tree) 
-    {  
-        int depth = traverse(tree.root, 0);
-        return depth;
-
-    }
-
-    public static int traverse(TreeNode root, int depth) 
-    {
-        if (root == null)
-            return depth;
-        int leftDepth = traverse(root.left, depth++);
-        int rightDepth = traverse(root.right, depth++);
-        return Math.max(leftDepth, rightDepth);
-    }`}
-                        </code>
-                    </div>         
-                </>
-        )
-    }
-
-
     render() {
         return    <>
                     <div className="AlgorithmSectionContainer"> 
@@ -174,7 +117,7 @@ export default class MaxDepthBinaryTree extends Component
                             name = "AlgorithmInput" 
                             type="number" 
                             placeholder="Type in a number to insert to tree and press enter or Insert Tree Node:"
-                            id="TreeInput"
+                            id="algoInput"
                             // onChange ={this.buildTreeNode}
                             >
                             </input>
@@ -202,9 +145,7 @@ export default class MaxDepthBinaryTree extends Component
 {`
     public static int MaxDepthBinaryTree (@RequestBody BinarySearchTree tree) 
     {  
-        int depth = traverse(tree.root, 0);
-        return depth;
-
+        return traverse(tree.root, 0);
     }
 
     public static int traverse(TreeNode root, int depth) 
