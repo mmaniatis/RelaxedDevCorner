@@ -2,66 +2,6 @@ import React, {Component} from 'react'
 import AppNavbar from './AppNavBar'
 import MaxDepthBinaryTree from './AlogrithmComponents/MaxDepthBinaryTree'
 
-
-class TreeNode{
-    value;
-    left;
-    right;
-
-    constructor(x){
-        this.value = x;
-        this.left = null;
-        this.right = null;
-    }
-}
-class BinarySearchTree 
-{ 
-    
-    constructor() 
-    { 
-        this.root = null; 
-    } 
-  
-    insert = (data) => 
-    { 
-        var newNode = new TreeNode(data); 
-        if(this.root === null) 
-            this.root = newNode; 
-        else
-            this.insertTreeNode(this.root, newNode); 
-    }
-
-    insertTreeNode(node, newNode) 
-    {  
-        if(newNode.value < node.value) 
-        { 
-            if(node.left === null) 
-                node.left = newNode; 
-            else
-                this.insertTreeNode(node.left, newNode);  
-        } 
-        else
-        { 
-            if(node.right === null) 
-                node.right = newNode; 
-            else
-                this.insertTreeNode(node.right,newNode); 
-        } 
-    }
-    
-    print()
-    { 
-        document.getElementById('outputSection').textContent=JSON.stringify(this);
-
-    }
-
-    reset()
-    {
-        this.root = null;
-        document.getElementById('outputSection').textContent ='';
-    }
-} 
-
 export default class AlgorithmPuzzles extends Component
 {
     constructor(){
