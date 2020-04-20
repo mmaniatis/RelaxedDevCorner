@@ -28,8 +28,8 @@ public class AlgorithmRepository implements IAlgorithmRepository {
             }
             else //no pair has been found yet
             {
-                int sumMinusTarget = target - intArray[i]; //target - current index, add to hash table for future use
-                hash.put(sumMinusTarget, i);
+
+                hash.put(target - intArray[i], i); //target - current index, index of this total 
             }
         }
         

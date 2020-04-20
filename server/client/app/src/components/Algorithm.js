@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import AppNavbar from './AppNavBar'
 import MaxDepthBinaryTree from './AlogrithmComponents/MaxDepthBinaryTree'
+import TwoSum from './AlogrithmComponents/TwoSum';
 
 export default class AlgorithmPuzzles extends Component
 {
@@ -19,16 +20,26 @@ export default class AlgorithmPuzzles extends Component
         }
     }
 
+    getAlgorithmComponent()
+    {
+        switch (this.state.algorithmName){
+            case "MaxDepthTree":
+                return <MaxDepthBinaryTree />;
+            case "TwoSum":
+                return <TwoSum />
+        }
+    }
+
     render() {
         return <>
                 <AppNavbar/>
                 <div className="jumbotron">
                     <h1>{this.state.algorithmName}</h1>
-                    <p>Code is written in Java.</p>
+                    <p id="description">Code is written in Java.</p>
                     <p id="solution">Solution will appear here ....</p>
                 </div>                  
                 <div className = "AlgorithmPageContainer">
-                    <MaxDepthBinaryTree />
+                    {this.getAlgorithmComponent()}
                  </div>
                 
             

@@ -1,4 +1,4 @@
-import react, { Component } from 'react'
+import React, { Component } from 'react'
 
 export default class TwoSum extends Component
 {
@@ -25,18 +25,18 @@ export default class TwoSum extends Component
                     // onChange ={this.buildTreeNode}
                     >
                     </input>
-                    <button id ="buildTree" onClick={}>
+                    {/* <button id ="ListInsert" onClick={}>
                     Insert Into list
-                    </button>
+                    </button> */}
                 </div>
                 
-                <button onClick={}>
+                {/* <button onClick={}>
                     Submit
                 </button>
 
                 <button onClick={}>
                     Reset
-                </button>
+                </button> */}
                 <p id="outputSection">
                 List ...
                 </p>

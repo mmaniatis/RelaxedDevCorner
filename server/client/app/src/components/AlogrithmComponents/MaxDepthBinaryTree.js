@@ -69,6 +69,7 @@ export default class MaxDepthBinaryTree extends Component
 
     componentDidMount()
     {
+        document.getElementById('description').textContent = 'This algorithm takes in a Binary Search Tree as input, and returns the maximum depth in the given tree.'
         window.addEventListener('keypress', function (e) {
             if (e.keyCode === 13 && document.getElementById('algoInput').value !== '') {
                 document.getElementById('buildTree').click();
