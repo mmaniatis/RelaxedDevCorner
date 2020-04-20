@@ -29,8 +29,8 @@ public class AlgorithmController {
         return algoRepo.MaxDepthBinaryTree(tree);
     }
 
-    @PostMapping("/TwoSum") //Returns the indicies of the two numbers that add up to the target number.
-    public ArrayList<Integer> TwoSum(@RequestBody TwoSumInput tsi) {
+    @PostMapping("/TwoSum") //Returns the indices of the two numbers that add up to the target number.
+    public int[] TwoSum(@RequestBody TwoSumInput tsi) {
         return algoRepo.TwoSum(tsi.intArray, tsi.target);
     }
 }

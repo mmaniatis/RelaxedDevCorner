@@ -6,6 +6,6 @@ import java.util.ArrayList;
 
 public interface IAlgorithmRepository {
     int MaxDepthBinaryTree(BinarySearchTree tree);
-    ArrayList<Integer> TwoSum(ArrayList<Integer> intArray , Integer target);
+    int[] TwoSum(int[] intArray , Integer target);
 
 }

@@ -14,21 +14,21 @@ public class AlgorithmRepository implements IAlgorithmRepository {
         return depth;
     }
 
-    public ArrayList<Integer> TwoSum(ArrayList<Integer> intArray, Integer target)
+    public int[] TwoSum(int[] intArray, Integer target)
     {
-        ArrayList<Integer> sums = new ArrayList<>(); //arrayList we will return
+        int[] sums = new int[2]; //list we will return
         HashMap<Integer, Integer> hash = new HashMap<>(); //hash table to track the pairings
-        for (int i = 0; i < intArray.size(); i++)
+        for (int i = 0; i < intArray.length; i++)
         {
-            if (hash.containsKey(intArray.get(i))) // if our hash has this number as a key, it means we found the other pair already
+            if (hash.containsKey(intArray[i])) // if our hash has this number as a key, it means we found the other pair already
             {
-                sums.add(hash.get(intArray.get(i))); //return the pair
-                sums.add(i);
+                sums = new int[] {hash.get(intArray[i]), i}; //return the pair
+
                 return sums;
             }
             else //no pair has been found yet
             {
-                int sumMinusTarget = target - intArray.get(i); //target - current index, add to hash table for future use
+                int sumMinusTarget = target - intArray[i]; //target - current index, add to hash table for future use
                 hash.put(sumMinusTarget, i);
             }
         }
