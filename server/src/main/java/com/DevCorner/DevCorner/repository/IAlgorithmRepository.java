@@ -7,5 +7,6 @@ import java.util.ArrayList;
 public interface IAlgorithmRepository {
     int MaxDepthBinaryTree(BinarySearchTree tree);
     int[] TwoSum(int[] intArray , Integer target);
+    int lengthOfLongestSubstring(String s);
 
 }
