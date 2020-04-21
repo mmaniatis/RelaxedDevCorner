@@ -1,6 +1,7 @@
 package com.DevCorner.DevCorner.controller;
 
 import com.DevCorner.DevCorner.models.BinarySearchTree;
+import com.DevCorner.DevCorner.models.TwoSumInput;
 import com.DevCorner.DevCorner.repository.AlgorithmRepository;
 import com.DevCorner.DevCorner.repository.IAlgorithmRepository;
 
@@ -23,13 +24,13 @@ public class AlgorithmController {
         algoRepo = new AlgorithmRepository();
     }
 
-    @PostMapping("/MaxDepthBinaryTree")
+    @PostMapping("/MaxDepthBinaryTree") //Returns the max depth in a given binary tree.
     public int MaxDepthBinaryTree(@RequestBody BinarySearchTree tree){
         return algoRepo.MaxDepthBinaryTree(tree);
     }
 
-    @PostMapping("/TwoSum")
-    public ArrayList<Integer> TwoSum(@RequestBody ArrayList<Integer> intArray) {
-        return algoRepo.TwoSum(intArray);
+    @PostMapping("/TwoSum") //Returns the indices of the two numbers that add up to the target number.
+    public int[] TwoSum(@RequestBody TwoSumInput tsi) {
+        return algoRepo.TwoSum(tsi.intArray, tsi.target);
     }
 }
