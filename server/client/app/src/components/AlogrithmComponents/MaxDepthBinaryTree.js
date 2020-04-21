@@ -144,19 +144,18 @@ export default class MaxDepthBinaryTree extends Component
                     <div className="CodeSection" style={{ whiteSpace: 'pre-wrap' }}>
                         <code className="UserCode">
 {`
-    public static int MaxDepthBinaryTree (@RequestBody BinarySearchTree tree) 
-    {  
-        return traverse(tree.root, 0);
+    public int MaxDepthBinaryTree(TreeNode root) {
+        return traverseAndReturnDepth(root);
     }
-
-    public static int traverse(TreeNode root, int depth) 
-    {
+    
+   private static int traverseAndReturnDepth(TreeNode root){
         if (root == null)
-            return depth;
-        int leftDepth = traverse(root.left, depth++);
-        int rightDepth = traverse(root.right, depth++);
-        return Math.max(leftDepth, rightDepth);
-    }`}
+            return 0;
+        int leftDepth = traverseAndReturnDepth(root.left);
+        int rightDepth = traverseAndReturnDepth(root.right);
+        return 1 + Math.max(leftDepth, rightDepth);
+    }
+}`}
                         </code>
                     </div>         
                 </>

@@ -5,7 +5,7 @@ export default class TwoSum extends Component
     constructor(props)
     {
         super(props);   
-        this.state = {inputArray: []}  
+        this.state = {inputArray: [], targetSum : 0}  
     }
 
     componentDidMount()
@@ -15,13 +15,17 @@ export default class TwoSum extends Component
             if (e.keyCode === 13 && document.getElementById('algoInput').value !== '') {
                 document.getElementById('ListInsert').click();
             }
+            if (e.keyCode === 13 && document.getElementById('targetSum').value !== '') {
+                document.getElementById('TargetSumInsert').click();
+            }
         }, false);
     }
 
     reset = () => 
     {
-        this.setState({inputArray :[]});
+        this.setState({inputArray :[], targetSum: 0});
         document.getElementById('outputSection').textContent ='';
+        document.getElementById('outputSection2').textContent ='';
     }
 
     buildInputList = () => {
@@ -31,6 +35,16 @@ export default class TwoSum extends Component
             document.getElementById('algoInput').value='';
             this.state.inputArray.push(parseInt(value));
             document.getElementById('outputSection').textContent = "[" + this.state.inputArray + "]";
+        }
+    }
+
+    setTargetSum = () => {
+        const value = document.getElementById('targetSum').value;
+        if (value !== '')
+        {
+            document.getElementById('targetSum').value = '';
+            this.setState({targetSum : parseInt(value)});
+            document.getElementById('outputSection2').textContent = 'Target sum: ' + this.state.targetSum;
         }
     }
 
@@ -61,15 +75,18 @@ export default class TwoSum extends Component
                         className ="CreateFormInput" 
                         name = "AlgorithmInput" 
                         type="number" 
-                        placeholder=""
+                        placeholder="Insert list to be checked ..."
                         id="algoInput"
-                        // onChange ={this.buildTreeNode}
                         >
                         </input>
                         </div>
                         <button id ="ListInsert" onClick={this.buildInputList}>
                             Insert Into list
                         </button>
+
+                        <p id="outputSection">
+                        List ...
+                        </p>
                     </div>
 
                     <div className="col-sm">
@@ -78,15 +95,18 @@ export default class TwoSum extends Component
                         className ="CreateFormInput" 
                         name = "AlgorithmInput" 
                         type="number" 
-                        placeholder=""
+                        placeholder="Insert target sum ..."
                         id="targetSum"
-                        // onChange ={this.buildTreeNode}
                         >
                         </input>
                         </div>
-                        <button id ="ListInsert" onClick={this.buildInputList}>
-                            Insert Into list
+                        <button id ="TargetSumInsert" onClick={this.setTargetSum}>
+                            Insert Target Sum
                         </button>
+
+                        <p id="outputSection2">
+                            Target sum:
+                        </p>
                     </div>
                 </div>
 
@@ -99,11 +119,20 @@ export default class TwoSum extends Component
                 <button onClick={this.reset}>
                     Reset
                 </button> 
-                <p id="outputSection">
-                List ...
-                </p>
                 
             </div>  
+
+            <div className ="CodeSectionContainer">
+                <pre>
+                    <code>
+                        This
+                        Insert
+                        Algorithm
+                        Test
+                        
+                    </code>
+                </pre>
+            </div>
         </>
     }
 } 
