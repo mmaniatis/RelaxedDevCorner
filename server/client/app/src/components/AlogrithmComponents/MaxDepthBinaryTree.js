@@ -111,39 +111,38 @@ export default class MaxDepthBinaryTree extends Component
 
     render() {
         return    <>
-                    <div className="AlgorithmSectionContainer"> 
-                        <div className="inputSection">
-                            <input 
-                            className ="CreateFormInput" 
-                            name = "AlgorithmInput" 
-                            type="number" 
-                            placeholder="Type in a number to insert to tree and press enter or Insert Tree Node:"
-                            id="algoInput"
-                            // onChange ={this.buildTreeNode}
-                            >
-                            </input>
-                            <button id ="buildTree" onClick={this.buildTreeNode}>
-                            Insert Into Tree
-                            </button>
-                        </div>
-                        
-                        <button onClick={this.getMaxDepth}>
-                            Submit
-                        </button>
+                    <div className="row"> 
+                        <div className="col-lg">
+                                <div className="inputSection">
+                                    <input 
+                                    className ="CreateFormInput" 
+                                    name = "AlgorithmInput" 
+                                    type="number" 
+                                    placeholder="Type in a number to insert to tree and press enter or Insert Tree Node:"
+                                    id="algoInput"
+                                    // onChange ={this.buildTreeNode}
+                                    >
+                                    </input>
+                                    <button id ="buildTree" onClick={this.buildTreeNode}>
+                                    Insert Into Tree
+                                    </button>
+                                </div>
+                                
+                                <button onClick={this.getMaxDepth}>
+                                    Submit
+                                </button>
 
-                        <button onClick={this.resetTree}>
-                            Reset
-                        </button>
-                        <p id="outputSection">
-                        Tree Output ... 
-                        </p>
-                        
-                    </div>  
-
-
-                    <div className="CodeSectionContainer">
-                    <pre>
-                        <code className="UserCode">
+                                <button onClick={this.resetTree}>
+                                    Reset
+                                </button>
+                                <p id="outputSection">
+                                Tree Output ... 
+                                </p>
+                            </div>
+                            
+                            <div className="col-lg">
+                    <pre className="UserCode">
+                        <code>
 {`
     public int MaxDepthBinaryTree(TreeNode root) {
         return traverseAndReturnDepth(root);
@@ -159,7 +158,12 @@ export default class MaxDepthBinaryTree extends Component
 }`}
                         </code>
                     </pre>
-                    </div>         
+                    </div>  
+
+                    </div>  
+
+
+                          
                 </>
     }
 }

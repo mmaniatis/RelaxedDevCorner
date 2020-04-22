@@ -237,35 +237,21 @@ a:active {
   
 }
 
-.AlgorithmSectionContainer
-{
-  /* display: block; */
-  width:50%;
-  line-height:2rem;
-  float:left;
-  word-break:break-word;
-}
+/*  */
 
-.CodeSectionContainer{
-  width:50%;
-  float:right;
+pre .UserCode {
+  width:100%;
 }
 
 .UserCode {
   background-color: #eee;
   border: 1px solid #999;
-  display: block;
+  display:block;
   word-wrap:break-word;
   color: #ff007f;
+  width:100%;
 }
 
-.AlgorithmPageContainer
-{
-  width:100%;
-  height:100%;
-  display: inline-block;
-  margin: 0 auto;
-}
 
 
 
@@ -301,10 +287,6 @@ a:active {
   { 
     margin-top:60%;
     
-  }
-
-  .CodeSection{
-    font-size: 50%;
   }
   
 }

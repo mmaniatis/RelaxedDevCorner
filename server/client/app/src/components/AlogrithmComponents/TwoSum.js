@@ -68,64 +68,59 @@ export default class TwoSum extends Component
 
     render() {
         return <>
-            <div className="AlgorithmSectionContainer"> 
-                <div className="row">
-                    <div className="col-sm">
-                        <div className="inputSection">
-                        <input 
-                        className ="CreateFormInput" 
-                        name = "AlgorithmInput" 
-                        type="number" 
-                        placeholder="Insert list to be checked ..."
-                        id="algoInput"
-                        >
-                        </input>
-                        </div>
-                        <button id ="ListInsert" onClick={this.buildInputList}>
-                            Insert Into list
-                        </button>
-
-                        <p id="outputSection">
-                        List ...
-                        </p>
+            <div className="row">
+                <div className="col-sm">
+                    <div className="inputSection">
+                    <input 
+                    className ="CreateFormInput" 
+                    name = "AlgorithmInput" 
+                    type="number" 
+                    placeholder="Insert list to be checked ..."
+                    id="algoInput"
+                    >
+                    </input>
                     </div>
+                    <button id ="ListInsert" onClick={this.buildInputList}>
+                        Insert Into list
+                    </button>
 
-                    <div className="col-sm">
-                        <div className="inputSection">
-                        <input 
-                        className ="CreateFormInput" 
-                        name = "AlgorithmInput" 
-                        type="number" 
-                        placeholder="Insert target sum ..."
-                        id="targetSum"
-                        >
-                        </input>
-                        </div>
-                        <button id ="TargetSumInsert" onClick={this.setTargetSum}>
-                            Insert Target Sum
-                        </button>
+                    <p id="outputSection">
+                    List ...
+                    </p>
 
-                        <p id="outputSection2">
-                            Target sum:
-                        </p>
-                    </div>
                 </div>
 
-               
-                
-                <button onClick={this.getTwoSum}>
-                    Submit
-                </button>
-               
-                <button onClick={this.reset}>
-                    Reset
-                </button> 
-                
-            </div>  
+                <div className="col-sm">
+                    <div className="inputSection">
+                    <input 
+                    className ="CreateFormInput" 
+                    name = "AlgorithmInput" 
+                    type="number" 
+                    placeholder="Insert target sum ..."
+                    id="targetSum"
+                    >
+                    </input>
+                    </div>
+                    <button id ="TargetSumInsert" onClick={this.setTargetSum}>
+                        Insert Target Sum
+                    </button>
 
-            <div className ="CodeSectionContainer">
-                <pre>
-                    <code className="UserCode">
+                    <p id="outputSection2">
+                        Target sum:
+                    </p>
+
+                    <button onClick={this.getTwoSum}>
+                            Submit
+                    </button>
+                
+                    <button onClick={this.reset}>
+                        Reset
+                    </button> 
+                </div>
+            
+                <div className ="col-lg">
+                <pre className="UserCode">
+                    <code>
 {`
  //returns two indices of numbers that sum to the target
  public int[] TwoSum(int[] intArray, Integer target)
@@ -155,6 +150,8 @@ export default class TwoSum extends Component
                         </code>
                 </pre>
             </div>
+            </div>
+
         </>
     }
 } 
