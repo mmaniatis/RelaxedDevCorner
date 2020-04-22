@@ -246,7 +246,7 @@ a:active {
   word-break:break-word;
 }
 
-.CodeSection{
+.CodeSectionContainer{
   width:50%;
   float:right;
 }
@@ -255,6 +255,8 @@ a:active {
   background-color: #eee;
   border: 1px solid #999;
   display: block;
+  word-wrap:break-word;
+  color: #ff007f;
 }
 
 .AlgorithmPageContainer

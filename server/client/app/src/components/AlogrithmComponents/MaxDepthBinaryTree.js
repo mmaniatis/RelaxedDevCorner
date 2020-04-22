@@ -141,7 +141,8 @@ export default class MaxDepthBinaryTree extends Component
                     </div>  
 
 
-                    <div className="CodeSection" style={{ whiteSpace: 'pre-wrap' }}>
+                    <div className="CodeSectionContainer">
+                    <pre>
                         <code className="UserCode">
 {`
     public int MaxDepthBinaryTree(TreeNode root) {
@@ -157,6 +158,7 @@ export default class MaxDepthBinaryTree extends Component
     }
 }`}
                         </code>
+                    </pre>
                     </div>         
                 </>
     }

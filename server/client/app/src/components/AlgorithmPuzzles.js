@@ -29,13 +29,13 @@ export default class AlgorithmPuzzles extends Component
                                 </a>
 
                             </div>
-                            {/* <div className="col-sm">
+                            <div className="col-sm">
                                 <a href="/ViewPuzzle/TwoSum">
                                     <button className="btn btn-primary btn-block">
                                         Two Sum
                                     </button>
                                 </a>
-                            </div> */}
+                            </div>
                         </div>
                     </div>
 

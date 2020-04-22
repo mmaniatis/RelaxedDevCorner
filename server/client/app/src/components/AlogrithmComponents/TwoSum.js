@@ -44,14 +44,15 @@ export default class TwoSum extends Component
         {
             document.getElementById('targetSum').value = '';
             this.setState({targetSum : parseInt(value)});
-            document.getElementById('outputSection2').textContent = 'Target sum: ' + this.state.targetSum;
+            document.getElementById('outputSection2').textContent = 'Target sum: ' + value;
         }
     }
 
     getTwoSum = () => {
+        var json = JSON.stringify({intArray: this.state.inputArray, target: this.state.targetSum});
         fetch(process.env.REACT_APP_API_URL + "Algorithm/TwoSum", {
             method: 'post',
-            body: "",
+            body: json,
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -59,7 +60,7 @@ export default class TwoSum extends Component
         }).then(response => response.json())
         .then(responseJSON => 
             
-            document.getElementById('solution').textContent = ''
+            document.getElementById('solution').textContent = 'The two indicies that sum to the target: [' + responseJSON + ']'
         
         )
         .catch(err => alert(err));
@@ -112,10 +113,10 @@ export default class TwoSum extends Component
 
                
                 
-                {/* <button onClick={}>
+                <button onClick={this.getTwoSum}>
                     Submit
                 </button>
-                */}
+               
                 <button onClick={this.reset}>
                     Reset
                 </button> 
@@ -124,13 +125,34 @@ export default class TwoSum extends Component
 
             <div className ="CodeSectionContainer">
                 <pre>
-                    <code>
-                        This
-                        Insert
-                        Algorithm
-                        Test
-                        
-                    </code>
+                    <code className="UserCode">
+{`
+ //returns two indices of numbers that sum to the target
+ public int[] TwoSum(int[] intArray, Integer target)
+ {
+     int[] sums = new int[2]; //list we will return
+
+     //hash table to track the pairings
+     HashMap<Integer, Integer> hash = new HashMap<>();
+
+     for (int i = 0; i < intArray.length; i++)
+     {
+         if (hash.containsKey(intArray[i])) //hash has pair
+         {
+             sums = new int[] {hash.get(intArray[i]), i}; //return the pair
+
+             return sums;
+         }
+         else //no pair has been found yet
+         {
+
+             hash.put(target - intArray[i], i); 
+         }
+     }
+     
+     return sums; //return the pair if any
+ }`} 
+                        </code>
                 </pre>
             </div>
         </>

@@ -1,5 +1,6 @@
 package com.DevCorner.DevCorner.repository;
 import com.DevCorner.DevCorner.models.BinarySearchTree;
+import com.DevCorner.DevCorner.models.ListNode;
 import com.DevCorner.DevCorner.models.TreeNode;
 import java.util.*;
 
@@ -85,6 +86,47 @@ public class AlgorithmRepository implements IAlgorithmRepository {
             result = x;
         }
         return result;
+    }
+
+    //Fizz-Buzz
+    public List<String> fizzBuzz(int n) {
+        List<String> res = new ArrayList<>();
+        for (int i = 1; i < n+1; i++)
+        {
+            if (i%3 == 0 && i%5 ==0)
+                res.add("FizzBuzz");
+            else if (i%3==0)
+                res.add("Fizz");
+            else if (i%5==0)
+                res.add("Buzz");
+            else
+                res.add(String.valueOf(i));
+        }
+        return res;
+    }
+
+    //Reverse Linked List
+    public ListNode reverseList(ListNode head) {
+        Stack<Integer> reverseStack = new Stack<>();
+
+        if (head == null || head.next ==null)
+            return head;
+
+        while (head.next != null)
+        {
+            reverseStack.add((head.val));
+            head=head.next;
+        }
+
+        ListNode result = new ListNode (head.val);
+        ListNode headResult = result;
+
+        while (reverseStack.size() > 0)
+        {
+            result.next = new ListNode(reverseStack.pop());
+            result = result.next;
+        }
+        return headResult;
     }
 
     /* Helper Methods */
