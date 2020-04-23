@@ -1,3 +1,4 @@
+cd server/client/app &&
 npm run build &&
 mv build static &&
 rm -r ../../src/main/resources/static &&

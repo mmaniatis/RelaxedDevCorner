@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 
 @SpringBootApplication
@@ -56,15 +57,16 @@ public class PostRepository implements IPostRepository {
         //Not the most efficient sorting algorithm, but it'l do for now.
         for(int i = 0; i < result.size(); i ++)
         {
-            for (int j =0; j < result.size() - 1; j ++)
+            for (int j =1; j < result.size()-i; j ++)
             {
-                if (result.get(i).cdDate.compareTo(result.get(j + 1).cdDate) <  0) {
-                    Post temp = result.get(i);
-                    result.set(i, result.get(j+ 1));
-                    result.set(j+ 1, temp);
+                if (result.get(j).cdDate.compareTo(result.get(j-1).cdDate) >  0) {
+                    Post temp = result.get(j-1);
+                    result.set(j-1, result.get(j));
+                    result.set(j, temp);
                 }
             }
         }
+
         return result;
     }
 
