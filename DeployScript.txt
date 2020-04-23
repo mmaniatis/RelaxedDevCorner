@@ -1,0 +1,8 @@
+cd server/client/app &&
+npm run build &&
+mv build static &&
+rm -r ../../src/main/resources/static &&
+mv static ../../src/main/resources &&
+cd ../../ &&
+mvn clean package &&
+mvn azure-webapp:deploy

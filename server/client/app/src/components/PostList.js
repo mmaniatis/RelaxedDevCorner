@@ -10,7 +10,7 @@ class PostList extends Component{
           posts: [], 
           isLoading:true,
           offset: 0,
-          perPage: 5,
+          perPage: 3,
           currentPage: 0,
           pageCount: null
         }
