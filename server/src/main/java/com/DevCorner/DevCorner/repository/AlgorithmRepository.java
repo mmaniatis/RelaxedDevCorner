@@ -19,7 +19,7 @@ public class AlgorithmRepository implements IAlgorithmRepository {
         HashMap<Integer, Integer> hash = new HashMap<>(); //hash table to track the pairings
         for (int i = 0; i < intArray.length; i++)
         {
-            if (hash.containsKey(intArray[i])) // if our hash has this number as a key, it means we found the other pair already
+            if (hash.containsKey(intArray[i])) // hash found pair
             {
                 sums = new int[] {hash.get(intArray[i]), i}; //return the pair
 
@@ -130,8 +130,11 @@ public class AlgorithmRepository implements IAlgorithmRepository {
         return headResult;
     }
 
-    
+    //Depth First Search
+    public List<String> DFS()
+    {
 
+    }
 
     /* Helper Methods */
     private static int traverseAndReturnDepth(TreeNode root){
@@ -141,5 +144,7 @@ public class AlgorithmRepository implements IAlgorithmRepository {
         int rightDepth = traverseAndReturnDepth(root.right);
         return 1 + Math.max(leftDepth, rightDepth);
     }
+
+    
 
 }
