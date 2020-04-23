@@ -191,6 +191,8 @@ a:active {
 
 #FormattedText {
   white-space: pre-line;
+  max-width: inherit;
+  overflow-x: auto;
 }
 
 .CreatePostForm {
@@ -239,6 +241,15 @@ a:active {
 
 /*  */
 
+pre code{
+  background-color: #eee;
+  border: 1px solid #999;
+  display:block;
+  word-wrap:break-word;
+  color: #ff007f;
+  width:100%;
+}
+
 pre .UserCode {
   width:100%;
 }
@@ -275,7 +286,7 @@ pre .UserCode {
      
   }
   .PostBody {
-    width:70%;
+    max-width: inherit;
     display: flex;
     justify-self: center;
     line-height: 1.5rem;
