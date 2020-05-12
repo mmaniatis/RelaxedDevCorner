@@ -3,8 +3,11 @@ import com.DevCorner.DevCorner.models.BinarySearchTree;
 import com.DevCorner.DevCorner.models.Graph;
 import com.DevCorner.DevCorner.models.ListNode;
 import com.DevCorner.DevCorner.models.TreeNode;
+import org.springframework.stereotype.Component;
+
 import java.util.*;
 
+@Component
 public class AlgorithmRepository implements IAlgorithmRepository {
 
     //given a binary tree, return the maximum depth present in the tree.
@@ -130,11 +133,6 @@ public class AlgorithmRepository implements IAlgorithmRepository {
         return headResult;
     }
 
-    //Depth First Search
-    public List<String> DFS()
-    {
-
-    }
 
     /* Helper Methods */
     private static int traverseAndReturnDepth(TreeNode root){

@@ -7,6 +7,7 @@ import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -16,6 +17,7 @@ import java.util.Date;
 
 @SpringBootApplication
 @RestController
+@Component
 public class PostRepository implements IPostRepository {
     private MongoDatabase database;
     public PostRepository()

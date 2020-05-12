@@ -3,6 +3,7 @@ package com.DevCorner.DevCorner.controller;
         import com.DevCorner.DevCorner.models.*;
         import com.DevCorner.DevCorner.repository.IPostRepository;
         import com.DevCorner.DevCorner.repository.PostRepository;
+        import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.boot.autoconfigure.SpringBootApplication;
         import org.springframework.web.bind.annotation.*;
         import java.util.ArrayList;
@@ -12,12 +13,8 @@ package com.DevCorner.DevCorner.controller;
 @RequestMapping("/api")
 public class HomeController {
 
+    @Autowired
     private IPostRepository repository;
-
-    public HomeController()
-    {
-        repository = new PostRepository();
-    }
 
     @GetMapping("/GetPosts")
     public ArrayList<Post> GetPosts()
