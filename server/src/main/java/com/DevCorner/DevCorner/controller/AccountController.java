@@ -11,6 +11,7 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.gson.Gson;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.*;
@@ -24,11 +25,9 @@ import java.util.Collections;
 @RequestMapping("/api/Account")
 public class AccountController {
 
-    private IAccountRepository accountRepository;
-    public AccountController()
-    {
-        accountRepository = new AccountRepository();
-    }
+    @Autowired
+    private AccountRepository accountRepository;
+
 
     @GetMapping("/Authenticate")
     public String Authenticate(String idTokenString) throws Exception

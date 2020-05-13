@@ -20,7 +20,7 @@ import java.util.ArrayList;
 public class AlgorithmController {
 
     @Autowired
-    private IAlgorithmRepository algoRepo;
+    private AlgorithmRepository algoRepo;
 
     @PostMapping("/MaxDepthBinaryTree") //Returns the max depth in a given binary tree.
     public int MaxDepthBinaryTree(@RequestBody BinarySearchTree tree){

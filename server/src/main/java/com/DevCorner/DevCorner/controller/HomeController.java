@@ -14,7 +14,7 @@ package com.DevCorner.DevCorner.controller;
 public class HomeController {
 
     @Autowired
-    private IPostRepository repository;
+    private PostRepository repository;
 
     @GetMapping("/GetPosts")
     public ArrayList<Post> GetPosts()
@@ -39,7 +39,7 @@ public class HomeController {
 
     public Post GetPost(@RequestParam("category") String category, @RequestParam("slug")  String slug)
     {
-        return repository.GetPost(category, slug);
+        return repository.GetPost(category,  slug);
     }
 
     @RequestMapping("/")
