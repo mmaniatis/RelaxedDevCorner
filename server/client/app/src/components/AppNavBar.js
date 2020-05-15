@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink} from 'reactstrap';
+import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink, DropdownMenu, DropdownItem, DropdownToggle, Dropdown } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { GoogleLogin} from 'react-google-login';
 import Cookies from 'universal-cookie';
@@ -7,7 +7,7 @@ import logo from './images/CodeCornerLogo32x32.png';
 export default class AppNavbar extends Component {
   constructor(props) {
     super(props);
-    this.state = {isOpen: false};
+    this.state = {isOpen: false, CategoryList: [], categoryDropDown: false};
     this.toggle = this.toggle.bind(this);
   }
 
@@ -16,19 +16,16 @@ export default class AppNavbar extends Component {
       isOpen: !this.state.isOpen
     });
   }
-
   CheckAuthentication()
   {
     const cookies = new Cookies();
     return cookies.get("IsAuthenticated") === "True";
   }
-
   IsAdmin()
   {
     const cookies = new Cookies();
     return cookies.get("IsAdmin") === "True";
   }
-
   GetSignInButton() {
     const Success = (response) => {
       return fetch(process.env.REACT_APP_API_URL + 'Account/Authenticate?idTokenString=' + response.tokenId, {
@@ -90,7 +87,36 @@ export default class AppNavbar extends Component {
       )
     }
   }
+  componentDidMount() {
+    fetch(process.env.REACT_APP_API_URL + 'GetCategories', {
+    method: 'get',
+    headers: {
+    },
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        this.setState({CategoryList: data});
+        
 
+    });
+  }
+
+  getCategoryDropdown() {
+    const toggle = () => this.setState({categoryDropDown : !this.state.categoryDropDown});
+    return <>
+            <Dropdown isOpen={this.state.categoryDropDown} toggle={toggle}>
+              <DropdownToggle caret>
+                Categories
+              </DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem tag="a" href="/" active>
+                 Development
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+    </>
+  }
 
   render() {
     return <div className="NavBar"><Navbar color="dark" dark expand="md" id="MainNavBar">
@@ -98,6 +124,9 @@ export default class AppNavbar extends Component {
       <NavbarToggler onClick={this.toggle}/>
       <Collapse isOpen={this.state.isOpen} navbar>
         <Nav className="ml-auto" navbar>
+
+        {this.getCategoryDropdown()}
+
           <NavItem>
           {this.ShowCreatePost()}
           </NavItem>
