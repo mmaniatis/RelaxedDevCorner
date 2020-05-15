@@ -17,7 +17,6 @@ import java.util.List;
 @Configuration
 public class Config implements WebMvcConfigurer {
 
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         ResourceResolver resolver = new ReactResourceResolver();

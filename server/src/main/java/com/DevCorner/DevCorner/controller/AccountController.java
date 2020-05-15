@@ -28,7 +28,6 @@ public class AccountController {
     @Autowired
     private AccountRepository accountRepository;
 
-
     @GetMapping("/Authenticate")
     public String Authenticate(String idTokenString) throws Exception
     {
@@ -72,4 +71,6 @@ public class AccountController {
             throw new Exception();
         }
     }
+
+    
 }

@@ -5,15 +5,11 @@ import com.google.gson.Gson;
 import com.mongodb.client.*;
 import org.bson.Document;
 import org.bson.types.ObjectId;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
+import java.util.*;
 
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
 
 @SpringBootApplication
 @RestController
@@ -56,19 +52,7 @@ public class PostRepository implements IPostRepository {
             }
         }
 
-        //Not the most efficient sorting algorithm, but it'l do for now.
-        for(int i = 0; i < result.size(); i ++)
-        {
-            for (int j =1; j < result.size()-i; j ++)
-            {
-                if (result.get(j).cdDate.compareTo(result.get(j-1).cdDate) >  0) {
-                    Post temp = result.get(j-1);
-                    result.set(j-1, result.get(j));
-                    result.set(j, temp);
-                }
-            }
-        }
-
+        sortPosts(result);
         return result;
     }
 
@@ -105,5 +89,58 @@ public class PostRepository implements IPostRepository {
         }
 
         return result;
+    }
+
+    public Set<String> getCategories()  {
+        Set<String> result = new HashSet<>();
+        FindIterable<Document> findIterable;
+        MongoCollection<Document> coll = getDBCollection("Post");
+        Gson g = new Gson();
+        if (coll != null){
+
+            findIterable = coll.find(new Document());
+
+            for (Document doc : findIterable){
+                Post p = g.fromJson(g.toJson(doc) , Post.class);
+                result.add(p.category);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<Post> getPostsByCategory(String category){
+        ArrayList<Post> result = new ArrayList<>();
+        FindIterable<Document> findIterable;
+        MongoCollection<Document> coll = getDBCollection("Post");
+        Gson g = new Gson();
+        if (coll != null){
+
+            findIterable = coll.find(new Document());
+
+            for (Document doc : findIterable){
+                Post p = g.fromJson(g.toJson(doc) , Post.class);
+                if(p.category.equalsIgnoreCase(category)){
+                    result.add(p);
+                }
+            }
+        }
+
+        sortPosts(result);
+
+        return result;
+    }
+
+    private void sortPosts(List<Post> arr){
+        for(int i = 0; i < arr.size(); i ++)
+        {
+            for (int j =1; j < arr.size()-i; j ++)
+            {
+                if (arr.get(j).cdDate.compareTo(arr.get(j-1).cdDate) >  0) {
+                    Post temp = arr.get(j-1);
+                    arr.set(j-1, arr.get(j));
+                    arr.set(j, temp);
+                }
+            }
+        }
     }
 }
