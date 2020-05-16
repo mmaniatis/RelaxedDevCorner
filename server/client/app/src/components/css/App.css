@@ -90,6 +90,7 @@ a:active {
   display:block;
   margin-top:7rem;
   /* width:100%; */
+  /* min-width: 900px; */
   /* justify-self: center; */
   
 }
@@ -264,7 +265,15 @@ pre .UserCode {
 }
 
 
+.DropDownLink.active {
+  background-color: white !important;
+  color: #282c34 !important;
+}
 
+.DropDownLink:hover {
+  background-color:  #282c34 !important;
+  color: white !important;
+}
 
 /* MOBILE CSS */
 @media only screen and (max-width: 600px) {
@@ -299,6 +308,16 @@ pre .UserCode {
     margin-top:60%;
     
   }
+
+  .PostContainer{
+    width:100%;
+  }
   
+}
+/* DESKTOP CSS */
+@media only screen and (min-width: 900px) {
+  .PostContainer {
+    min-width: 900px;
+  }
 }
 

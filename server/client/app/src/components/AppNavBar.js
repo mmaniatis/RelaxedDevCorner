@@ -7,7 +7,7 @@ import logo from './images/CodeCornerLogo32x32.png';
 export default class AppNavbar extends Component {
   constructor(props) {
     super(props);
-    this.state = {isOpen: false, CategoryList: [], categoryDropDown: false};
+    this.state = {isOpen: false, categoryList: [], categoryDropDown: false};
     this.toggle = this.toggle.bind(this);
   }
 
@@ -88,45 +88,39 @@ export default class AppNavbar extends Component {
     }
   }
   componentDidMount() {
-    fetch(process.env.REACT_APP_API_URL + 'GetCategories', {
-    method: 'get',
-    headers: {
-    },
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log(data);
-        this.setState({CategoryList: data});
-        
-
-    });
+      fetch(process.env.REACT_APP_API_URL + 'GetCategories', {
+        method: 'get',
+        headers: {
+        },
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            this.setState({categoryList: data});
+        });
   }
 
-  getCategoryDropdown() {
-    const toggle = () => this.setState({categoryDropDown : !this.state.categoryDropDown});
-    return <>
-            <Dropdown isOpen={this.state.categoryDropDown} toggle={toggle}>
-              <DropdownToggle caret>
-                Categories
-              </DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem tag="a" href="/" active>
-                 Development
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-    </>
+  toggleCategoryDropdown = () => {
+    this.setState({categoryDropDown : !this.state.categoryDropDown})
   }
 
   render() {
+    const {categoryList} = this.state;
     return <div className="NavBar"><Navbar color="dark" dark expand="md" id="MainNavBar">
       <NavbarBrand tag={Link} to="/"><img src={logo} alt="Logo" /> CodeCorner</NavbarBrand>
       <NavbarToggler onClick={this.toggle}/>
       <Collapse isOpen={this.state.isOpen} navbar>
         <Nav className="ml-auto" navbar>
-
-        {this.getCategoryDropdown()}
-
+        <Dropdown isOpen={this.state.categoryDropDown} toggle={this.toggleCategoryDropdown}>
+                  <DropdownToggle caret={!this.state.categoryDropDown}>
+                    Categories
+                  </DropdownToggle>
+                  <DropdownMenu>
+                  {categoryList.map(function(category){
+                      return <DropdownItem tag="a" href={"/GetCategory/" + category } active className="DropDownLink">{category}</DropdownItem> 
+                    })}
+                  </DropdownMenu>
+          </Dropdown>
           <NavItem>
           {this.ShowCreatePost()}
           </NavItem>

@@ -46,7 +46,8 @@ public class HomeController {
     public Set<String> GetCategories() {
         return repository.getCategories();
     }
-    @GetMapping("GetPostsByCategory")
+
+    @GetMapping("/GetPostsByCategory")
     public ArrayList<Post> GetPostByCategory(String category){
         return repository.getPostsByCategory(category);
     }

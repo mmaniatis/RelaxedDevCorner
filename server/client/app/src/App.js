@@ -3,6 +3,7 @@ import Home from './components/Home';
 import AlgorithmPuzzles from './components/AlgorithmPuzzles';
 import Algorithm from './components/Algorithm'
 import ViewPost from './components/ViewPost';
+import GetCategory from './components/GetCategory';
 import CreatePost from './components/CreatePost';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Cookies from 'universal-cookie';
@@ -26,6 +27,7 @@ class App extends Component {
           <Route path='/ViewPost/:category/:slug' exact={true} component={ViewPost}/>
           <Route path='/Algorithms' exact={true} component={AlgorithmPuzzles} />
           <Route path='/ViewPuzzle/:algorithm' exact={true} component={Algorithm}/>
+          <Route path='/GetCategory/:category' exact={true} component={GetCategory}/>
           {this.returnAdminRoutes()}
         </Switch>
       </Router>
