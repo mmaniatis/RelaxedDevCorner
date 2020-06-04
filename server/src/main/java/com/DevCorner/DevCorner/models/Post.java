@@ -27,7 +27,6 @@ public class Post {
         this.body = body;
         this.author = author;
         this.cdDate = cdDate;
-
         comments = new ArrayList<>();
     }
 

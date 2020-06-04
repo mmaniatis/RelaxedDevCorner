@@ -65,7 +65,8 @@ public class PostRepository implements IPostRepository {
                                     .append("slug", post.slug)
                                     .append("body", post.body)
                                     .append("author", post.author)
-                                    .append("cdDate", post.cdDate);
+                                    .append("cdDate", post.cdDate)
+                                    .append("comments", post.getComments());
             MongoCollection<Document> collection = getDBCollection("Post");
             collection.insertOne(toInsert);
         }
