@@ -2,6 +2,7 @@ package com.DevCorner.DevCorner.repository;
 import java.util.ArrayList;
 import java.util.Set;
 
+import com.DevCorner.DevCorner.models.Comment;
 import com.DevCorner.DevCorner.models.Post;
 
 public interface IPostRepository {
@@ -10,4 +11,5 @@ public interface IPostRepository {
     Post GetPost(String category, String slug);
     Set<String> getCategories();
     ArrayList<Post> getPostsByCategory(String category);
+    void addComment(Post p);
 }

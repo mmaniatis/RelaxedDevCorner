@@ -55,10 +55,10 @@ class DevCornerApplicationTests {
 	}
 
 	@Test
-	void getComments() {
+	void getCommentsNoDB() {
 		Post p = new Post("TestCategory", "TestTitle",
 				"TestSlug", "TestBody", "TestAuthor", new Date());
-		p.addComment(new Comment("TestBody"));
+		p.addComment(new Comment("TestBody", "Michael J. Maniatis"));
 		List<Comment> comments = p.getComments();
 
 		assertEquals("TestBody", comments.get(0).getBody());

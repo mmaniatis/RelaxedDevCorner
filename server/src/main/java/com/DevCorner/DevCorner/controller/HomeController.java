@@ -21,8 +21,8 @@ public class HomeController {
     {
         return repository.GetAllPosts();
     }
+
     @PostMapping("/CreatePost")
-    @CrossOrigin(origins = "http://localhost:3000")
     public boolean CreatePost(@RequestBody Post post)
     {
         try
@@ -35,8 +35,8 @@ public class HomeController {
             return false;
         }
     }
-    @GetMapping("/GetPost")
 
+    @GetMapping("/GetPost")
     public Post GetPost(@RequestParam("category") String category, @RequestParam("slug")  String slug)
     {
         return repository.GetPost(category,  slug);
@@ -51,6 +51,12 @@ public class HomeController {
     public ArrayList<Post> GetPostByCategory(String category){
         return repository.getPostsByCategory(category);
     }
+
+    @PostMapping("/AddComment")
+    public void AddComment(@RequestBody Post p) {
+        repository.addComment(p);
+    }
+    
     @RequestMapping("/")
     public String index() {
         return "Relaxed Dev Corner API.";

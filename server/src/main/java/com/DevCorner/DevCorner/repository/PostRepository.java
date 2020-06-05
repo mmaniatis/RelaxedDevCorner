@@ -1,6 +1,6 @@
 package com.DevCorner.DevCorner.repository;
 import com.DevCorner.DevCorner.ApplicationProperties;
-import com.DevCorner.DevCorner.models.Post;
+import com.DevCorner.DevCorner.models.*;
 import com.google.gson.Gson;
 import com.mongodb.client.*;
 import org.bson.Document;
@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
+
+import static com.mongodb.client.model.Filters.eq;
 
 
 @SpringBootApplication
@@ -129,6 +131,12 @@ public class PostRepository implements IPostRepository {
         sortPosts(result);
 
         return result;
+    }
+
+    public synchronized void addComment(Post p) {
+        MongoCollection<Document> coll = getDBCollection("Post");
+        Gson g = new Gson();
+        coll.replaceOne(eq("slug", p.slug), Document.parse(g.toJson(p)));
     }
 
     private void sortPosts(List<Post> arr){
