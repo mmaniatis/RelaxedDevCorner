@@ -17,7 +17,7 @@ export default class ViewPost extends Component {
 
     constructor(props){
         super(props);
-        this.state = {post: []}
+        this.state = {post: [], comments: []}
     }
     componentDidMount()
     {
@@ -27,7 +27,6 @@ export default class ViewPost extends Component {
             fetch(process.env.REACT_APP_API_URL+ '/GetPost?category=' + category + '&slug=' +slug, {
                 method: 'GET',
                 cache: 'no-cache', 
-                // credentials: 'same-origin', 
                 headers: {
                   'Content-Type': 'application/json'
                 },
@@ -36,11 +35,21 @@ export default class ViewPost extends Component {
               }).then(response => response.json())
               .then(data =>  this.setState({post: data}));
         }
-
     }
 
     render(){
         const {post} = this.state;
+        var {comments} = [];
+        if (post.comments != undefined) {
+            comments = post.comments.map((comment) => 
+                <div className ="comment">
+                    <h3>{comment.body}</h3>
+                    <h5>{comment.author}</h5>
+                    
+                </div>);
+            debugger;
+        };
+
         return (<div className="ViewPostContainer"> 
                 <div>
                 <AppNavbar/>
@@ -48,7 +57,7 @@ export default class ViewPost extends Component {
                 <div className="shareButtons">
                     <TwitterShareButton
                         url={window.location.href}
-                        title={"Check out this post on CodeCorner, " +post.title}
+                        title={"Check out this post on CodeCorner, " + post.title}
                     >
                     <TwitterIcon
                     size={32}
@@ -89,8 +98,14 @@ export default class ViewPost extends Component {
                         <div className="PostBody">
                             <p id="FormattedText" dangerouslySetInnerHTML={{__html: post.body}}></p>
                         </div>
-                    </div>
+
+
                 </div>
+
+                <div>
+                    <ul>{comments}</ul>
+                </div>
+            </div>
         );
     }
 }

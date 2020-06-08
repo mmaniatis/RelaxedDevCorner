@@ -170,6 +170,16 @@ a:active {
   justify-content: center;
   white-space: pre-line;
 }
+.comment {
+  display:block;
+  justify-self: center;
+  justify-content: center;
+  /* background-color:#d3d3d3; */
+  border-style:solid;
+  border-color:#d3d3d3;
+  height:100%;
+  width:100%;
+}
 
 .PostBody {
   width:70%;
