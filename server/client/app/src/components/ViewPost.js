@@ -43,11 +43,15 @@ export default class ViewPost extends Component {
         if (post.comments != undefined) {
             comments = post.comments.map((comment) => 
                 <div className ="comment">
-                    <h3>{comment.body}</h3>
-                    <h5>{comment.author}</h5>
-                    
+                    <h2>{comment.body}</h2>
+                    <h2>{comment.author}</h2>
+
+                   {comment.replies.map((reply) => 
+                        <div>
+                            <h5>{reply.body}</h5>
+                            <h5>{reply.author}</h5>
+                        </div>)}
                 </div>);
-            debugger;
         };
 
         return (<div className="ViewPostContainer"> 
@@ -102,7 +106,9 @@ export default class ViewPost extends Component {
 
                 </div>
 
-                <div>
+                <div className ="commentSection">
+                    <h3>Please leave a comment!</h3>
+                    <hr />
                     <ul>{comments}</ul>
                 </div>
             </div>
