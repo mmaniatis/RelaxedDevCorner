@@ -170,16 +170,7 @@ a:active {
   justify-content: center;
   white-space: pre-line;
 }
-.comment {
-  display:block;
-  justify-self: center;
-  justify-content: center;
-  /* background-color:#d3d3d3; */
-  border-style:solid;
-  border-color:#d3d3d3;
-  height:100%;
-  width:100%;
-}
+
 
 .PostBody {
   width:70%;
@@ -284,7 +275,47 @@ pre .UserCode {
   background-color:  #282c34 !important;
   color: white !important;
 }
+.comment {
+  display:block;
+  justify-self: center;
+  justify-content: center;
+  border-style:solid;
+  border-color:#d3d3d3;
+  height:100%;
+  margin: 0 auto;
+  padding-left:2px;
+  padding-right:2px;
+}
 
+.comment #commentAuthor {
+  font-size: 70%;
+  color: #61dafb;
+  margin-left: 5px;
+}
+
+.comment #commentBody {
+  font-size: 85%;
+
+
+}
+
+.comment .reply {
+  margin-left: 25px;
+  border-left:.5px solid gray;
+  padding-left:5px;
+}
+
+.comment #replyAuthor {
+  font-size: 65%;
+  color: #61dafb;
+
+}
+
+.comment #replyBody {
+  font-size: 80%;
+  margin-left:20px;
+
+}
 /* MOBILE CSS */
 @media only screen and (max-width: 600px) {
   html {
@@ -322,12 +353,19 @@ pre .UserCode {
   .PostContainer{
     width:100%;
   }
+
+  .comment {
+    width:80%;
+  }
   
 }
 /* DESKTOP CSS */
 @media only screen and (min-width: 900px) {
   .PostContainer {
     min-width: 900px;
+  }
+  .comment {
+    width:50%;
   }
 }
 

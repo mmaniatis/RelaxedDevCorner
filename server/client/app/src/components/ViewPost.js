@@ -43,14 +43,15 @@ export default class ViewPost extends Component {
         if (post.comments != undefined) {
             comments = post.comments.map((comment) => 
                 <div className ="comment">
-                    <h2>{comment.body}</h2>
-                    <h2>{comment.author}</h2>
-
-                   {comment.replies.map((reply) => 
-                        <div>
-                            <h5>{reply.body}</h5>
-                            <h5>{reply.author}</h5>
+                    <span id="commentBody">{comment.body}</span> <br />
+                    <span id="commentAuthor">{comment.author}</span>
+                    {comment.replies.map((reply) => 
+                        <div className ="reply">
+                            <span id="replyBody" >{reply.body}</span> <br />
+                            <span id="replyAuthor">{reply.author}</span> 
+                            
                         </div>)}
+
                 </div>);
         };
 
@@ -107,9 +108,14 @@ export default class ViewPost extends Component {
                 </div>
 
                 <div className ="commentSection">
-                    <h3>Please leave a comment!</h3>
                     <hr />
-                    <ul>{comments}</ul>
+                    <div className="writeComment">
+                        <input></input>
+                    </div>
+                    <div>
+                        <ul>{comments}</ul>
+
+                    </div>
                 </div>
             </div>
         );
