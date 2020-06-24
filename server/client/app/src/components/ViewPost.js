@@ -1,7 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import './css/App.css';
 import AppNavbar from './AppNavBar';
-import { Container} from 'reactstrap';
+import { Container, Button} from 'reactstrap';
+import Modal from 'react-bootstrap/Modal'
+import ModalHeader from 'react-bootstrap/ModalHeader'
+import ModalDialog from 'react-bootstrap/ModalDialog'
+import ModalTitle from 'react-bootstrap/ModalTitle'
+import ModalBody from 'react-bootstrap/ModalBody'
+import ModalFooter from 'react-bootstrap/ModalFooter'
 import {
     EmailShareButton,
     FacebookShareButton,
@@ -17,7 +23,7 @@ export default class ViewPost extends Component {
 
     constructor(props){
         super(props);
-        this.state = {post: [], comments: []}
+        this.state = {post: [], comments: [], show: false, setShow: false}
     }
     componentDidMount()
     {
@@ -39,22 +45,30 @@ export default class ViewPost extends Component {
 
     render(){
         const {post} = this.state;
+        var {show} = true;
         var {comments} = [];
         if (post.comments != undefined) {
             comments = post.comments.map((comment) => 
                 <div className ="comment">
                     <span id="commentBody">{comment.body}</span> <br />
                     <span id="commentAuthor">{comment.author}</span>
+                    
                     {comment.replies.map((reply) => 
                         <div className ="reply">
-                            <span id="replyBody" >{reply.body}</span> <br />
+                            <span id="replyBody">{reply.body}</span> <br />
                             <span id="replyAuthor">{reply.author}</span> 
                             
                         </div>)}
 
                 </div>);
         };
+        const handleClose = () => {
+            this.setState({show: false});
+        }
 
+        const handleShow = () => {
+            this.setState({show: true});
+        }
         return (<div className="ViewPostContainer"> 
                 <div>
                 <AppNavbar/>
@@ -106,17 +120,34 @@ export default class ViewPost extends Component {
 
 
                 </div>
+                <hr />
+
 
                 <div className ="commentSection">
-                    <hr />
-                    <div className="writeComment">
-                        <input></input>
-                    </div>
+                <Button variant="primary" onClick={handleShow}>
+                    Launch demo modal
+                </Button>
+
+                <Modal show={this.state.show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                    <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleClose}>
+                        Save Changes
+                    </Button>
+                    </Modal.Footer>
+                </Modal>
                     <div>
                         <ul>{comments}</ul>
-
                     </div>
+
                 </div>
+
             </div>
         );
     }

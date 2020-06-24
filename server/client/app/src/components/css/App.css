@@ -286,7 +286,14 @@ pre .UserCode {
   padding-left:2px;
   padding-right:2px;
 }
-
+#commentButton {
+  display: flex;
+  justify-self: center;
+  justify-content: center;
+  margin: 0 auto;
+  border-bottom: 1px solid white;
+  
+}
 .comment #commentAuthor {
   font-size: 70%;
   color: #61dafb;
@@ -295,8 +302,6 @@ pre .UserCode {
 
 .comment #commentBody {
   font-size: 85%;
-
-
 }
 
 .comment .reply {
@@ -315,8 +320,7 @@ pre .UserCode {
   font-size: 80%;
   margin-left:20px;
 
-}
-/* MOBILE CSS */
+}/* MOBILE CSS */
 @media only screen and (max-width: 600px) {
   html {
     font-size:70%;
