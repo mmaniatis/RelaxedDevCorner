@@ -8,6 +8,8 @@ import ModalDialog from 'react-bootstrap/ModalDialog'
 import ModalTitle from 'react-bootstrap/ModalTitle'
 import ModalBody from 'react-bootstrap/ModalBody'
 import ModalFooter from 'react-bootstrap/ModalFooter'
+import Cookies from 'universal-cookie';
+
 import {
     EmailShareButton,
     FacebookShareButton,
@@ -18,6 +20,7 @@ import {
     RedditIcon,
     EmailIcon
   } from "react-share";
+import { post } from 'jquery';
 
 export default class ViewPost extends Component {
 
@@ -25,8 +28,28 @@ export default class ViewPost extends Component {
         super(props);
         this.state = {post: [], comments: [], show: false, setShow: false}
     }
+    
+     wait(ms)
+    {
+        var d = new Date();
+        var d2 = null;
+        do { d2 = new Date(); }
+        while(d2-d < ms);
+    }
+    _handleKeyDown = (event) => {
+        var ENTER_KEY = 13;
+        switch( event.keyCode ) {
+            case ENTER_KEY:
+                this.submitComment();
+                
+                break;
+            default: 
+                break;
+        }
+    }
     componentDidMount()
     {
+        document.addEventListener("keydown", this._handleKeyDown);
         if (this.props.match.params){
             const slug = this.props.match.params.slug;
             const category = this.props.match.params.category;
@@ -43,6 +66,34 @@ export default class ViewPost extends Component {
         }
     }
 
+    submitComment = () => {
+        var comment = document.getElementById('commentTextArea');
+        if(comment != undefined) {
+            if (comment.value != null) {
+                var post = this.state.post;
+                const cookies = new Cookies();
+                const userName = cookies.get("givenName");
+                debugger;
+                var comment = {
+                    "body": comment.value,
+                    "author": userName,
+                    "replies": []
+                };
+                fetch(process.env.REACT_APP_API_URL+ '/AddComment?' + 'body=' + comment.body + '&author=' + comment.author + '&slug=' + post.slug + '&category=' + post.category , {
+                    method: 'GET',
+                    cache: 'no-cache', 
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    redirect: 'follow', 
+                    referrerPolicy: 'no-referrer',
+                    async: false
+                  }).then(response => response.json());
+                  this.wait(1000);
+                  window.location.reload()
+            }
+        }
+    }
     render(){
         const {post} = this.state;
         var {show} = true;
@@ -65,10 +116,11 @@ export default class ViewPost extends Component {
         const handleClose = () => {
             this.setState({show: false});
         }
-
         const handleShow = () => {
             this.setState({show: true});
         }
+        const cookies = new Cookies();
+        const disableComment = cookies.get("IsAuthenticated") === "True" ? false : true;
         return (<div className="ViewPostContainer"> 
                 <div>
                 <AppNavbar/>
@@ -124,21 +176,30 @@ export default class ViewPost extends Component {
 
 
                 <div className ="commentSection">
-                <Button variant="primary" onClick={handleShow}>
-                    Launch demo modal
+                
+                <Button id="commentButton" variant="primary" onClick={handleShow} disabled={disableComment}>
+                    {disableComment ? "Please sign in to write a comment" : "Write a comment"}
                 </Button>
 
-                <Modal show={this.state.show} onHide={handleClose}>
+                <Modal show={this.state.show} onHide={handleClose}
+                size="lg"
+                aria-labelledby="contained-modal-title-vcenter"
+                centered>
                     <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+
+                    <Modal.Title>
+                        
+                    </Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                    <Modal.Body>
+                        <textarea id="commentTextArea"> </textarea>
+                    </Modal.Body>
                     <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
-                        Save Changes
+                    <Button variant="secondary" onClick={this.submitComment}>
+                        Send it!
                     </Button>
                     </Modal.Footer>
                 </Modal>

@@ -133,10 +133,23 @@ public class PostRepository implements IPostRepository {
         return result;
     }
 
-    public synchronized void addComment(Post p) {
-        MongoCollection<Document> coll = getDBCollection("Post");
-        Gson g = new Gson();
-        coll.replaceOne(eq("slug", p.slug), Document.parse(g.toJson(p)));
+    public synchronized void addComment(String body, String author, String slug, String category){
+        if (!body.equals("")) {
+            try {
+                MongoCollection<Document> coll = getDBCollection("Post");
+                Gson g = new Gson();
+                Post post = this.GetPost(category, slug);
+                Document toUpdate = Document.parse(g.toJson(post));
+                post.addComment(body, author);
+                Document updated = Document.parse(g.toJson(post));
+                coll.replaceOne(toUpdate, updated);
+            }
+            catch (Exception ex){
+                throw ex;
+            }
+
+        }
+
     }
 
     private void sortPosts(List<Post> arr){

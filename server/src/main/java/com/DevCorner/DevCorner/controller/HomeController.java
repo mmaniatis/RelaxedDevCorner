@@ -52,9 +52,9 @@ public class HomeController {
         return repository.getPostsByCategory(category);
     }
 
-    @PostMapping("/AddComment")
-    public void AddComment(@RequestBody Post p) {
-        repository.addComment(p);
+    @GetMapping("/AddComment")
+    public void AddComment(@RequestParam("body") String body, @RequestParam("author") String author, @RequestParam("slug") String slug, @RequestParam("category") String category) {
+        repository.addComment(body, author, slug, category);
     }
     
     @RequestMapping("/")

@@ -11,5 +11,5 @@ public interface IPostRepository {
     Post GetPost(String category, String slug);
     Set<String> getCategories();
     ArrayList<Post> getPostsByCategory(String category);
-    void addComment(Post p);
+    void addComment(String body, String author, String slug, String category);
 }
