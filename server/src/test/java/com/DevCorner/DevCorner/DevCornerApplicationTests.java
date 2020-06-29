@@ -65,16 +65,12 @@ class DevCornerApplicationTests {
 				Arrays.asList("Test", "Test1", "Test2")
 		), postService.getCategories());
 	}
-//
-//	@Test
-//	void getPostByCategory(){
-//
-//	}
-//
-//	@Test
-//	void getCommentsNoDB() {
-//
-//	}
+
+	@Test
+	void getPostByCategory(){
+		when(postRepository.getPostsByCategory(any(String.class))).thenReturn(getSamplePosts());
+		assertEquals(postService.getPostsByCategory("Test").size(), getSamplePosts().size());
+	}
 
 	private ArrayList<Post> getSamplePosts() {
 		Post p = new Post(
