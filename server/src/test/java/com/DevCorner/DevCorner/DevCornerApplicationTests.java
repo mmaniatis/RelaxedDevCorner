@@ -16,7 +16,6 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -40,6 +39,7 @@ class DevCornerApplicationTests {
 		when(postRepository.CreatePost(any(Post.class))).thenReturn(true);
 		assertTrue(postService.CreatePost(this.getSamplePost()));
 	}
+
 	@Test
 	void getPostsSorting() {
 		when(postRepository.GetAllPosts()).thenReturn(getSamplePosts());
@@ -56,10 +56,15 @@ class DevCornerApplicationTests {
 		assert(isSortedDescending);
 	}
 
-//	@Test
-//	void getCategoreis() {
-//
-//	}
+	@Test
+	void getCategories() {
+		when(postRepository.getCategories()).thenReturn(new HashSet<String>(
+			Arrays.asList("Test", "Test1", "Test2")
+		));
+		assertEquals(new HashSet<String>(
+				Arrays.asList("Test", "Test1", "Test2")
+		), postService.getCategories());
+	}
 //
 //	@Test
 //	void getPostByCategory(){

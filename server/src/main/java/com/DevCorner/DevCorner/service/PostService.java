@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
+import java.nio.channels.NotYetBoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -54,7 +55,7 @@ public class PostService {
             return false;
         }
     }
-    private void sortPosts(List<Post> arr){
+    private void sortPosts(List<Post> arr) {
         for(int i = 0; i < arr.size(); i ++)
         {
             for (int j =1; j < arr.size()-i; j ++)
