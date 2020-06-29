@@ -2,6 +2,7 @@ package com.DevCorner.DevCorner.repository;
 import com.DevCorner.DevCorner.ApplicationProperties;
 import com.DevCorner.DevCorner.models.*;
 import com.google.gson.Gson;
+import com.mongodb.DBCollection;
 import com.mongodb.client.*;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -53,12 +54,10 @@ public class PostRepository implements IPostRepository {
                 result.add(p);
             }
         }
-
-        sortPosts(result);
         return result;
     }
 
-    public void CreatePost(Post post)
+    public boolean CreatePost(Post post)
     {
         try{
             Document toInsert = new Document("id", new ObjectId())
@@ -71,10 +70,12 @@ public class PostRepository implements IPostRepository {
                                     .append("comments", post.getComments());
             MongoCollection<Document> collection = getDBCollection("Post");
             collection.insertOne(toInsert);
+            return true;
         }
         catch(Exception e)
         {
             System.out.println(e.toString());
+            return false;
         }
     }
 
@@ -128,7 +129,7 @@ public class PostRepository implements IPostRepository {
             }
         }
 
-        sortPosts(result);
+//        sortPosts(result);
 
         return result;
     }
@@ -152,17 +153,5 @@ public class PostRepository implements IPostRepository {
 
     }
 
-    private void sortPosts(List<Post> arr){
-        for(int i = 0; i < arr.size(); i ++)
-        {
-            for (int j =1; j < arr.size()-i; j ++)
-            {
-                if (arr.get(j).cdDate.compareTo(arr.get(j-1).cdDate) >  0) {
-                    Post temp = arr.get(j-1);
-                    arr.set(j-1, arr.get(j));
-                    arr.set(j, temp);
-                }
-            }
-        }
-    }
+
 }

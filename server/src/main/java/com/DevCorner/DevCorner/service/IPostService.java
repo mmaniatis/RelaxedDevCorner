@@ -1,13 +1,11 @@
-package com.DevCorner.DevCorner.repository;
+package com.DevCorner.DevCorner.service;
+import com.DevCorner.DevCorner.models.Post;
 import java.util.ArrayList;
 import java.util.Set;
 
-import com.DevCorner.DevCorner.models.Comment;
-import com.DevCorner.DevCorner.models.Post;
-
-public interface IPostRepository {
+public interface IPostService {
     ArrayList<Post> GetAllPosts() ;
-    boolean CreatePost(Post post);
+    void CreatePost(Post post);
     Post GetPost(String category, String slug);
     Set<String> getCategories();
     ArrayList<Post> getPostsByCategory(String category);

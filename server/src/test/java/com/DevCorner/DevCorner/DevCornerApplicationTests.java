@@ -1,66 +1,116 @@
 package com.DevCorner.DevCorner;
 
+import com.DevCorner.DevCorner.controller.HomeController;
 import com.DevCorner.DevCorner.models.Comment;
 import com.DevCorner.DevCorner.models.Post;
 import com.DevCorner.DevCorner.repository.IPostRepository;
+import com.DevCorner.DevCorner.repository.PostRepository;
+import com.DevCorner.DevCorner.service.PostService;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class DevCornerApplicationTests {
+
+
+	@MockBean
+	private PostRepository postRepository;
+
 	@Autowired
-	private IPostRepository postRepo;
+	PostService postService;
 
 	@Test
 	void getPosts() {
-		List<Post> posts = postRepo.GetAllPosts();
-		assert(posts.size() > 0 );
+		when(postRepository.GetAllPosts()).thenReturn(getSamplePosts());
+		assertEquals(this.getSamplePosts().size(), postService.GetAllPosts().size());
+	}
+
+	@Test
+	void createPost() {
+		when(postRepository.CreatePost(any(Post.class))).thenReturn(true);
+		assertTrue(postService.CreatePost(this.getSamplePost()));
 	}
 	@Test
 	void getPostsSorting() {
-		List<Post> posts = postRepo.GetAllPosts();
+		when(postRepository.GetAllPosts()).thenReturn(getSamplePosts());
+		List<Post> posts = postService.GetAllPosts();
 		boolean isSortedDescending = true;
-		for(int i = posts.size()-1; i > 0; i--){
-			if(posts.get(i - 1).cdDate.compareTo(posts.get(i).cdDate) > 0){
+		for (int i = posts.size() - 1; i > 0; i--) {
+			if (posts.get(i - 1).cdDate.compareTo(posts.get(i).cdDate) >= 0) {
 				continue;
-			}
-			else {
+			} else {
 				isSortedDescending = false;
 				break;
 			}
 		}
-
 		assert(isSortedDescending);
 	}
 
-	@Test
-	void getCategoreis() {
-		Set<String> categories = postRepo.getCategories();
-		assert(categories.size() > 0);
+//	@Test
+//	void getCategoreis() {
+//
+//	}
+//
+//	@Test
+//	void getPostByCategory(){
+//
+//	}
+//
+//	@Test
+//	void getCommentsNoDB() {
+//
+//	}
+
+	private ArrayList<Post> getSamplePosts() {
+		Post p = new Post(
+				"Test",
+				"Test",
+				"Test",
+				"Test",
+				"Test",
+				new Date()
+		);
+		Post p2 = new Post(
+				"Test",
+				"Test",
+				"Test",
+				"Test",
+				"Test",
+				new Date(-3)
+		);
+		Post p3 = new Post(
+				"Test",
+				"Test",
+				"Test",
+				"Test",
+				"Test",
+				new Date()
+		);
+		ArrayList<Post> res = new ArrayList<>();
+		res.add(p);
+		res.add(p2);
+		res.add(p3);
+		return res;
 	}
-
-	@Test
-	void getPostByCategory(){
-		ArrayList<Post> posts = postRepo.getPostsByCategory("Java");
-		assert(posts.size() > 0);
-	}
-
-	@Test
-	void getCommentsNoDB() {
-		Post p = new Post("TestCategory", "TestTitle",
-				"TestSlug", "TestBody", "TestAuthor", new Date());
-		p.addComment(new Comment("TestBody", "Michael J. Maniatis"));
-		List<Comment> comments = p.getComments();
-
-		assertEquals("TestBody", comments.get(0).getBody());
+	private Post getSamplePost() {
+		Post p = new Post(
+				"Test",
+				"Test",
+				"Test",
+				"Test",
+				"Test",
+				new Date()
+		);
+		return p;
 	}
 }

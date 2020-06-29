@@ -2,6 +2,7 @@ package com.DevCorner.DevCorner.controller;
 
         import com.DevCorner.DevCorner.models.*;
         import com.DevCorner.DevCorner.repository.PostRepository;
+        import com.DevCorner.DevCorner.service.PostService;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.boot.autoconfigure.SpringBootApplication;
         import org.springframework.web.bind.annotation.*;
@@ -14,47 +15,39 @@ package com.DevCorner.DevCorner.controller;
 public class HomeController {
 
     @Autowired
-    private PostRepository repository;
+    private PostService postService;
 
     @GetMapping("/GetPosts")
     public ArrayList<Post> GetPosts()
     {
-        return repository.GetAllPosts();
+        return postService.GetAllPosts();
     }
 
     @PostMapping("/CreatePost")
     public boolean CreatePost(@RequestBody Post post)
     {
-        try
-        {
-            repository.CreatePost(post);
-            return true;
-        }
-        catch (Exception ex)
-        {
-            return false;
-        }
+        return postService.CreatePost(post);
     }
 
     @GetMapping("/GetPost")
     public Post GetPost(@RequestParam("category") String category, @RequestParam("slug")  String slug)
     {
-        return repository.GetPost(category,  slug);
+        return postService.GetPost(category,  slug);
     }
 
     @GetMapping("/GetCategories")
     public Set<String> GetCategories() {
-        return repository.getCategories();
+        return postService.getCategories();
     }
 
     @GetMapping("/GetPostsByCategory")
     public ArrayList<Post> GetPostByCategory(String category){
-        return repository.getPostsByCategory(category);
+        return postService.getPostsByCategory(category);
     }
 
     @GetMapping("/AddComment")
     public void AddComment(@RequestParam("body") String body, @RequestParam("author") String author, @RequestParam("slug") String slug, @RequestParam("category") String category) {
-        repository.addComment(body, author, slug, category);
+        postService.addComment(body, author, slug, category);
     }
     
     @RequestMapping("/")
