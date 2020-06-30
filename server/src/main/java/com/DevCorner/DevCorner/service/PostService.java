@@ -42,8 +42,11 @@ public class PostService {
         return postRepository.getCategories();
     }
     public ArrayList<Post> getPostsByCategory(String category) {
-        ArrayList<Post> result = postRepository.getPostsByCategory(category);
-        sortPosts(result);
+        ArrayList<Post> result = new ArrayList<>();
+        if(category != null && !category.equals("")) {
+            result = postRepository.getPostsByCategory(category);
+            sortPosts(result);
+        }
         return result;
     }
 
@@ -56,16 +59,19 @@ public class PostService {
         }
     }
     private void sortPosts(List<Post> arr) {
-        for(int i = 0; i < arr.size(); i ++)
-        {
-            for (int j =1; j < arr.size()-i; j ++)
+        if (arr != null && arr.size() > 0) {
+            for(int i = 0; i < arr.size(); i ++)
             {
-                if (arr.get(j).cdDate.compareTo(arr.get(j-1).cdDate) >  0) {
-                    Post temp = arr.get(j-1);
-                    arr.set(j-1, arr.get(j));
-                    arr.set(j, temp);
+                for (int j =1; j < arr.size()-i; j ++)
+                {
+                    if (arr.get(j).cdDate.compareTo(arr.get(j-1).cdDate) >  0) {
+                        Post temp = arr.get(j-1);
+                        arr.set(j-1, arr.get(j));
+                        arr.set(j, temp);
+                    }
                 }
             }
         }
+
     }
 }

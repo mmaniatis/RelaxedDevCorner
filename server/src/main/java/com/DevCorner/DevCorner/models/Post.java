@@ -26,6 +26,24 @@ public class Post {
         this.comments = new ArrayList<>();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj.getClass() == this.getClass()) {
+            if(
+                    this.category.equals(((Post)obj).category) &&
+                    this.slug.equals(((Post)obj).slug) &&
+                    this.author.equals(((Post)obj).author)
+            ) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
     public ArrayList<Comment> getComments() {
         return comments;
     }

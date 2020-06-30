@@ -1,4 +1,4 @@
-package com.DevCorner.DevCorner;
+package com.DevCorner.DevCorner.ServiceTests;
 
 import com.DevCorner.DevCorner.controller.HomeController;
 import com.DevCorner.DevCorner.models.Comment;
@@ -19,7 +19,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
-class DevCornerApplicationTests {
+class PostServiceTests {
 
 
 	@MockBean
@@ -37,6 +37,7 @@ class DevCornerApplicationTests {
 	@Test
 	void createPost() {
 		when(postRepository.CreatePost(any(Post.class))).thenReturn(true);
+
 		assertTrue(postService.CreatePost(this.getSamplePost()));
 	}
 
@@ -68,8 +69,63 @@ class DevCornerApplicationTests {
 
 	@Test
 	void getPostByCategory(){
+		String str = "Test";
 		when(postRepository.getPostsByCategory(any(String.class))).thenReturn(getSamplePosts());
-		assertEquals(postService.getPostsByCategory("Test").size(), getSamplePosts().size());
+
+		ArrayList<Post> posts = postService.getPostsByCategory(str);
+
+		assert(posts.size() > 1);
+	}
+
+	@Test
+	void getPostsByNullCategory() {
+		String str = null;
+		when(postRepository.getPostsByCategory(any(String.class))).thenReturn(new ArrayList<>());
+		ArrayList<Post> posts = postService.getPostsByCategory(str);
+		assert(posts.size() == 0);
+	}
+
+	@Test
+	void getPostsByEmptyStringCategory() {
+		String str = "";
+		when(postRepository.getPostsByCategory(any(String.class))).thenReturn(this.getSamplePosts());
+
+		ArrayList<Post> posts = postService.getPostsByCategory(str);
+
+		assert(posts.size() == 0);
+	}
+
+	@Test
+	void getPostsByNonExistentCategory() {
+		String str = "SomeCategory";
+		when(postRepository.getPostsByCategory(any(String.class))).thenReturn(new ArrayList<>());
+
+		ArrayList<Post> posts = postService.getPostsByCategory(str);
+
+		assert(posts.size() == 0);
+	}
+
+	@Test
+	void getExistingPost(){
+		String category = "testCategory"; String slug = "testSlug";
+
+		when(postRepository.GetPost(any(String.class), any(String.class)))
+				.thenReturn(this.getSamplePost());
+
+		Post p = postService.GetPost(category, slug);
+		assert(p.equals(this.getSamplePost()));
+	}
+
+	@Test
+	void getNonExistingPost() {
+		String category = "testCategory"; String slug = "testSlug";
+
+		when(postRepository.GetPost(any(String.class), any(String.class)))
+				.thenReturn(null);
+
+		Post p = postService.GetPost(category, slug);
+
+		assert(p == null);
 	}
 
 	private ArrayList<Post> getSamplePosts() {
