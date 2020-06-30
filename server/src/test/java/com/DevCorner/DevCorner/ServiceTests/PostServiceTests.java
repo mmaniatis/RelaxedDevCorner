@@ -1,18 +1,13 @@
 package com.DevCorner.DevCorner.ServiceTests;
 
-import com.DevCorner.DevCorner.controller.HomeController;
-import com.DevCorner.DevCorner.models.Comment;
 import com.DevCorner.DevCorner.models.Post;
-import com.DevCorner.DevCorner.repository.IPostRepository;
 import com.DevCorner.DevCorner.repository.PostRepository;
 import com.DevCorner.DevCorner.service.PostService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-
 import java.util.*;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
@@ -122,6 +117,18 @@ class PostServiceTests {
 
 		when(postRepository.GetPost(any(String.class), any(String.class)))
 				.thenReturn(null);
+
+		Post p = postService.GetPost(category, slug);
+
+		assert(p == null);
+	}
+
+	@Test
+	void getPostNullInput() {
+		String category = null; String slug = null;
+
+		when(postRepository.GetPost(any(String.class), any(String.class)))
+				.thenReturn(this.getSamplePost());
 
 		Post p = postService.GetPost(category, slug);
 

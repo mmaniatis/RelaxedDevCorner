@@ -35,7 +35,12 @@ public class PostService {
     }
 
     public Post GetPost(String category, String slug) {
-        return postRepository.GetPost(category, slug);
+        Post result = null;
+        if( (category != null && slug != null) && (!category.isEmpty() && !slug.isEmpty())) {
+            result = postRepository.GetPost(category, slug);
+        }
+        return result;
+
     }
 
     public Set<String> getCategories() {
