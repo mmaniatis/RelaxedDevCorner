@@ -4,6 +4,7 @@ import com.DevCorner.DevCorner.models.Post;
 import com.DevCorner.DevCorner.repository.PostRepository;
 import com.DevCorner.DevCorner.service.PostService;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -133,6 +134,17 @@ class PostServiceTests {
 		Post p = postService.GetPost(category, slug);
 
 		assert(p == null);
+	}
+
+	@Test
+	void addCommentToPost() {
+		Mockito.doNothing().when(postRepository).addComment(any(String.class), any(String.class),
+				any(String.class), any(String.class));
+
+		boolean comentAdded = postService.addComment("", "", "", "");
+
+		assertEquals(comentAdded, true);
+
 	}
 
 	private ArrayList<Post> getSamplePosts() {

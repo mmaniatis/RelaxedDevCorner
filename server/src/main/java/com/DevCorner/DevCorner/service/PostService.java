@@ -23,8 +23,7 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
-    public ArrayList<Post> GetAllPosts()
-    {
+    public ArrayList<Post> GetAllPosts() {
         ArrayList<Post> result = postRepository.GetAllPosts();
         sortPosts(result);
         return result;
@@ -46,6 +45,7 @@ public class PostService {
     public Set<String> getCategories() {
         return postRepository.getCategories();
     }
+
     public ArrayList<Post> getPostsByCategory(String category) {
         ArrayList<Post> result = new ArrayList<>();
         if(category != null && !category.equals("")) {

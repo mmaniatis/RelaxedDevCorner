@@ -9,5 +9,5 @@ public interface IPostService {
     Post GetPost(String category, String slug);
     Set<String> getCategories();
     ArrayList<Post> getPostsByCategory(String category);
-    void addComment(String body, String author, String slug, String category);
+    boolean addComment(String body, String author, String slug, String category);
 }

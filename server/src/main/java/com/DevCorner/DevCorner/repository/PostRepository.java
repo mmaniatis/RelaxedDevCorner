@@ -2,7 +2,6 @@ package com.DevCorner.DevCorner.repository;
 import com.DevCorner.DevCorner.ApplicationProperties;
 import com.DevCorner.DevCorner.models.*;
 import com.google.gson.Gson;
-import com.mongodb.DBCollection;
 import com.mongodb.client.*;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -10,9 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.*;
-
-import static com.mongodb.client.model.Filters.eq;
-
 
 @SpringBootApplication
 @RestController
@@ -24,8 +20,7 @@ public class PostRepository implements IPostRepository {
         this.database = new ApplicationProperties().getDataBase("Primary");
     }
 
-    private MongoCollection<Document> getDBCollection(String collection)
-    {
+    private MongoCollection<Document> getDBCollection(String collection) {
         MongoCollection<Document> coll = null;
         if (collection != null){
             try
@@ -39,8 +34,7 @@ public class PostRepository implements IPostRepository {
         return coll;
     }
 
-    public ArrayList<Post> GetAllPosts()
-    {
+    public ArrayList<Post> GetAllPosts() {
         ArrayList<Post> result = new ArrayList<>();
         FindIterable<Document> findIterable;
         MongoCollection<Document> coll = getDBCollection("Post");
@@ -57,8 +51,7 @@ public class PostRepository implements IPostRepository {
         return result;
     }
 
-    public boolean CreatePost(Post post)
-    {
+    public boolean CreatePost(Post post) {
         try{
             Document toInsert = new Document("id", new ObjectId())
                                     .append("category", post.category)
@@ -79,8 +72,7 @@ public class PostRepository implements IPostRepository {
         }
     }
 
-    public Post GetPost(String category, String slug)
-    {
+    public Post GetPost(String category, String slug) {
         Post result = null;
         FindIterable<Document> findIterable;
         findIterable = getDBCollection("Post").find(new Document());

@@ -40,7 +40,8 @@ export default class ViewPost extends Component {
         var ENTER_KEY = 13;
         switch( event.keyCode ) {
             case ENTER_KEY:
-                this.submitComment();
+                var btn = document.getElementById('sendButton');
+                btn.click();
                 
                 break;
             default: 
@@ -67,6 +68,8 @@ export default class ViewPost extends Component {
     }
 
     submitComment = () => {
+        var btn = document.getElementById('sendButton');
+        btn.disabled = true;
         var comment = document.getElementById('commentTextArea');
         if(comment != undefined) {
             if (comment.value != null) {
@@ -89,7 +92,7 @@ export default class ViewPost extends Component {
                     referrerPolicy: 'no-referrer',
                     async: false
                   }).then(response => response.json());
-                  this.wait(1000);
+                //   this.wait(1000);
                   window.location.reload()
             }
         }
@@ -198,14 +201,15 @@ export default class ViewPost extends Component {
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="secondary" onClick={this.submitComment}>
+                    <Button id="sendButton" variant="secondary" onClick={this.submitComment}>
                         Send it!
                     </Button>
                     </Modal.Footer>
                 </Modal>
-                    <div>
-                        <ul>{comments}</ul>
-                    </div>
+                
+                <div>
+                    <ul>{comments}</ul>
+                </div>
 
                 </div>
 
