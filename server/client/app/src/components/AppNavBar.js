@@ -44,7 +44,7 @@ export default class AppNavbar extends Component {
               {
                 cookies.set("IsAdmin", "True");
               }
-              responseJSON.givenName != null ? cookies.set("givenName", responseJSON.givenName) : cookies.set("givenName", "");
+              responseJSON.givenName != null ? cookies.set("givenName", responseJSON.givenName + " " + responseJSON.familyName) : cookies.set("givenName", "");
 
             }
           }
