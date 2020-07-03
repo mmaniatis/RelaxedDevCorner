@@ -97,7 +97,8 @@
         <groupId>com.microsoft.azure</groupId>  
         <artifactId>azure-webapp-maven-plugin</artifactId>  
         <version>1.9.0</version>  
-        <configuration> 
+        <configuration>
+          <authType>azure_cli</authType>
           <schemaVersion>V2</schemaVersion>  
           <resourceGroup>PRD-RelaxedDevCorner</resourceGroup>  
           <appName>PRD-APP-RelaxedDevCorner</appName>  
