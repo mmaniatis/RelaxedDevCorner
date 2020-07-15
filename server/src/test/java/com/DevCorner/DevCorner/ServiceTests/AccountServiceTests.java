@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import static org.hibernate.validator.internal.util.Contracts.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -27,13 +26,11 @@ public class AccountServiceTests {
             when(accountRepository.CreateAccountIfNotExists(any(Account.class)))
                     .thenReturn(g.toJson(this.getSampleAccount()));
 
-            Account account = g.fromJson(accountRepository.CreateAccountIfNotExists(this.getSampleAccount()), Account.class);
+            Account account = g.fromJson(accountService.CreateAccountIfNotExists(this.getSampleAccount()), Account.class);
             assert(account.equals(this.getSampleAccount()));
         } catch (Exception ex){
 
         }
-
-
     }
 
     private Account getSampleAccount() {

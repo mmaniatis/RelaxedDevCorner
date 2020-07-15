@@ -1,17 +1,12 @@
 package com.DevCorner.DevCorner.service;
 
 import com.DevCorner.DevCorner.models.Post;
-import com.DevCorner.DevCorner.repository.IPostRepository;
 import com.DevCorner.DevCorner.repository.PostRepository;
-import com.google.gson.Gson;
-import com.mongodb.client.FindIterable;
-import com.mongodb.client.MongoCollection;
-import org.bson.Document;
+import com.DevCorner.DevCorner.repository.PostRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
-import java.nio.channels.NotYetBoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -21,35 +16,35 @@ import java.util.Set;
 public class PostService {
 
     @Autowired
-    private PostRepository postRepository;
+    private PostRepository postRepositoryImpl;
 
     public ArrayList<Post> GetAllPosts() {
-        ArrayList<Post> result = postRepository.GetAllPosts();
+        ArrayList<Post> result = postRepositoryImpl.GetAllPosts();
         sortPosts(result);
         return result;
     }
 
     public boolean CreatePost(Post post) {
-        return postRepository.CreatePost(post);
+        return postRepositoryImpl.CreatePost(post);
     }
 
     public Post GetPost(String category, String slug) {
         Post result = null;
         if( (category != null && slug != null) && (!category.isEmpty() && !slug.isEmpty())) {
-            result = postRepository.GetPost(category, slug);
+            result = postRepositoryImpl.GetPost(category, slug);
         }
         return result;
 
     }
 
     public Set<String> getCategories() {
-        return postRepository.getCategories();
+        return postRepositoryImpl.getCategories();
     }
 
     public ArrayList<Post> getPostsByCategory(String category) {
         ArrayList<Post> result = new ArrayList<>();
         if(category != null && !category.equals("")) {
-            result = postRepository.getPostsByCategory(category);
+            result = postRepositoryImpl.getPostsByCategory(category);
             sortPosts(result);
         }
         return result;
@@ -57,7 +52,7 @@ public class PostService {
 
     public boolean addComment(String body, String author, String slug, String category) {
         try {
-            postRepository.addComment(body, author, slug, category);
+            postRepositoryImpl.addComment(body, author, slug, category);
             return true;
         } catch (Exception ex) {
             return false;

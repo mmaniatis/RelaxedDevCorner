@@ -14,28 +14,28 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Component
 public class AccountRepository implements IAccountRepository {
 
     private MongoDatabase database;
+
+    @Autowired
+    private ApplicationProperties applicationProperties;
+
     public AccountRepository()
     {
-        this.database = new ApplicationProperties().getDataBase("Primary");
-    }
 
+    }
     private MongoCollection<Document> getDBCollection(String collection)
     {
         MongoCollection<Document> coll = null;
         if (collection != null){
             try
             {
-                coll = database.getCollection(collection);
-//                if  (coll == null)
-//                {
-//                    database.createCollection(collection);
-//                }
+                coll = applicationProperties.getDataBase("Primary").getCollection(collection);
             } catch (Exception e)
             {
                 throw e;

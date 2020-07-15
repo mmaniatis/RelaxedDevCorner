@@ -1,7 +1,6 @@
 package com.DevCorner.DevCorner.controller;
 
         import com.DevCorner.DevCorner.models.*;
-        import com.DevCorner.DevCorner.repository.PostRepository;
         import com.DevCorner.DevCorner.service.PostService;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.boot.autoconfigure.SpringBootApplication;
