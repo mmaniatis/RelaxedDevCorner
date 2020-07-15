@@ -24,28 +24,36 @@ public class PostRepositoryImpl implements PostRepository {
         Gson g = new Gson();
         if (collection != null){
             findIterable = collection.find(new Document());
-            MongoCursor cursor = findIterable.iterator();
-            while(cursor.hasNext()){
-                Post p = g.fromJson(g.toJson(cursor.next()) , Post.class);
-                result.add(p);
+            if(findIterable != null){
+                MongoCursor cursor = findIterable.iterator();
+                while(cursor.hasNext()){
+                    Post p = g.fromJson(g.toJson(cursor.next()) , Post.class);
+                    result.add(p);
+                }
             }
+
         }
         return result;
     }
 
     public boolean CreatePost(Post post) {
         try{
-            Document toInsert = new Document("id", new ObjectId())
-                                    .append("category", post.category)
-                                    .append("title", post.title)
-                                    .append("slug", post.slug)
-                                    .append("body", post.body)
-                                    .append("author", post.author)
-                                    .append("cdDate", post.cdDate)
-                                    .append("comments", post.getComments());
-            MongoCollection<Document> collection = databaseConfig.getPostCollection();
-            collection.insertOne(toInsert);
-            return true;
+            if(post != null){
+                Document toInsert = new Document("id", new ObjectId())
+                        .append("category", post.category)
+                        .append("title", post.title)
+                        .append("slug", post.slug)
+                        .append("body", post.body)
+                        .append("author", post.author)
+                        .append("cdDate", post.cdDate)
+                        .append("comments", post.getComments());
+                MongoCollection<Document> collection = databaseConfig.getPostCollection();
+                collection.insertOne(toInsert);
+                return true;
+            } else {
+                return false;
+            }
+
         }
         catch(Exception e)
         {
