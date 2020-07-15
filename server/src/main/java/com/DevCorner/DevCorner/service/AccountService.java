@@ -11,52 +11,46 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
 
-@SpringBootApplication
-@Component
+
+@Service
 public class AccountService {
 
     @Autowired
     private AccountRepository accountRepository;
+    @Autowired
+    private ApplicationProperties applicationProperties;
 
+    private final HttpTransport transport;
+    private final JacksonFactory jsonFactory;
+
+    public AccountService() {
+        transport = new NetHttpTransport();
+        jsonFactory = new JacksonFactory();
+    }
     public String CreateAccountIfNotExists(Account account) throws Exception {
         return accountRepository.CreateAccountIfNotExists(account);
     }
 
     public String Authenticate(String idTokenString) throws Exception
     {
-        HttpTransport transport = new NetHttpTransport();
-        JacksonFactory jsonFactory = new JacksonFactory();
         GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(transport, jsonFactory)
-                .setAudience(Collections.singletonList(new ApplicationProperties().getProperty("app.prodGoogleClientId")))
+                .setAudience(Collections.singletonList(
+                        applicationProperties.getProperty("app.prodGoogleClientId")))
                 .build();
         try {
             GoogleIdToken idToken = verifier.verify(idTokenString);
             if (idToken != null) {
                 GoogleIdToken.Payload payload = idToken.getPayload();
 
-                // Get profile information from payload
-                if(Boolean.valueOf(payload.getEmailVerified()))
+                if(payload.getEmailVerified())
                 {
-                    String email = payload.getEmail();
-                    String name = (String) payload.get("name");
-                    String locale = (String) payload.get("locale");
-                    String familyName = (String) payload.get("family_name");
-                    String givenName = (String) payload.get("given_name");
-
-                    Account account = new Account(
-                            email,
-                            name,
-                            locale,
-                            familyName,
-                            givenName,
-                            false
-                    );
-                    return this.CreateAccountIfNotExists(account);
+                    return this.CreateAccountIfNotExists(createAccountDetails(payload));
                 }
                 else
                     throw new Exception("Email not verified.");
@@ -68,5 +62,22 @@ public class AccountService {
         catch (GeneralSecurityException | IOException Ex){
             throw new Exception();
         }
+    }
+
+    private Account createAccountDetails(GoogleIdToken.Payload payload) {
+        String email = payload.getEmail();
+        String name = (String) payload.get("name");
+        String locale = (String) payload.get("locale");
+        String familyName = (String) payload.get("family_name");
+        String givenName = (String) payload.get("given_name");
+
+        return new Account(
+                email,
+                name,
+                locale,
+                familyName,
+                givenName,
+                false
+        );
     }
 }

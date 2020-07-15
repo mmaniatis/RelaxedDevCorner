@@ -2,6 +2,7 @@ package com.DevCorner.DevCorner.ServiceTests;
 
 import com.DevCorner.DevCorner.models.Post;
 import com.DevCorner.DevCorner.repository.PostRepository;
+import com.DevCorner.DevCorner.repository.PostRepositoryImpl;
 import com.DevCorner.DevCorner.service.PostService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -16,30 +17,28 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 class PostServiceTests {
-
-
 	@MockBean
-	private PostRepository postRepository;
+	private PostRepository postRepositoryImpl;
 
 	@Autowired
 	PostService postService;
 
 	@Test
 	void getPosts() {
-		when(postRepository.GetAllPosts()).thenReturn(getSamplePosts());
+		when(postRepositoryImpl.GetAllPosts()).thenReturn(getSamplePosts());
 		assertEquals(this.getSamplePosts().size(), postService.GetAllPosts().size());
 	}
 
 	@Test
 	void createPost() {
-		when(postRepository.CreatePost(any(Post.class))).thenReturn(true);
+		when(postRepositoryImpl.CreatePost(any(Post.class))).thenReturn(true);
 
 		assertTrue(postService.CreatePost(this.getSamplePost()));
 	}
 
 	@Test
 	void getPostsSorting() {
-		when(postRepository.GetAllPosts()).thenReturn(getSamplePosts());
+		when(postRepositoryImpl.GetAllPosts()).thenReturn(getSamplePosts());
 		List<Post> posts = postService.GetAllPosts();
 		boolean isSortedDescending = true;
 		for (int i = posts.size() - 1; i > 0; i--) {
@@ -55,7 +54,7 @@ class PostServiceTests {
 
 	@Test
 	void getCategories() {
-		when(postRepository.getCategories()).thenReturn(new HashSet<String>(
+		when(postRepositoryImpl.getCategories()).thenReturn(new HashSet<String>(
 			Arrays.asList("Test", "Test1", "Test2")
 		));
 		assertEquals(new HashSet<String>(
@@ -66,7 +65,7 @@ class PostServiceTests {
 	@Test
 	void getPostByCategory(){
 		String str = "Test";
-		when(postRepository.getPostsByCategory(any(String.class))).thenReturn(getSamplePosts());
+		when(postRepositoryImpl.getPostsByCategory(any(String.class))).thenReturn(getSamplePosts());
 
 		ArrayList<Post> posts = postService.getPostsByCategory(str);
 
@@ -76,7 +75,7 @@ class PostServiceTests {
 	@Test
 	void getPostsByNullCategory() {
 		String str = null;
-		when(postRepository.getPostsByCategory(any(String.class))).thenReturn(new ArrayList<>());
+		when(postRepositoryImpl.getPostsByCategory(any(String.class))).thenReturn(new ArrayList<>());
 		ArrayList<Post> posts = postService.getPostsByCategory(str);
 		assert(posts.size() == 0);
 	}
@@ -84,7 +83,7 @@ class PostServiceTests {
 	@Test
 	void getPostsByEmptyStringCategory() {
 		String str = "";
-		when(postRepository.getPostsByCategory(any(String.class))).thenReturn(this.getSamplePosts());
+		when(postRepositoryImpl.getPostsByCategory(any(String.class))).thenReturn(this.getSamplePosts());
 
 		ArrayList<Post> posts = postService.getPostsByCategory(str);
 
@@ -94,7 +93,7 @@ class PostServiceTests {
 	@Test
 	void getPostsByNonExistentCategory() {
 		String str = "SomeCategory";
-		when(postRepository.getPostsByCategory(any(String.class))).thenReturn(new ArrayList<>());
+		when(postRepositoryImpl.getPostsByCategory(any(String.class))).thenReturn(new ArrayList<>());
 
 		ArrayList<Post> posts = postService.getPostsByCategory(str);
 
@@ -105,7 +104,7 @@ class PostServiceTests {
 	void getExistingPost(){
 		String category = "testCategory"; String slug = "testSlug";
 
-		when(postRepository.GetPost(any(String.class), any(String.class)))
+		when(postRepositoryImpl.GetPost(any(String.class), any(String.class)))
 				.thenReturn(this.getSamplePost());
 
 		Post p = postService.GetPost(category, slug);
@@ -116,7 +115,7 @@ class PostServiceTests {
 	void getNonExistingPost() {
 		String category = "testCategory"; String slug = "testSlug";
 
-		when(postRepository.GetPost(any(String.class), any(String.class)))
+		when(postRepositoryImpl.GetPost(any(String.class), any(String.class)))
 				.thenReturn(null);
 
 		Post p = postService.GetPost(category, slug);
@@ -128,7 +127,7 @@ class PostServiceTests {
 	void getPostNullInput() {
 		String category = null; String slug = null;
 
-		when(postRepository.GetPost(any(String.class), any(String.class)))
+		when(postRepositoryImpl.GetPost(any(String.class), any(String.class)))
 				.thenReturn(this.getSamplePost());
 
 		Post p = postService.GetPost(category, slug);
@@ -138,7 +137,7 @@ class PostServiceTests {
 
 	@Test
 	void addCommentToPost() {
-		Mockito.doNothing().when(postRepository).addComment(any(String.class), any(String.class),
+		Mockito.doNothing().when(postRepositoryImpl).addComment(any(String.class), any(String.class),
 				any(String.class), any(String.class));
 
 		boolean comentAdded = postService.addComment("", "", "", "");
