@@ -2,6 +2,7 @@ package com.DevCorner.DevCorner.repository;
 import com.DevCorner.DevCorner.DatabaseConfig;
 import com.DevCorner.DevCorner.models.*;
 import com.google.gson.Gson;
+import com.mongodb.Cursor;
 import com.mongodb.client.*;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -23,8 +24,9 @@ public class PostRepositoryImpl implements PostRepository {
         Gson g = new Gson();
         if (collection != null){
             findIterable = collection.find(new Document());
-            for (Document doc : findIterable){
-                Post p = g.fromJson(g.toJson(doc) , Post.class);
+            MongoCursor cursor = findIterable.iterator();
+            while(cursor.hasNext()){
+                Post p = g.fromJson(g.toJson(cursor.next()) , Post.class);
                 result.add(p);
             }
         }
