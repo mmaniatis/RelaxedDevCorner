@@ -9,7 +9,6 @@ package com.DevCorner.DevCorner.controller;
         import java.util.Set;
 
 @RestController
-@SpringBootApplication
 @RequestMapping("/api")
 public class HomeController {
 

@@ -22,7 +22,6 @@ import java.security.GeneralSecurityException;
 import java.util.Collections;
 
 @RestController
-@SpringBootApplication
 @RequestMapping("/api/Account")
 public class AccountController {
 

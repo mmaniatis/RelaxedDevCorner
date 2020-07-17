@@ -2,6 +2,7 @@ package com.DevCorner.DevCorner.repository;
 import com.DevCorner.DevCorner.DatabaseConfig;
 import com.DevCorner.DevCorner.models.*;
 import com.google.gson.Gson;
+import com.mongodb.Cursor;
 import com.mongodb.client.*;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -23,27 +24,34 @@ public class PostRepositoryImpl implements PostRepository {
         Gson g = new Gson();
         if (collection != null){
             findIterable = collection.find(new Document());
-            for (Document doc : findIterable){
-                Post p = g.fromJson(g.toJson(doc) , Post.class);
+            MongoCursor cursor = findIterable.iterator();
+            while(cursor.hasNext()){
+                Post p = g.fromJson(g.toJson(cursor.next()) , Post.class);
                 result.add(p);
             }
+
         }
         return result;
     }
 
     public boolean CreatePost(Post post) {
         try{
-            Document toInsert = new Document("id", new ObjectId())
-                                    .append("category", post.category)
-                                    .append("title", post.title)
-                                    .append("slug", post.slug)
-                                    .append("body", post.body)
-                                    .append("author", post.author)
-                                    .append("cdDate", post.cdDate)
-                                    .append("comments", post.getComments());
-            MongoCollection<Document> collection = databaseConfig.getPostCollection();
-            collection.insertOne(toInsert);
-            return true;
+            if(post != null){
+                Document toInsert = new Document("id", new ObjectId())
+                        .append("category", post.category)
+                        .append("title", post.title)
+                        .append("slug", post.slug)
+                        .append("body", post.body)
+                        .append("author", post.author)
+                        .append("cdDate", post.cdDate)
+                        .append("comments", post.getComments());
+                MongoCollection<Document> collection = databaseConfig.getPostCollection();
+                collection.insertOne(toInsert);
+                return true;
+            } else {
+                return false;
+            }
+
         }
         catch(Exception e)
         {
@@ -54,14 +62,20 @@ public class PostRepositoryImpl implements PostRepository {
 
     public Post GetPost(String category, String slug) {
         Post result = null;
-        FindIterable<Document> findIterable;
-        findIterable = databaseConfig.getPostCollection().find(new Document());
-        for (Document doc : findIterable) { //At some point I need to refactor this into a binary search or something ..
-            String currslug = doc.get("slug").toString();
-            String currCategory = doc.get("category").toString();
-            Gson g = new Gson();
-            if (slug.equals(currslug) && category.equals(currCategory))
-                return g.fromJson(g.toJson(doc) , Post.class);
+
+        if(category != null && slug != null){
+
+            FindIterable<Document> findIterable;
+            findIterable = databaseConfig.getPostCollection().find(new Document());
+            MongoCursor cursor = findIterable.iterator();
+            while(cursor.hasNext()) {
+                Document doc = (Document) cursor.next();
+                String currslug = doc.get("slug").toString();
+                String currCategory = doc.get("category").toString();
+                Gson g = new Gson();
+                if (slug.equals(currslug) && category.equals(currCategory))
+                    return g.fromJson(g.toJson(doc) , Post.class);
+            }
         }
 
         return result;
