@@ -24,12 +24,10 @@ public class PostRepositoryImpl implements PostRepository {
         Gson g = new Gson();
         if (collection != null){
             findIterable = collection.find(new Document());
-            if(findIterable != null){
-                MongoCursor cursor = findIterable.iterator();
-                while(cursor.hasNext()){
-                    Post p = g.fromJson(g.toJson(cursor.next()) , Post.class);
-                    result.add(p);
-                }
+            MongoCursor cursor = findIterable.iterator();
+            while(cursor.hasNext()){
+                Post p = g.fromJson(g.toJson(cursor.next()) , Post.class);
+                result.add(p);
             }
 
         }
@@ -64,14 +62,20 @@ public class PostRepositoryImpl implements PostRepository {
 
     public Post GetPost(String category, String slug) {
         Post result = null;
-        FindIterable<Document> findIterable;
-        findIterable = databaseConfig.getPostCollection().find(new Document());
-        for (Document doc : findIterable) { //At some point I need to refactor this into a binary search or something ..
-            String currslug = doc.get("slug").toString();
-            String currCategory = doc.get("category").toString();
-            Gson g = new Gson();
-            if (slug.equals(currslug) && category.equals(currCategory))
-                return g.fromJson(g.toJson(doc) , Post.class);
+
+        if(category != null && slug != null){
+
+            FindIterable<Document> findIterable;
+            findIterable = databaseConfig.getPostCollection().find(new Document());
+            MongoCursor cursor = findIterable.iterator();
+            while(cursor.hasNext()) {
+                Document doc = (Document) cursor.next();
+                String currslug = doc.get("slug").toString();
+                String currCategory = doc.get("category").toString();
+                Gson g = new Gson();
+                if (slug.equals(currslug) && category.equals(currCategory))
+                    return g.fromJson(g.toJson(doc) , Post.class);
+            }
         }
 
         return result;
