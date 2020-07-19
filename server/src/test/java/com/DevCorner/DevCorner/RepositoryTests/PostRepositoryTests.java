@@ -24,6 +24,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Set;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -130,7 +131,6 @@ public class PostRepositoryTests {
 
     }
 
-
     @Test
     public void GetSinglePostGoodSlugBadCategory() {
         String category = null;
@@ -169,6 +169,38 @@ public class PostRepositoryTests {
 
         assertTrue(p == null);
     }
+
+    @Test
+    public void getCategoriesNone() {
+        when(cursor.hasNext())
+                .thenReturn(false);
+
+        Set<String> categories = postRepository.getCategories();
+
+        assertTrue(categories.size() == 0);
+    }
+
+    @Test
+    public void getCategoriesSome() {
+        Document doc1 = getPostDocument("category1", "testSlug");
+        Document doc2 = getPostDocument("category1", "testSllug");
+        Document doc3 = getPostDocument("category2", "testSlug");
+        when(cursor.hasNext())
+                .thenReturn(true)
+                .thenReturn(true)
+                .thenReturn(true)
+                .thenReturn(false);
+        when(cursor.next())
+                .thenReturn(doc1)
+                .thenReturn(doc2)
+                .thenReturn(doc3);
+        Set<String> categories = postRepository.getCategories();
+        assertEquals(categories.size(), 2);
+
+    }
+
+    //Need to add getPostsByCategory next..
+    /* Test helper methods */
     private Document getPostDocument() {
         return new Document("id", new ObjectId())
                 .append("category", "testCategory")

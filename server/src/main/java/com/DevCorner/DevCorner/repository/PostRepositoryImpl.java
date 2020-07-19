@@ -88,7 +88,9 @@ public class PostRepositoryImpl implements PostRepository {
         Gson g = new Gson();
         if (collection != null){
             findIterable = collection.find(new Document());
-            for (Document doc : findIterable){
+            MongoCursor cursor = findIterable.iterator();
+            while(cursor.hasNext()){
+                Document doc = (Document) cursor.next();
                 Post p = g.fromJson(g.toJson(doc) , Post.class);
                 result.add(p.category);
             }
