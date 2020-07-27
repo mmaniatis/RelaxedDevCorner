@@ -3,13 +3,18 @@ package com.DevCorner.DevCorner.ConfigurationTests;
 import com.DevCorner.DevCorner.ApplicationProperties;
 import com.DevCorner.DevCorner.BlizzardApiConfigurationImpl;
 
+import com.DevCorner.DevCorner.models.BlizzardBearerToken;
+import com.DevCorner.DevCorner.service.HttpService;
+import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.omg.CORBA.NameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -17,16 +22,26 @@ import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class BlizzardApiConfigurationTests {
+    Gson g = new Gson();
     @Autowired
     BlizzardApiConfigurationImpl blizzardApiConfiguration;
 
     @MockBean
     ApplicationProperties  applicationProperties;
 
+    @MockBean
+    HttpService httpServiceImpl;
+
+
     @BeforeEach
     public void setUp() {
+        BlizzardBearerToken mockBearerToken = new BlizzardBearerToken("testToken", "TestType", 123456);
+
         when(applicationProperties.getProperty("app.BlizzardClientId")).thenReturn("testClientId");
         when(applicationProperties.getProperty("app.BlizzardClientSecret")).thenReturn("testClientSecret");
+        when(applicationProperties.getProperty("app.BlizzardOauthUri")).thenReturn("TestUri");
+
+        when(httpServiceImpl.sendPost(any(String.class), any(List.class), any(Optional.class))).thenReturn(g.toJson(mockBearerToken));
     }
 
     @Test
@@ -45,9 +60,6 @@ public class BlizzardApiConfigurationTests {
 
     @Test
     public void whenGetBlizzardApiTokenThenRetrieveToken() {
-        when(applicationProperties.getProperty("app.BlizzardClientId")).thenReturn("190844a001a44495b47e336acf4d19d1");
-        when(applicationProperties.getProperty("app.BlizzardClientSecret")).thenReturn("NyF4iHnm7Dfv4w3qWFG6VJ0H6ExxT0DU");
-        when(applicationProperties.getProperty("app.BlizzardOauthUri")).thenReturn("https://us.battle.net/oauth/token");
         String token = blizzardApiConfiguration.GetBlizzardApiToken();
         Assert.assertTrue(token != null);
     }
