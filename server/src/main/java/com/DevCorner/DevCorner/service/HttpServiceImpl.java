@@ -1,13 +1,18 @@
 package com.DevCorner.DevCorner.service;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.UriBuilder;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -45,6 +50,35 @@ public class HttpServiceImpl implements HttpService {
             return null;
         }
 
+        return response.toString();
+    }
+
+    public String sendGet(String getUrl, List<NameValuePair> params, String bearerToken) {
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        StringBuffer response = new StringBuffer();
+        try {
+            URIBuilder uriBuilder = new URIBuilder(getUrl);
+            for(NameValuePair pair : params){
+                uriBuilder.addParameter(pair.getName(), pair.getValue());
+            }
+            HttpGet httpGet = new HttpGet(uriBuilder.build());
+            if (bearerToken != null){
+                httpGet.setHeader(HttpHeaders.AUTHORIZATION, "Bearer " + bearerToken);
+            }
+            httpGet.setHeader(HttpHeaders.CONTENT_TYPE, "application/json;charset=UTF-8");
+            // add request headers
+            CloseableHttpResponse httpResponse = httpClient.execute(httpGet);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(
+                    httpResponse.getEntity().getContent()));
+            String inputLine;
+            while ((inputLine = reader.readLine()) != null) {
+                response.append(inputLine);
+            }
+            reader.close();
+            httpClient.close();
+        } catch (Exception ex ) {
+
+        }
         return response.toString();
     }
 }
