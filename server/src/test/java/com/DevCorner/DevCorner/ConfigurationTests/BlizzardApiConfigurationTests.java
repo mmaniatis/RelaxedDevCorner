@@ -2,22 +2,19 @@ package com.DevCorner.DevCorner.ConfigurationTests;
 
 import com.DevCorner.DevCorner.ApplicationProperties;
 import com.DevCorner.DevCorner.BlizzardApiConfigurationImpl;
-
 import com.DevCorner.DevCorner.models.BlizzardBearerToken;
 import com.DevCorner.DevCorner.service.HttpService;
+import com.DevCorner.DevCorner.service.HttpServiceImpl;
 import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.omg.CORBA.NameValuePair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
@@ -30,7 +27,7 @@ public class BlizzardApiConfigurationTests {
     ApplicationProperties  applicationProperties;
 
     @MockBean
-    HttpService httpServiceImpl;
+    HttpServiceImpl httpServiceImpl;
 
 
     @BeforeEach
@@ -60,7 +57,7 @@ public class BlizzardApiConfigurationTests {
 
     @Test
     public void whenGetBlizzardApiTokenThenRetrieveToken() {
-        String token = blizzardApiConfiguration.GetBlizzardApiToken();
+        String token = blizzardApiConfiguration.GetApiToken();
         Assert.assertTrue(token != null);
     }
 }

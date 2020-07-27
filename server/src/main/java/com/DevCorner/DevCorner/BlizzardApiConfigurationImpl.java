@@ -32,6 +32,7 @@ public class BlizzardApiConfigurationImpl implements ApiConfiguration {
     private final String clientIdProperty = "app.BlizzardClientId";
     private final String clientSecretProperty = "app.BlizzardClientSecret";
     private final String blizzardOauthUri = "app.BlizzardOauthUri";
+    private final String blizzardApiUrl = "app.BlizzardApiUrl";
     private Gson g = new Gson();
     @Autowired
     ApplicationProperties applicationProperties;
@@ -47,7 +48,7 @@ public class BlizzardApiConfigurationImpl implements ApiConfiguration {
         return applicationProperties.getProperty(clientSecretProperty);
     }
 
-    public String GetBlizzardApiToken() {
+    public String GetApiToken() {
 
         String uri = applicationProperties.getProperty(blizzardOauthUri);
         List<NameValuePair> params = new ArrayList<NameValuePair>(1);
@@ -57,6 +58,10 @@ public class BlizzardApiConfigurationImpl implements ApiConfiguration {
         String response = httpServiceImpl.sendPost(uri, params, Optional.ofNullable(encoding));
         BlizzardBearerToken bearerToken = g.fromJson(String.valueOf(response), BlizzardBearerToken.class);
         return bearerToken.getAccess_token();
+    }
+
+    public String GetBaseApiUrl() {
+        return applicationProperties.getProperty(blizzardApiUrl);
     }
 
 }
